@@ -60,9 +60,10 @@ Settings Page
 
 - **HTML** - A clean and clearly defined HTML page
   - 4 HTML pages
-    - Register page
-    - Login page
-    - Gameplay page
+    - [Login Page](./VFLoginPage.jpeg)
+    - [Register Page](./VFRegisterPage.jpeg)
+    - [Gameplay Page](./VFGameplayPage.jpeg)
+    - [Settings Page](./VFSettingsPage.jpeg)
 - **CSS** - A minimalistic yet intuitive approach to...
   - The usage of color theory
   - A simple pixel art + vectorized combination look
@@ -89,28 +90,28 @@ Settings Page
 
 ## HTML Deliverable
 
->TODO
+> - [ ] TODO
 
 ## CSS Deliverable
 
->TODO
+> - [ ] TODO
 
 ## JavaScript Deliverable
 
->TODO
+> - [ ] TODO
 
 ## Service Deliverable
 
->TODO
+> - [ ] TODO
 
 ## DB Deliverable
 
->TODO
+> - [ ] TODO
 
 ## Web Socket Deliverable
 
->TODO
+> - [ ] TODO
 
 ## React Deliverable
 
->TODO
+> - [ ] TODO
