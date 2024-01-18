@@ -1,4 +1,4 @@
- # Virtual Friend
+# **Virtual Friend**
 
 > [!NOTE]
 > Make sure to check out the [notes](/notes.md)!
@@ -9,7 +9,7 @@ Have you ever wanted to make a new friend without having to go outside? Or maybe
 
 ## Design
 
-TODO
+>TODO
 
 ## Key Features
 ### Base Features
@@ -75,14 +75,28 @@ TODO
 
 ## HTML Deliverable
 
+>TODO
+
 ## CSS Deliverable
+
+>TODO
 
 ## JavaScript Deliverable
 
+>TODO
+
 ## Service Deliverable
+
+>TODO
 
 ## DB Deliverable
 
+>TODO
+
 ## Web Socket Deliverable
 
+>TODO
+
 ## React Deliverable
+
+>TODO
