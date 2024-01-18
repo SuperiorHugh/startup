@@ -9,7 +9,21 @@ Have you ever wanted to make a new friend without having to go outside? Or maybe
 
 ## Design
 
->TODO
+Login Page
+
+![Login Page](./VFLoginPage.jpeg)
+
+Register Page
+
+![Register Page](./VFRegisterPage.jpeg)
+
+Gameplay Page
+
+![Gameplay Page](./VFGameplayPage.jpeg)
+
+Settings Page
+
+![Settings Page](./VFSettingsPage.jpeg)
 
 ## Key Features
 ### Base Features
