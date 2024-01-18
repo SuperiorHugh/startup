@@ -56,8 +56,11 @@ TODO
   - A clearly defined font which is clean and legible
   - Beveled edges on UI elements
 - **JavaScript** - For backend, provides gameplay graphics to clients, as well as backend for serverside
-- **Service** - 
-- **Data Base** - Will provide a storing point for all game data. This will include...
+- **Service** - Will provide backend service endpoints for...
+  - Logging in
+  - Registration
+  - **TODO** (Not fully sure what service is used for yet, just that it is a request and recieve model)
+- **DB** - Will provide a storing point for all game data. This will include...
   - Player character
   - Player currency amount
   - Credentials
@@ -70,4 +73,16 @@ TODO
   - Player Dialogue Emojis
 - **React** - Port the application to React, to provide a more complex and efficient system
 
+## HTML Deliverable
 
+## CSS Deliverable
+
+## JavaScript Deliverable
+
+## Service Deliverable
+
+## DB Deliverable
+
+## Web Socket Deliverable
+
+## React Deliverable
