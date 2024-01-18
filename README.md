@@ -59,10 +59,10 @@ Settings Page
 ## Technologies (SUBJECT TO CHANGE)
 
 - **HTML** - A clean and clearly defined HTML page
-  - 3 HTML pages
-    - Register
-    - Login
-    - Actual game page
+  - 4 HTML pages
+    - Register page
+    - Login page
+    - Gameplay page
 - **CSS** - A minimalistic yet intuitive approach to...
   - The usage of color theory
   - A simple pixel art + vectorized combination look
