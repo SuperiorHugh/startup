@@ -14,4 +14,4 @@
     6. git pull
     7. add other commands here! :+1:
 > Notes for day 2
-- ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup
+- ./deployFiles.sh -k yourpemkey -h yourdomain -s startup
