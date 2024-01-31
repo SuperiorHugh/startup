@@ -6,6 +6,7 @@
     <link rel="icon" href="favicon.ico">
     <title>Virtual Friend</title>
     <link rel="stylesheet" href="style.css">
+    <script type="module" src="game.js"></script>
 </head>
 <body>
     <h1 id="game-title">Virtual Friend</h1>
@@ -22,26 +23,9 @@
 
 
     <hr>
-
-        <form action="formSubmit.html" method="post">
-            <div id="credentials-wrapper">
-                <h2 id="login-title">Login</h2>
-                <ul id="credentials">
-                    <div>
-                        <li>
-                            <input type="text" id="text" name="varText" placeholder="Email" required>
-                        </li>
-                        <li>
-                            <input type="password" name="passwordText" id="password" placeholder="Password" required>
-                        </li>
-                    </div>
-                </ul>
-                <div>
-                    <button id="login-button" type="submit">Submit</button>
-                </div>
-            </div>
-        </form>
-
+        <div id="screen-wrapper">
+            <canvas id="screen"></canvas>
+        </div>
     <hr>
 
     <footer>
