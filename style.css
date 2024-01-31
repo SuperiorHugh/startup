@@ -4,20 +4,26 @@
 
 #game-title {
     text-align: center;
-    font-size: 32px;
+    font-size: 40px;
     background: linear-gradient(to left, #ffb3b3, #ffd2b8f6);
     background-clip: text;
     color: transparent;
-
+    margin-bottom: 0;
 }
 #non-logged-in {
+    margin-top: 8px;
     text-align: center;
     display: block;
     color: rgba(0, 0, 0, 0.3);
 }
 #logged-in {
+    margin-top: 8px;
     text-align: center;
-    display: none;
+    display: block;
+
+    background: linear-gradient(to left, #ffb3b3, #ffd2b8f6);
+    background-clip: text;
+    color: transparent;
 }
 #username {
     color: rgba(0, 0, 0, 0.3);
@@ -31,10 +37,9 @@ div.horizontal-list-wrapper {
 ul.horizontal-list {
     list-style: none;
     background: linear-gradient(to left, #ffb3b3, #ffd2b8f6);
-    display: inline-block;
     padding: 1rem 1rem;
     border-radius: 8px;
-    box-shadow: 0px 0px 20px 0px #ffb3b350;
+    box-shadow: 0px 0px 20px 0px rgba(255, 179, 179, 0.2);
 }
 
 ul.horizontal-list li {
@@ -54,4 +59,73 @@ ul.horizontal-list li a {
 
     font-weight: bold;
     font-size: 20px;
+}
+
+hr {
+    background: linear-gradient(to left, #ffb3b3, #ffd2b8f6);
+    border-radius: 4px;
+    height: 5px;
+    border: none;
+}
+
+#credentials-wrapper {
+    background: linear-gradient(to left, #ffb3b3, #ffd2b8f6);
+    padding: 40px;
+    border-radius: 8px;
+    width: 400px;
+    height: 400px;
+}
+
+#credentials-wrapper div {
+    text-align: center;
+}
+
+#login-title {
+    text-align: center;
+    color: white;
+}
+#credentials {
+    list-style: none;
+    padding: 1rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px 0px rgba(255, 179, 179, 0.2);
+}
+
+#credentials div {
+    text-align: center;
+}
+
+#credentials div li {
+    padding: 5px;
+}
+
+#credentials div li input {
+    width: 200px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    color: black;
+    font-weight: bold;
+    padding: 10px;
+}
+
+#credentials div li input::placeholder {
+    color: grey;
+    font-weight: 10;
+}
+
+#login-button {
+    border: none;
+    width: 150px;
+    height: 40px;
+    color: black;
+    border-radius: 8px;
+    background-color: rgba(255, 230, 230, 1);
+    transition: background-color 0.3s ease;
+}
+
+#login-button:hover {
+    cursor: pointer;
+    background-color:rgba(255, 250, 250, 1);
+    font-weight: bold;
 }

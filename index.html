@@ -10,7 +10,7 @@
 <body>
     <h1 id="game-title">Virtual Friend</h1>
     <h3 id="non-logged-in">You are currently not logged in</h3>
-    <h3 id="logged-in">Logged in as: <span id="username">NONE</span></h3>
+    <h3 id="logged-in">Logged in as: <span id="username">Joebiden131</span></h3>
     <div class="horizontal-list-wrapper">
         <ul class="horizontal-list">
             <li><a href="index.html" class="menu-button">Login</a></li>
@@ -23,6 +23,26 @@
 
     <hr>
 
+        <form action="formSubmit.html" method="post">
+            <div id="credentials-wrapper">
+                <h2 id="login-title">Login</h2>
+                <ul id="credentials">
+                    <div>
+                        <li>
+                            <input type="text" id="text" name="varText" placeholder="Username" required>
+                        </li>
+                        <li>
+                            <input type="password" name="passwordText" id="password" placeholder="Password" required>
+                        </li>
+                    </div>
+                </ul>
+                <div>
+                    <button id="login-button" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+
+    <hr>
 
     <footer>
         <p>Author - Hugh Takara</p>
