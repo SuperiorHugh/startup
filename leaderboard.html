@@ -6,7 +6,6 @@
     <link rel="icon" href="favicon.ico">
     <title>Virtual Friend</title>
     <link rel="stylesheet" href="style.css">
-    <script type="module" src="game.js"></script>
 </head>
 <body>
     <h1 id="game-title">Virtual Friend</h1>
@@ -22,9 +21,32 @@
         </ul>
     </div>
 
-    <div id="screen-wrapper">
-        <canvas id="screen"></canvas>
-    </div>
+    <table id="leaderboard">
+        <tr id="leaderboard-header">
+            <th>Player</th>
+            <th>Emotes Used</th>
+            <th>Login Amount</th>
+        </tr>
+        <tr class="leaderboard-stat">
+            <td>Jerry360</td>
+            <td>2</td>
+            <td>5</td>
+        </tr>
+        <tr class="leaderboard-stat">
+            <td>FriendlyGuy</td>
+            <td>2533</td>
+            <td>593</td>
+        </tr>
+    </table>
+    
+    <h3>Check out this dog!</h3>
+    <img id="randomdog" width="300" height="300" alt="random dog">
+    <script>
+        fetch('https://dog.ceo/api/breeds/image/random')
+        .then(response => response.json())
+        .then(data => randomdog.src = data.message);
+    </script>
+
     <hr>
 
     <footer>

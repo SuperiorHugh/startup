@@ -251,10 +251,24 @@ div.setting-page {
     text-align: center;
 }
 
+#game-settings {
+    width: 600px;
+    height: 350px;
+}
+
+#audio-settings {
+    width: 600px;
+    height: 450px;
+}
+
+#epic-settings {
+    width: 600px;
+    height: 250px;
+}
+
 div.setting-page ul {
     list-style: none;
-    margin: 0;
-    padding: 0;
+    text-align: left;
 }
 
 div.setting-page h2 {
@@ -263,14 +277,16 @@ div.setting-page h2 {
 }
 
 div.setting-page ul li {
-    padding: 10px;
+    padding: 20px;
 }
 
 div.setting-page h2, div.setting-page label {
     color:#FFB3B3;
 }
 
-input.range-input {
+input.range-input, input.volume-range-input {
+    margin: 10px;
+    --sliderColor: #FFB3B3;/*TODO*/
     -webkit-appearance: none;
     appearance: none;
     width: 300px;
@@ -284,7 +300,17 @@ input.range-input::-webkit-slider-thumb {
     appearance: none;
     width: 20px;
     height: 20px;
-    background: #FFB3B3;
+    background-color: #FFB3B3;/*TODO*/
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input.volume-range-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: var(--sliderColor);/*TODO*/
     border-radius: 50%;
     cursor: pointer;
 }
@@ -294,7 +320,30 @@ input.range-input::-moz-range-thumb {
     appearance: none;
     width: 20px;
     height: 20px;
-    background: white;
+    background: #FFB3B3;
     border-radius: 50%;
     cursor: pointer;
+}
+
+input.checkbox-input {
+    margin: 10px;
+    -webkit-appearance: none;
+    appearance: none;
+
+    height: 25px;
+    width: 25px;
+    background-color: #ffd2b860;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+input.checkbox-input:checked {
+    background-color: #FFB3B3;
+}
+
+#randomdog {
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px 0px rgba(255, 179, 179, 0.6);
 }
