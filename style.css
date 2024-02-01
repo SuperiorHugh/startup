@@ -116,6 +116,12 @@ hr {
     color: black;
     font-weight: bold;
     padding: 10px;
+    transition: width 0.2s ease-out;
+    outline: none;
+}
+
+#credentials div li input:focus{
+    width: 205px;
 }
 
 #credentials div li input::placeholder {
@@ -167,7 +173,7 @@ footer span{
     padding: 30px;
     border-radius: 8px;
     width: 300px;
-    height: 80px;
+    height: 120px;
     margin: auto;
     margin-bottom: 60px;
     text-align: center;
@@ -194,4 +200,101 @@ footer span{
 #no-account-prompt a:hover {
     cursor: pointer;
     background-color:rgba(255, 250, 250, 1);
+}
+
+div.scroll-menu-wrapper {
+    margin:auto;
+    width: 900px;
+    height: 600px;
+    background: linear-gradient(to top, #ffb3b3, #ffd2b8f6);
+    display: flex;
+    border-radius: 8px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+div.scroll-menu {
+    padding: 25px;
+    width: 800px;
+    height: 500px;
+    background:transparent;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+    width: 14px;
+}
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(to top, #ffb3b3, #ffd2b8f6);
+    border-radius: 6px;
+}
+
+div.scroll-menu::-webkit-scrollbar {
+    width: 14px;
+    
+}
+div.scroll-menu::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 6px;
+}
+
+div.setting-page {
+    border-radius: 8px;
+    width: 600px;
+    height: 400px;
+    background-color: white;
+    margin: auto;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+div.setting-page ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+div.setting-page h2 {
+    font-size: 30px;
+    padding: 30px;
+}
+
+div.setting-page ul li {
+    padding: 10px;
+}
+
+div.setting-page h2, div.setting-page label {
+    color:#FFB3B3;
+}
+
+input.range-input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 300px;
+    background: #ffd2b860;
+    height: 3px;
+    border-radius: 8px;
+}
+
+input.range-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #FFB3B3;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input.range-input::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
 }

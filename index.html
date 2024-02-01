@@ -20,32 +20,29 @@
         </ul>
     </div>
 
-
-    <hr>
-
-        <form action="formSubmit.html" method="post">
-            <div id="credentials-wrapper">
-                <h2 id="login-title">Login</h2>
-                <ul id="credentials">
-                    <div>
-                        <li>
-                            <input type="text" id="text" name="varText" placeholder="Email" required>
-                        </li>
-                        <li>
-                            <input type="password" name="passwordText" id="password" placeholder="Password" required>
-                        </li>
-                    </div>
-                </ul>
+    <form action="formSubmit.html" method="post">
+        <div id="credentials-wrapper">
+            <h2 id="login-title">Login</h2>
+            <ul id="credentials">
                 <div>
-                    <button id="login-button" type="submit">Submit</button>
+                    <li>
+                        <input type="text" class="text-input" name="emailText" placeholder="Email" required>
+                    </li>
+                    <li>
+                        <input type="password" class="text-input" name="passwordText" placeholder="Password" required>
+                    </li>
                 </div>
+            </ul>
+            <div>
+                <button id="login-button" type="submit">Submit</button>
             </div>
-        </form>
-        
-        <div id=no-account-prompt>
-            <p>Don't have an account?</p>
-            <a href="signup.html">Sign Up Here</a>
         </div>
+    </form>
+    
+    <div id=no-account-prompt>
+        <p>Don't have an account?</p>
+        <a href="signup.html">Sign Up Here</a>
+    </div>
 
     <hr>
 
