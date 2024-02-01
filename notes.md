@@ -15,3 +15,6 @@
     7. add other commands here! :+1:
 > Notes for day 2
 - ./deployFiles.sh -k yourpemkey -h yourdomain -s startup
+> Notes for day 3
+- cd OneDrive/Desktop/GitHub/startup
+- ./deployFiles.sh -k /c/Users/hught/OneDrive/Desktop/forwindows.pem -h virtualfriend.click -s startup
