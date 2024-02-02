@@ -224,7 +224,7 @@ div.scroll-menu {
     height: 500px;
     background:transparent;
     overflow: hidden;
-    overflow-y: scroll;/*TODO*/
+    overflow-y: scroll;
 }
 
 body::-webkit-scrollbar {
@@ -289,7 +289,7 @@ div.setting-page h2, div.setting-page label {
 
 input.range-input, input.volume-range-input {
     margin: 10px;
-    --sliderColor: #FFB3B3;/*TODO*/
+    --sliderColor: #FFB3B3;
     -webkit-appearance: none;
     appearance: none;
     width: 300px;
@@ -303,7 +303,7 @@ input.range-input::-webkit-slider-thumb {
     appearance: none;
     width: 20px;
     height: 20px;
-    background-color: #FFB3B3;/*TODO*/
+    background-color: #FFB3B3;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -313,7 +313,7 @@ input.volume-range-input::-webkit-slider-thumb {
     appearance: none;
     width: 20px;
     height: 20px;
-    background-color: var(--sliderColor);/*TODO*/
+    background-color: var(--sliderColor);
     border-radius: 50%;
     cursor: pointer;
 }
@@ -355,7 +355,7 @@ input.checkbox-input:checked {
     text-align: center;
     background: #FFF;
     width: 500px;
-    height: 400px;
+    height: 500px;
     padding: 25px;
     margin-top: 100px;
     margin-bottom: 50px;
@@ -378,6 +378,7 @@ input.checkbox-input:checked {
     width: 500px;
     padding: 25px;
     border-radius: 8px;
+    color: #FFB3B3;
 }
 
 #leaderboard-scroll-wrapper {
@@ -386,3 +387,51 @@ input.checkbox-input:checked {
     padding: 50px;
 }
 
+#top1 {
+    font-weight: bold;
+    color: #f0d88b;
+    font-size: 26px;
+}
+
+#top2 {
+    font-weight: bold;
+    color: #d6d6d6;
+    font-size: 22px;
+}
+
+#top3 {
+    font-weight: bold;
+    color: #d8a275;
+    font-size: 20px;
+}
+
+tr {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    height: 40px;
+}
+
+#jokesetup {
+    margin-top: 50px;
+    color: rgba(0, 0, 0, 0.3);
+    font-size: small;
+    cursor: default;
+}
+
+#jokedelivery {
+    color: rgba(0, 0, 0, 0);
+    margin-top: 20px;
+    font-size: small;
+    background-color: #FFEEE4;
+    width: 200px;
+    margin: auto;
+    border-radius: 8px;
+
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: default;
+}
+
+#jokedelivery:hover{
+    color: rgba(0, 0, 0, 0.3);
+    background-color: #FFF; 
+}
