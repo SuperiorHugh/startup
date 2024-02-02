@@ -6,6 +6,7 @@
     <link rel="icon" href="/Pictures/Icon/favicon.ico">
     <title>Virtual Friend</title>
     <link rel="stylesheet" href="/Site Files/CSS/style.css">
+    <script type="module" src="/Site Files/JS/getapis.js"></script>
 </head>
 <body>
     <h1 id="game-title">Virtual Friend</h1>
@@ -13,7 +14,7 @@
     <h3 id="logged-in">Logged in as: <span id="username">Joebiden131</span></h3>
     <div class="horizontal-list-wrapper">
         <ul class="horizontal-list">
-            <li><a href="index.html" class="menu-button">Login</a></li>
+            <li><a href="/index.html" class="menu-button">Login</a></li>
             <li><a href="/Site Files/HTML/signup.html"class="menu-button">Sign Up</a></li>
             <li><a href="/Site Files/HTML/gameplay.html"class="menu-button">Play</a></li>
             <li><a href="/Site Files/HTML/settings.html"class="menu-button">Settings</a></li>
@@ -21,31 +22,47 @@
         </ul>
     </div>
 
-    <table id="leaderboard">
-        <tr id="leaderboard-header">
-            <th>Player</th>
-            <th>Emotes Used</th>
-            <th>Login Amount</th>
-        </tr>
-        <tr class="leaderboard-stat">
-            <td>Jerry360</td>
-            <td>2</td>
-            <td>5</td>
-        </tr>
-        <tr class="leaderboard-stat">
-            <td>FriendlyGuy</td>
-            <td>2533</td>
-            <td>593</td>
-        </tr>
-    </table>
+    <div class="scroll-menu-wrapper" id="leaderboard-scroll-wrapper">
+        <div class="scroll-menu" id="leaderboard-wrapper">
+            <table id="leaderboard">
+                <tr id="leaderboard-header">
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Emotes Used</th>
+                    <th>Login Amount</th>
+                </tr>
+                <tr class="leaderboard-stat">
+                    <td class="rank-td" id="top1">1</td>
+                    <td>FriendlyGuy</td>
+                    <td>2533</td>
+                    <td>593</td>
+                </tr>
+                <tr class="leaderboard-stat">
+                    <td class="rank-td" id="top2">2</td>
+                    <td>Jerry360</td>
+                    <td>2</td>
+                    <td>5</td>
+                </tr>
+                <tr class="leaderboard-stat">
+                    <td class="rank-td" id="top3">3</td>
+                    <td>eggnoglord</td>
+                    <td>1</td>
+                    <td>3</td>
+                </tr>
+                <tr class="leaderboard-stat">
+                    <td class="rank-td">4</td>
+                    <td>xFishx</td>
+                    <td>0</td>
+                    <td>2</td>
+                </tr>
+            </table>
+        </div>
+    </div>
     
-    <h3>Check out this dog!</h3>
-    <img id="randomdog" width="300" height="300" alt="random dog">
-    <script>
-        fetch('https://dog.ceo/api/breeds/image/random')
-        .then(response => response.json())
-        .then(data => randomdog.src = data.message);
-    </script>
+    <div id="random-apis">
+        <h3>Say hi to my pet dog, <span id="randomword"></span>!</h3>
+        <img id="randomdog" width="300" height="300" alt="random dog">
+    </div>
 
     <hr>
 
