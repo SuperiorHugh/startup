@@ -6,6 +6,7 @@
     <link rel="icon" href="/Pictures/Icon/favicon.ico">
     <title>Virtual Friend</title>
     <link rel="stylesheet" href="/Site Files/CSS/style.css">
+    <script type="module" src="/Site Files/JS/game.js"></script>
 </head>
 <body>
     <h1 id="game-title">Virtual Friend</h1>
@@ -21,30 +22,9 @@
         </ul>
     </div>
 
-    <form action="formSubmit.html" method="post">
-        <div id="credentials-wrapper">
-            <h2 id="login-title">Login</h2>
-            <ul id="credentials">
-                <div>
-                    <li>
-                        <input type="text" class="text-input" name="emailText" placeholder="Email" required>
-                    </li>
-                    <li>
-                        <input type="password" class="text-input" name="passwordText" placeholder="Password" required>
-                    </li>
-                </div>
-            </ul>
-            <div>
-                <button id="login-button" type="submit">Submit</button>
-            </div>
-        </div>
-    </form>
-    
-    <div id=no-account-prompt>
-        <p>Don't have an account?</p>
-        <a href="/Site Files/HTML/signup.html">Sign Up Here</a>
+    <div id="screen-wrapper">
+        <canvas id="screen"></canvas>
     </div>
-
     <hr>
 
     <footer>
