@@ -9,7 +9,7 @@ fetch('https://random-word-api.herokuapp.com/word')
     randomword.innerText = stringified.replace(stringified[0], stringified[0].toUpperCase());
 });
 
-fetch('https://v2.jokeapi.dev/joke/Any?type=twopart')
+fetch('https://v2.jokeapi.dev/joke/Programming,Miscellaneous,Pun?type=twopart')
 .then(response => response.json())
 .then(data => {
     jokesetup.innerText = "\"" + data.setup + "\"";
