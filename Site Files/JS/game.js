@@ -39,14 +39,49 @@ const players = [player1, player2];
 
 //platform class
 class Platform {
-    constructor(x, y, width, height, color){
+    constructor(x, y, width, height, color, time){
         this.color = color;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.delete = false;
+        this.time = time;
     }
 
+    tick(){
+        //TODO
+    }
+    verticalDistToPlayer(player) {
+        return this.y - player.y;
+    }
+    horizontalDistToPlayer(player){
+        return this.x - player.x;
+    }
+}
+class DamagePlatform {
+    constructor(x, y, width, height, color, time, pTime, dcolorR, dcolorG, dcolorB){
+        this.color = color;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.time = time;//current p time
+        this.pTime = pTime; //after destruction p time
+        this.trueTime = time;
+        this.dcolorR = dcolorR;
+        this.dcolorG = dcolorG;
+        this.dcolorB = dcolorB;
+        this.delete = false;
+    }
+    
+    tick(pa){
+        this.time -= 1;
+        if(this.time <= 0){
+            this.delete = true;
+            pa.push(new Platform(this.x, this.y, this.width, this.height, this.color, this.pTime))
+        }
+    }
     verticalDistToPlayer(player) {
         return this.y - player.y;
     }
@@ -56,9 +91,9 @@ class Platform {
 }
 //create platforms
 const platformArray = [
-    new Platform(-64, screenHeight * (8 / 9), screenWidth + 128, screenHeight * (1 / 9), "rgb(210 210 210)"),
-    new Platform(100, 190, 100, 50, "rgb(210 230 210)"),
-    new Platform(50, 300, 200, 50, "rgb(210 210 210)"),
+    new Platform(-64, screenHeight * (8 / 9), screenWidth + 128, screenHeight * (1 / 9), "rgb(210 210 210)", 10000),
+    //new Platform(100, 190, 100, 50, "rgb(210 230 210)"),
+    new DamagePlatform(50, 300, 200, 50, 'rgb(210 210 210)', 100, 100, 250, 150, 150),
 ]
 
 
@@ -162,13 +197,41 @@ function gameLoop(){
         ctx.fillRect(players[i].x, players[i].y, 32, 32);
     }
     
+    //update platforms
+    for(let i = 0; i < platformArray.length; i++){
+        platformArray[i].tick(platformArray);
+        if(platformArray[i].delete){
+            platformArray.splice(i, 1);
+        }
+    }
+
     //draw platforms
     for(let i = 0; i < platformArray.length; i++){
-        ctx.fillStyle = platformArray[i].color;
-        ctx.fillRect(   platformArray[i].x, 
+        //draw normal platforms:
+        if(platformArray[i] instanceof Platform){
+            ctx.fillStyle = platformArray[i].color;
+            ctx.fillRect(platformArray[i].x, 
                         platformArray[i].y, 
                         platformArray[i].width, 
                         platformArray[i].height);
+        }
+        //draw damage platforms:
+        else if(platformArray[i] instanceof DamagePlatform){
+            ctx.fillStyle = platformArray[i].color; 
+            ctx.fillRect(platformArray[i].x, 
+                platformArray[i].y, 
+                platformArray[i].width, 
+                platformArray[i].height);
+            ctx.fillStyle = "rgba(" + platformArray[i].dcolorR + ", " + 
+                                      platformArray[i].dcolorG + ", " + 
+                                      platformArray[i].dcolorB + ", " + 
+                                      (platformArray[i].time / platformArray[i].trueTime) + ")";
+            ctx.fillRect(platformArray[i].x, 
+                platformArray[i].y, 
+                platformArray[i].width, 
+                platformArray[i].height);
+        }
+        
     }
 
     //next frame
