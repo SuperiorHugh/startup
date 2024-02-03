@@ -39,18 +39,24 @@ const players = [player1, player2];
 
 //platform class
 class Platform {
-    constructor(x, y, width, height, color, time){
-        this.color = color;
+    constructor(x, y, width, height, time){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.delete = false;
         this.time = time;
+        this.trueTime = time; 
+        this.allowtick = time != 0;
     }
 
     tick(){
-        //TODO
+        if(!this.allowtick)
+            return;
+
+        this.time--;
+        this.delete = this.time <= 0;
+
     }
     verticalDistToPlayer(player) {
         return this.y - player.y;
@@ -60,8 +66,7 @@ class Platform {
     }
 }
 class DamagePlatform {
-    constructor(x, y, width, height, color, time, pTime, dcolorR, dcolorG, dcolorB){
-        this.color = color;
+    constructor(x, y, width, height, time, pTime){
         this.x = x;
         this.y = y;
         this.width = width;
@@ -69,17 +74,14 @@ class DamagePlatform {
         this.time = time;//current p time
         this.pTime = pTime; //after destruction p time
         this.trueTime = time;
-        this.dcolorR = dcolorR;
-        this.dcolorG = dcolorG;
-        this.dcolorB = dcolorB;
         this.delete = false;
     }
     
     tick(pa){
-        this.time -= 1;
+        this.time--;
         if(this.time <= 0){
             this.delete = true;
-            pa.push(new Platform(this.x, this.y, this.width, this.height, this.color, this.pTime));
+            pa.push(new Platform(this.x, this.y, this.width, this.height, this.pTime));
         }
     }
     verticalDistToPlayer(player) {
@@ -89,11 +91,36 @@ class DamagePlatform {
         return this.x - player.x;
     }
 }
+
+class WarningPlatform {
+    constructor(x, y, width, height, time, pTime, dTime){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.time = time;//current p time
+        this.pTime = pTime;
+        this.dTime = dTime; //after destruction p time
+        this.trueTime = time;
+        this.delete = false;
+    }
+
+    tick(pa){
+        this.time--;
+        if(this.time <= 0){
+            this.delete = true;
+            pa.push(new DamagePlatform(this.x, this.y, this.width, this.height, this.dTime, this.pTime));
+        }
+    }
+}
 //create platforms
 const platformArray = [
-    new Platform(-64, screenHeight * (8 / 9), screenWidth + 128, screenHeight * (1 / 9), "rgb(210 210 210)", 10000),
+    new Platform(-64, screenHeight * (8 / 9), screenWidth + 128, screenHeight * (1 / 9), 0),
     //new Platform(100, 190, 100, 50, "rgb(210 230 210)"),
-    new DamagePlatform(50, 300, 200, 50, 'rgb(210 210 210)', 100, 100, 250, 150, 150),
+    new DamagePlatform(50, 300, 200, 50, 100, 500),
+]
+const warningArray = [
+    new WarningPlatform(400, 300, 200, 50, 200, 100, 100),
 ]
 
 
@@ -190,26 +217,15 @@ function gameLoop(){
             players[i].x = -players[i].width;
         }
     }
-
-    //draw players
-    for(let i = 0; i < players.length; i++){
-        ctx.fillStyle = players[i].color;
-        ctx.fillRect(players[i].x, players[i].y, 32, 32);
-    }
     
-    //update platforms
+    //update and draw platforms
     for(let i = 0; i < platformArray.length; i++){
         platformArray[i].tick(platformArray);
-        if(platformArray[i].delete){
-            platformArray.splice(i, 1);
-        }
-    }
 
-    //draw platforms
-    for(let i = 0; i < platformArray.length; i++){
         //draw normal platforms:
         if(platformArray[i] instanceof Platform){
-            ctx.fillStyle = platformArray[i].color;
+            ctx.fillStyle = "rgba(210, 210, 210, " + 
+                                      ((platformArray[i].trueTime == 0) ? 1 : (platformArray[i].time / platformArray[i].trueTime)) + ")";
             ctx.fillRect(platformArray[i].x, 
                         platformArray[i].y, 
                         platformArray[i].width, 
@@ -217,21 +233,53 @@ function gameLoop(){
         }
         //draw damage platforms:
         else if(platformArray[i] instanceof DamagePlatform){
-            ctx.fillStyle = platformArray[i].color; 
+            ctx.fillStyle = "rgba(210, 210, 210, 1)";
             ctx.fillRect(platformArray[i].x, 
                 platformArray[i].y, 
                 platformArray[i].width, 
                 platformArray[i].height);
-            ctx.fillStyle = "rgba(" + platformArray[i].dcolorR + ", " + 
-                                      platformArray[i].dcolorG + ", " + 
-                                      platformArray[i].dcolorB + ", " + 
+            ctx.fillStyle = "rgba(250, 150, 150, "+ 
                                       (platformArray[i].time / platformArray[i].trueTime) + ")";
             ctx.fillRect(platformArray[i].x, 
                 platformArray[i].y, 
                 platformArray[i].width, 
                 platformArray[i].height);
         }
+
+        if(platformArray[i].delete){
+            platformArray.splice(i, 1);
+            continue;
+        }
+    }
+
+    //update and draw warnings
+    for(let i = 0; i < warningArray.length; i++){
+        warningArray[i].tick(platformArray);
         
+
+        ctx.fillStyle = "rgba(250, 150, 150, " + (1 - (warningArray[i].time / warningArray[i].trueTime)) +")";
+        ctx.fillRect(warningArray[i].x, 
+                    warningArray[i].y, 
+                    warningArray[i].width, 
+                    warningArray[i].height);
+        ctx.fillStyle = "rgba(255, 255, 255, 1)";
+        ctx.fillRect(
+            warningArray[i].x + (( warningArray[i].width / 2) * (1 - (warningArray[i].time / warningArray[i].trueTime))),
+            warningArray[i].y + (( warningArray[i].height / 2) * (1 - (warningArray[i].time / warningArray[i].trueTime))),
+            warningArray[i].width * (warningArray[i].time / warningArray[i].trueTime),
+            warningArray[i].height * (warningArray[i].time / warningArray[i].trueTime),
+        )
+        
+        if(warningArray[i].delete){
+            warningArray.splice(i, 1);
+            continue;
+        }
+    }
+
+    //draw players
+    for(let i = 0; i < players.length; i++){
+        ctx.fillStyle = players[i].color;
+        ctx.fillRect(players[i].x, players[i].y, 32, 32);
     }
 
     //next frame
