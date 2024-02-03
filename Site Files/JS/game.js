@@ -79,7 +79,7 @@ class DamagePlatform {
         this.time -= 1;
         if(this.time <= 0){
             this.delete = true;
-            pa.push(new Platform(this.x, this.y, this.width, this.height, this.color, this.pTime))
+            pa.push(new Platform(this.x, this.y, this.width, this.height, this.color, this.pTime));
         }
     }
     verticalDistToPlayer(player) {
