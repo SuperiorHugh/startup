@@ -1,7 +1,7 @@
 # **Virtual Friend**
 
 > [!NOTE]
-> Make sure to check out the [notes](/notes.md)!
+> Make sure to check out the [notes](/For%20Class/notes.md)!
 
 ## Elevator Pitch
 
@@ -11,19 +11,19 @@ Have you ever wanted to make a new friend without having to go outside? Or maybe
 
 Login Page
 
-![Login Page](./VFLoginPage.jpeg)
+![Login Page](/Pictures/Planning/VFLoginPage.jpeg)
 
 Register Page
 
-![Register Page](./VFRegisterPage.jpeg)
+![Register Page](/Pictures/Planning/VFRegister.jpeg)
 
 Gameplay Page
 
-![Gameplay Page](./VFGameplayPage.jpeg)
+![Gameplay Page](/Pictures/Planning/VFGameplay.jpeg)
 
 Settings Page
 
-![Settings Page](./VFSettingsPage.jpeg)
+![Settings Page](/Pictures/Planning/VFSettingsPage.jpeg)
 
 ## Key Features
 ### Base Features
@@ -60,10 +60,10 @@ Settings Page
 
 - **HTML** - A clean and clearly defined HTML page
   - 4 HTML pages
-    - [Login Page](./VFLoginPage.jpeg)
-    - [Register Page](./VFRegisterPage.jpeg)
-    - [Gameplay Page](./VFGameplayPage.jpeg)
-    - [Settings Page](./VFSettingsPage.jpeg)
+    - [Login Page](/Pictures/Planning/VFLoginPage.jpeg)
+    - [Register Page](/Pictures/Planning/VFRegisterPage.jpeg)
+    - [Gameplay Page](/Pictures/Planning/VFGameplayPage.jpeg)
+    - [Settings Page](/Pictures/Planning/VFSettingsPage.jpeg)
 - **CSS** - A minimalistic yet intuitive approach to...
   - The usage of color theory
   - A simple pixel art + vectorized combination look
@@ -90,7 +90,8 @@ Settings Page
 
 ## HTML Deliverable
 
-> - [ ] TODO
+> - [x] TODO
+
 
 ## CSS Deliverable
 
