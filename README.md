@@ -90,7 +90,11 @@ Settings Page
 
 ## HTML Deliverable
 
-> - [x] TODO
+> - [ ] Finish login page
+> - [ ] Finish register page
+> - [ ] Finish gameplay page
+> - [ ] Finish settings page
+> - [ ] EXTRA Finish l
 
 
 ## CSS Deliverable
