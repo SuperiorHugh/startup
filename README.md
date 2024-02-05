@@ -98,11 +98,11 @@ Settings Page
 > - [x] Correctly structured
 > - [x] Links to different pages
 > - [x] Link to GitHub (Clickable link through GitHub image link in footer)
-> - [x] 3rd party app placeholder
-> - [x] application images
+> - [x] 3rd party app placeholder (bottom of leaderboard page)
+> - [x] application images (bottom of leaderboard page)
 > - [x] Login placeholder
 > - [x] Register placeholder
-> - [x] Database representation placeholder
+> - [x] Database representation placeholder (leaderboard page)
 > - [x] Websocket placeholder (The game page)
 > - [x] Consistency in code
 
