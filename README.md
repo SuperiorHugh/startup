@@ -90,11 +90,21 @@ Settings Page
 
 ## HTML Deliverable
 
-> - [ ] Finish login page
-> - [ ] Finish register page
-> - [ ] Finish gameplay page
-> - [ ] Finish settings page
-> - [ ] EXTRA Finish l
+> - [x] Finish login page
+> - [x] Finish register page
+> - [x] Finish gameplay page
+> - [x] Finish settings page
+> - [x] EXTRA Finish leaderboard page
+> - [x] Correctly structured
+> - [x] Links to different pages
+> - [x] Link to GitHub (Clickable link through GitHub image link in footer)
+> - [x] 3rd party app placeholder
+> - [x] application images
+> - [x] Login placeholder
+> - [x] Register placeholder
+> - [x] Database representation placeholder
+> - [x] Websocket placeholder (The game page)
+> - [x] Consistency in code
 
 
 ## CSS Deliverable
