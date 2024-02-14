@@ -1,6 +1,6 @@
 /*-- imports --*/
 import {executePlayerKeyCode, endPlayerKeyCode, checkVerticalCollision, move, checkHorizontalCollision} from './movement-input-handler.js'
-import {Platform, DamagePlatform, WarningPlatform} from './Game Files/platform-generation.js'
+import {Platform, DamagePlatform, WarningPlatform, PlatformGenerator} from './Game Files/platform-generation.js'
 import {clamp, lerp} from './Game Files/helper-functions.js'
 
 /*-- initiallize game settings --*/
@@ -49,6 +49,7 @@ const platformArray = [
 const warningArray = [
     //new WarningPlatform(400, 300, 200, 50, 200, 1000, 400),
 ]
+const platgen = new PlatformGenerator(warningArray);
 
 
 /*-- load game --*/
@@ -139,6 +140,9 @@ function gameLoop(){
         }
     }
     
+    //tick platform generator
+    platgen.tick();
+
     //update and draw platforms
     for(let i = 0; i < platformArray.length; i++){
         

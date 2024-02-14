@@ -86,7 +86,7 @@ export class PlatformGenerator {
                 [50, 300, 200, 50,      50, 100, 850],
             ],
             [
-                []
+                [100, 190, 100, 50,     50, 100, 850]
             ]
         ];
         this.level2plats = [];
@@ -101,29 +101,30 @@ export class PlatformGenerator {
         console.log(this.tickCount);
         this.level = Math.ceil(this.tickCount/3050);
         if(this.tickCount % 1000 == 0){
-            generatePlatforms();
+            this.generatePlatforms();
         }
     }
 
     generatePlatforms(){
+        let selection;
         switch(this.level){
             case 1:
-                selection = level1plats[Math.floor(level1plats.length * Math.random())];
-                for(plat of selection){
+                selection = this.level1plats[Math.floor(this.level1plats.length * Math.random())];
+                for(const plat of selection){
                     this.warningArray.push(new WarningPlatform(plat[0], plat[1], plat[2], plat[3], plat[4], plat[5], plat[6]))
                 }
             break;
 
             case 2:
-                selection = level2plats[Math.floor(level1plats.length * Math.random())];
-                for(plat of selection){
+                selection = this.level2plats[Math.floor(this.level2plats.length * Math.random())];
+                for(const plat of selection){
                     this.warningArray.push(new WarningPlatform(plat[0], plat[1], plat[2], plat[3], plat[4], plat[5], plat[6]))
                 }
             break;
 
             case 3:
-                selection = level2plats[Math.floor(level1plats.length * Math.random())];
-                for(plat of selection){
+                selection = this.level2plats[Math.floor(this.level3plats.length * Math.random())];
+                for(const plat of selection){
                     this.warningArray.push(new WarningPlatform(plat[0], plat[1], plat[2], plat[3], plat[4], plat[5], plat[6]))
                 }
             break;
