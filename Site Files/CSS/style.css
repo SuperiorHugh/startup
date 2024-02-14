@@ -30,11 +30,9 @@
 }
 
 
-div.horizontal-list-wrapper {
-    text-align: center;
-}
-
 ul.horizontal-list {
+    display: flex;
+    justify-content: space-around;
     list-style: none;
     background: linear-gradient(to left, #ffb3b3, #ffd2b8f6);
     padding: 1rem 1rem;
@@ -43,13 +41,13 @@ ul.horizontal-list {
 }
 
 ul.horizontal-list li {
+    width: 15%;
+    height: 30%;
     display: inline-block;
-    margin-left: 15px;
-    margin-right: 15px;
 }
 
 ul.horizontal-list li a {
-    width: 10rem;
+    width: 100%;
     height: 4rem;
     background-color: white;
     display: flex;

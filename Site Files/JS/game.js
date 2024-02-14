@@ -1,6 +1,7 @@
 /*-- imports --*/
 import {executePlayerKeyCode, endPlayerKeyCode, checkVerticalCollision, move, checkHorizontalCollision} from './movement-input-handler.js'
-
+import {Platform, DamagePlatform, WarningPlatform} from './Game Files/platform-generation.js'
+import {clamp, lerp} from './Game Files/helper-functions.js'
 
 /*-- initiallize game settings --*/
 let screen;
@@ -37,90 +38,16 @@ const player1 = new Player(32, 32, 32, 32, "rgb(250 210 210)", "KeyW", "KeyA", "
 const player2 = new Player(128, 32, 32, 32, "rgb(210 210 250)", "ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight");
 const players = [player1, player2];
 
-//platform class
-class Platform {
-    constructor(x, y, width, height, time){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.delete = false;
-        this.time = time;
-        this.trueTime = time; 
-        this.allowtick = time != 0;
-    }
 
-    tick(){
-        if(!this.allowtick)
-            return;
-
-        this.time--;
-        this.delete = this.time <= 0;
-
-    }
-    verticalDistToPlayer(player) {
-        return this.y - player.y;
-    }
-    horizontalDistToPlayer(player){
-        return this.x - player.x;
-    }
-}
-class DamagePlatform {
-    constructor(x, y, width, height, time, pTime){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.time = time;//current p time
-        this.pTime = pTime; //after destruction p time
-        this.trueTime = time;
-        this.delete = false;
-    }
-    
-    tick(pa){
-        this.time--;
-        if(this.time <= 0){
-            this.delete = true;
-            pa.push(new Platform(this.x, this.y, this.width, this.height, this.pTime));
-        }
-    }
-    verticalDistToPlayer(player) {
-        return this.y - player.y;
-    }
-    horizontalDistToPlayer(player){
-        return this.x - player.x;
-    }
-}
-
-class WarningPlatform {
-    constructor(x, y, width, height, time, pTime, dTime){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.time = time;//current p time
-        this.pTime = pTime;
-        this.dTime = dTime; //after destruction p time
-        this.trueTime = time;
-        this.delete = false;
-    }
-
-    tick(pa){
-        this.time--;
-        if(this.time <= 0){
-            this.delete = true;
-            pa.push(new DamagePlatform(this.x, this.y, this.width, this.height, this.dTime, this.pTime));
-        }
-    }
-}
 //create platforms
 const platformArray = [
     new Platform(-64, screenHeight * (8 / 9), screenWidth + 128, screenHeight * (1 / 9), 0),
-    //new Platform(100, 190, 100, 50, "rgb(210 230 210)"),
-    new DamagePlatform(50, 300, 200, 50, 100, 500),
+    new Platform(100, 190, 100, 50, 1000),
+    new Platform(50, 300, 200, 50, 1000),
+    //new DamagePlatform(50, 300, 200, 50, 100, 500),
 ]
 const warningArray = [
-    new WarningPlatform(400, 300, 200, 50, 200, 100, 100),
+    //new WarningPlatform(400, 300, 200, 50, 200, 1000, 400),
 ]
 
 
@@ -137,7 +64,7 @@ window.onload = function(){
 }
 
 
-/*-- helper functions --*/
+/*-- input handling --*/
 function inputStart(event){
     console.log(event.code)
     for(let i = 0; i < players.length; i++){
@@ -149,12 +76,6 @@ function inputEnd(event){
     for(let i = 0; i < players.length; i++){
         endPlayerKeyCode(players[i], platformArray, event.code);
     }
-}
-function clamp(value, min, max){
-    return Math.min(Math.max(value, min), max);
-}
-function lerp(current, goto, amount) {
-    return current + amount * (goto - current);
 }
 
 
@@ -220,7 +141,7 @@ function gameLoop(){
     
     //update and draw platforms
     for(let i = 0; i < platformArray.length; i++){
-        platformArray[i].tick(platformArray);
+        
 
         //draw normal platforms:
         if(platformArray[i] instanceof Platform){
@@ -238,18 +159,30 @@ function gameLoop(){
                 platformArray[i].y, 
                 platformArray[i].width, 
                 platformArray[i].height);
-            ctx.fillStyle = "rgba(250, 150, 150, "+ 
-                                      (platformArray[i].time / platformArray[i].trueTime) + ")";
+            ctx.fillStyle = "rgba(255, 255, 255, " + (platformArray[i].time / platformArray[i].trueTime)/2 + ")";
             ctx.fillRect(platformArray[i].x, 
                 platformArray[i].y, 
                 platformArray[i].width, 
                 platformArray[i].height);
+
+
+            
+            ctx.fillStyle = "rgba(250, 150, 150, "+ (platformArray[i].time / platformArray[i].trueTime) + ")";
+            ctx.fillRect(
+                platformArray[i].x + (( platformArray[i].width / 2) * (1 - (platformArray[i].time / platformArray[i].trueTime))),
+                platformArray[i].y,
+                platformArray[i].width * (platformArray[i].time / platformArray[i].trueTime),
+                platformArray[i].height,
+            )
+
+
         }
 
         if(platformArray[i].delete){
             platformArray.splice(i, 1);
             continue;
         }
+        platformArray[i].tick(platformArray);
     }
 
     //update and draw warnings
@@ -262,11 +195,11 @@ function gameLoop(){
                     warningArray[i].y, 
                     warningArray[i].width, 
                     warningArray[i].height);
-        ctx.fillStyle = "rgba(255, 255, 255, 1)";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
         ctx.fillRect(
-            warningArray[i].x + (( warningArray[i].width / 2) * (1 - (warningArray[i].time / warningArray[i].trueTime))),
+            warningArray[i].x,
             warningArray[i].y + (( warningArray[i].height / 2) * (1 - (warningArray[i].time / warningArray[i].trueTime))),
-            warningArray[i].width * (warningArray[i].time / warningArray[i].trueTime),
+            warningArray[i].width,
             warningArray[i].height * (warningArray[i].time / warningArray[i].trueTime),
         )
         
