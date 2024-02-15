@@ -15,11 +15,11 @@ Login Page
 
 Register Page
 
-![Register Page](/Pictures/Planning/VFRegister.jpeg)
+![Register Page](/Pictures/Planning/VFRegisterPage.jpeg)
 
 Gameplay Page
 
-![Gameplay Page](/Pictures/Planning/VFGameplay.jpeg)
+![Gameplay Page](/Pictures/Planning/VFGameplayPage.jpeg)
 
 Settings Page
 
