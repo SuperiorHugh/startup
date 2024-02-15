@@ -52,6 +52,15 @@
     border-radius: 8px;
     font-weight: bold;
     font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.horizontal-list a:hover {
+    transform: translateY(-4px);
+}
+
+.horizontal-list a:active {
+    transform: translateY(2px);
 }
 
 hr {
