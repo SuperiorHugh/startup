@@ -109,7 +109,23 @@ Settings Page
 
 ## CSS Deliverable
 
-> - [ ] TODO
+> - [x] TODO
+> - [x] Finish login css
+> - [x] Finish register css
+> - [x] Finish gameplay css
+> - [x] Finish settings css (apart from backend side)
+> - [x] Finish leaderboard page css
+> - Note that I did not style the following, as I went with more of a modular aproach to my site. They are more for structure in my site (although I did style everything)
+> - [x] Proper usage of header
+> - [x] Proper usage of main
+> - [x] Proper usage of footer
+> - [x] Usage of flex
+> - [x] Responsive to window resizing
+> - [x] Proper styling of elements
+> - [x] Proper styling of text
+> - [x] Proper styling of image (shown in leaderboard and footer)
+> - [x] Usage of css animation
+> - [x] Usage of css transitions
 
 ## JavaScript Deliverable
 
