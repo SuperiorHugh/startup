@@ -9,72 +9,75 @@
     <script type="module" src="/Site Files/JS/settings.js"></script>
 </head>
 <body>
-    <h1 id="game-title">Virtual Friend</h1>
-    <h3 id="non-logged-in">You are currently not logged in</h3>
-    <h3 id="logged-in">Logged in as: <span id="username">Joebiden131</span></h3>
-    <div class="horizontal-list-wrapper">
-        <ul class="horizontal-list">
-            <li><a href="/index.html" class="menu-button">Login</a></li>
-            <li><a href="/Site Files/HTML/signup.html"class="menu-button">Sign Up</a></li>
-            <li><a href="/Site Files/HTML/gameplay.html"class="menu-button">Play</a></li>
-            <li><a href="/Site Files/HTML/settings.html"class="menu-button">Settings</a></li>
-            <li><a href="/Site Files/HTML/leaderboard.html" class="menu-button">Leaderboard</a></li>
-        </ul>
-    </div>
+    <header>
+        <h1 id="game-title">Virtual Friend</h1>
+        <h3 id="non-logged-in">You are currently not logged in</h3>
+        <h3 id="logged-in">Logged in as: <span id="username">Joebiden131</span></h3>
+        <div class="horizontal-list-wrapper">
+            <ul class="horizontal-list">
+                <li><a href="/index.html" class="menu-button">Login</a></li>
+                <li><a href="/Site Files/HTML/signup.html"class="menu-button">Sign Up</a></li>
+                <li><a href="/Site Files/HTML/gameplay.html"class="menu-button">Play</a></li>
+                <li><a href="/Site Files/HTML/settings.html"class="menu-button">Settings</a></li>
+                <li><a href="/Site Files/HTML/leaderboard.html" class="menu-button">Leaderboard</a></li>
+            </ul>
+        </div>
+    </header>
 
 
-    <div class="scroll-menu-wrapper">
-        <div class="scroll-menu">
-            <div class="setting-page" id="game-settings">
-                <!-- set the values to current data upon load-->
-                <h2>Game Settings</h2>
-                <ul>
-                    <li>
-                        <label for="visible-emojis">Visible Emojis</label>
-                        <br>
-                        <input type="checkbox" name="visible-emojis" class="checkbox-input">
-                    </li>
-                    <li>
-                        <label for="auto-sleep">Auto Sleep Timer</label>
-                        <br>
-                        <input type="range" name="auto-sleep" class="range-input" min="0" max="100" step="1" value="0">
-                    </li>
-                </ul>
-            </div>
-            <div class="setting-page" id="audio-settings">
-                <h2>Audio Settings</h2>
-                <ul>
-                    <li>
-                        <label for="mute-game">Mute Game</label>
-                        <br>
-                        <input type="checkbox" name="mute-game" class="checkbox-input" id="mute-game">
-                    </li>
-                    <li>
-                        <label for="master-volume">Master Volume</label>
-                        <br>
-                        <input type="range" name="master-volume" class="volume-range-input" min="0" max="100" step="1" value="50">
-                    </li>
-                    <li>
-                        <label for="emoji-volume">Emoji Volume</label>
-                        <br>
-                        <input type="range" name="emoji-volume" class="volume-range-input" min="0" max="100" step="1" value="0">
-                    </li>
-                </ul>
-            </div>
-            <div class="setting-page" id="epic-settings">
-                <h2>Epic Settings</h2>
-                <ul>
-                    <li>
-                        <label for="bobble-head">Bobble Head</label>
-                        <br>
-                        <input type="checkbox" name="bobble-head" class="checkbox-input">
-                    </li>
-                </ul>
+    <main>
+        <div class="scroll-menu-wrapper">
+            <div class="scroll-menu">
+                <div class="setting-page" id="game-settings">
+                    <!-- set the values to current data upon load-->
+                    <h2>Game Settings</h2>
+                    <ul>
+                        <li>
+                            <label for="visible-emojis">Visible Emojis</label>
+                            <br>
+                            <input type="checkbox" name="visible-emojis" class="checkbox-input">
+                        </li>
+                        <li>
+                            <label for="auto-sleep">Auto Sleep Timer</label>
+                            <br>
+                            <input type="range" name="auto-sleep" class="range-input" min="0" max="100" step="1" value="0">
+                        </li>
+                    </ul>
+                </div>
+                <div class="setting-page" id="audio-settings">
+                    <h2>Audio Settings</h2>
+                    <ul>
+                        <li>
+                            <label for="mute-game">Mute Game</label>
+                            <br>
+                            <input type="checkbox" name="mute-game" class="checkbox-input" id="mute-game">
+                        </li>
+                        <li>
+                            <label for="master-volume">Master Volume</label>
+                            <br>
+                            <input type="range" name="master-volume" class="volume-range-input" min="0" max="100" step="1" value="50">
+                        </li>
+                        <li>
+                            <label for="emoji-volume">Emoji Volume</label>
+                            <br>
+                            <input type="range" name="emoji-volume" class="volume-range-input" min="0" max="100" step="1" value="0">
+                        </li>
+                    </ul>
+                </div>
+                <div class="setting-page" id="epic-settings">
+                    <h2>Epic Settings</h2>
+                    <ul>
+                        <li>
+                            <label for="bobble-head">Bobble Head</label>
+                            <br>
+                            <input type="checkbox" name="bobble-head" class="checkbox-input">
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-        
-
+    </main>
+    
     <hr>
 
     <footer>

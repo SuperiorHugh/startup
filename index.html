@@ -8,42 +8,46 @@
     <link rel="stylesheet" href="/Site Files/CSS/style.css">
 </head>
 <body>
-    <h1 id="game-title">Virtual Friend</h1>
-    <h3 id="non-logged-in">You are currently not logged in</h3>
-    <h3 id="logged-in">Logged in as: <span id="username">Joebiden131</span></h3>
-    <div class="horizontal-list-wrapper">
-        <ul class="horizontal-list">
-            <li><a href="/index.html" class="menu-button">Login</a></li>
-            <li><a href="/Site Files/HTML/signup.html"class="menu-button">Sign Up</a></li>
-            <li><a href="/Site Files/HTML/gameplay.html"class="menu-button">Play</a></li>
-            <li><a href="/Site Files/HTML/settings.html"class="menu-button">Settings</a></li>
-            <li><a href="/Site Files/HTML/leaderboard.html" class="menu-button">Leaderboard</a></li>
-        </ul>
-    </div>
-
-    <form action="formSubmit.html" method="post">
-        <div id="credentials-wrapper">
-            <h2 id="login-title">Login</h2>
-            <ul id="credentials">
-                <div>
-                    <li>
-                        <input type="text" class="text-input" name="emailText" placeholder="Email" required>
-                    </li>
-                    <li>
-                        <input type="password" class="text-input" name="passwordText" placeholder="Password" required>
-                    </li>
-                </div>
+    <header>
+        <h1 id="game-title">Virtual Friend</h1>
+        <h3 id="non-logged-in">You are currently not logged in</h3>
+        <h3 id="logged-in">Logged in as: <span id="username">Joebiden131</span></h3>
+        <div class="horizontal-list-wrapper">
+            <ul class="horizontal-list">
+                <li><a href="/index.html" class="menu-button">Login</a></li>
+                <li><a href="/Site Files/HTML/signup.html"class="menu-button">Sign Up</a></li>
+                <li><a href="/Site Files/HTML/gameplay.html"class="menu-button">Play</a></li>
+                <li><a href="/Site Files/HTML/settings.html"class="menu-button">Settings</a></li>
+                <li><a href="/Site Files/HTML/leaderboard.html" class="menu-button">Leaderboard</a></li>
             </ul>
-            <div>
-                <button id="login-button" type="submit">Submit</button>
-            </div>
         </div>
-    </form>
+    </header>
     
-    <div id=no-account-prompt>
-        <p>Don't have an account?</p>
-        <a href="/Site Files/HTML/signup.html">Sign Up Here</a>
-    </div>
+    <main>
+        <form action="formSubmit.html" method="post">
+            <div id="credentials-wrapper">
+                <h2 id="login-title">Login</h2>
+                <ul id="credentials">
+                    <div>
+                        <li>
+                            <input type="text" class="text-input" name="emailText" placeholder="Email" required>
+                        </li>
+                        <li>
+                            <input type="password" class="text-input" name="passwordText" placeholder="Password" required>
+                        </li>
+                    </div>
+                </ul>
+                <div>
+                    <button id="login-button" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+        
+        <div id=no-account-prompt>
+            <p>Don't have an account?</p>
+            <a href="/Site Files/HTML/signup.html">Sign Up Here</a>
+        </div>    
+    </main>
 
     <hr>
 

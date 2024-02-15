@@ -10,42 +10,43 @@
     <script type="module" src="/Site Files/JS/leaderboard-manager.js"></script>
 </head>
 <body>
-    <h1 id="game-title">Virtual Friend</h1>
-    <h3 id="non-logged-in">You are currently not logged in</h3>
-    <h3 id="logged-in">Logged in as: <span id="username">Joebiden131</span></h3>
-    <div class="horizontal-list-wrapper">
-        <ul class="horizontal-list">
-            <li><a href="/index.html" class="menu-button">Login</a></li>
-            <li><a href="/Site Files/HTML/signup.html"class="menu-button">Sign Up</a></li>
-            <li><a href="/Site Files/HTML/gameplay.html"class="menu-button">Play</a></li>
-            <li><a href="/Site Files/HTML/settings.html"class="menu-button">Settings</a></li>
-            <li><a href="/Site Files/HTML/leaderboard.html" class="menu-button">Leaderboard</a></li>
-        </ul>
-    </div>
-
-    <div class="scroll-menu-wrapper">
-        <div class="scroll-menu">
-            <table id="leaderboard">
-                <tr id="leaderboard-header">
-                    <th>Rank</th>
-                    <th>Player</th>
-                    <th>Emotes Used</th>
-                    <th>Login Amount</th>
-                </tr>
-            </table>
+    <header>
+        <h1 id="game-title">Virtual Friend</h1>
+        <h3 id="non-logged-in">You are currently not logged in</h3>
+        <h3 id="logged-in">Logged in as: <span id="username">Joebiden131</span></h3>
+        <div class="horizontal-list-wrapper">
+            <ul class="horizontal-list">
+                <li><a href="/index.html" class="menu-button">Login</a></li>
+                <li><a href="/Site Files/HTML/signup.html"class="menu-button">Sign Up</a></li>
+                <li><a href="/Site Files/HTML/gameplay.html"class="menu-button">Play</a></li>
+                <li><a href="/Site Files/HTML/settings.html"class="menu-button">Settings</a></li>
+                <li><a href="/Site Files/HTML/leaderboard.html" class="menu-button">Leaderboard</a></li>
+            </ul>
         </div>
-    </div>
+    </header>
+
+    <main>
+        <div class="scroll-menu-wrapper">
+            <div class="scroll-menu">
+                <table id="leaderboard">
+                    <tr id="leaderboard-header">
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Emotes Used</th>
+                        <th>Login Amount</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div id="random-apis">
+            <h3>Say hi to my pet dog, <span id="randomword"></span>!</h3>
+            <img id="randomdog" width="300" height="300" alt="random dog">
     
-    <div id="random-apis">
-        <h3>Say hi to my pet dog, <span id="randomword"></span>!</h3>
-        <img id="randomdog" width="300" height="300" alt="random dog">
-
-        <p id="jokesetup"></p>
-        <p id="jokedelivery"></p>
-    </div>
-
-
-
+            <p id="jokesetup"></p>
+            <p id="jokedelivery"></p>
+        </div>
+    </main>
 
     <hr>
 
