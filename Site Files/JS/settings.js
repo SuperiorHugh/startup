@@ -36,7 +36,7 @@ for(let slider of sliders){
     //update colors
     slider.oninput = function(){
         var x = slider.value;
-        var color = 'linear-gradient(to right, ##FFB3B3 ' + x + '%, #FFEEE4 ' + x + '%)';//#ffb3b3, #ffd2b8
+        var color = 'linear-gradient(to right, #FFB3B3 ' + x + '%, #FFEEE4 ' + x + '%)';//#ffb3b3, #ffd2b8
         slider.style.background = color;
     }
 }
