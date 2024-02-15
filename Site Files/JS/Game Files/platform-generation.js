@@ -98,7 +98,7 @@ export class PlatformGenerator {
     tick(){
         this.tickCount++;
         
-        console.log(this.tickCount);
+        console.log(this.tickCount);//TODO
         this.level = Math.ceil(this.tickCount/3050);
         if(this.tickCount % 1000 == 0){
             this.generatePlatforms();

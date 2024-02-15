@@ -67,7 +67,6 @@ window.onload = function(){
 
 /*-- input handling --*/
 function inputStart(event){
-    console.log(event.code)
     for(let i = 0; i < players.length; i++){
         executePlayerKeyCode(players[i], platformArray, event.code);
     }
