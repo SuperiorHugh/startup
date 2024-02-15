@@ -215,6 +215,7 @@ div.scroll-menu-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 div.scroll-menu {
@@ -236,7 +237,6 @@ body::-webkit-scrollbar-thumb {
 
 div.scroll-menu::-webkit-scrollbar {
     width: 14px;
-    
 }
 div.scroll-menu::-webkit-scrollbar-thumb {
     background: #ffffff;
@@ -251,6 +251,7 @@ div.setting-page {
     margin: auto;
     margin-bottom: 50px;
     text-align: center;
+    
 }
 
 #game-settings {
@@ -363,24 +364,34 @@ input.checkbox-input:checked {
     font-size: 24px;
 }
 
-#leaderboard-wrapper {
-    width: 650px;
-    height: 450px;
-}
 #leaderboard {
     margin: auto;
     background-color: white;
-    width: 500px;
+    width: 90%;
     padding: 25px;
     border-radius: 8px;
     color: #FFB3B3;
 }
 
-#leaderboard-scroll-wrapper {
-    width: 700px;
-    height: 500px;
-    padding: 50px;
+@keyframes slideInFromLeft {
+    0% {
+      transform: translateY(-100%);
+      color: transparent;
+      height: 0px;
+    }
+    100% {
+      transform: translateY(0);
+      color: #FFB3B3;
+      height: 40px;
+    }
+}  
+
+.leaderboard-stat {
+    animation: 0.4s ease-in 0s 1 slideInFromLeft;
+    text-align: center;
 }
+
+
 
 #top1 {
     font-weight: bold;
@@ -398,6 +409,10 @@ input.checkbox-input:checked {
     font-weight: bold;
     color: #d8a275;
     font-size: 20px;
+}
+
+.rank-td {
+    font-weight: bold;
 }
 
 tr {
