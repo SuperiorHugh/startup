@@ -1,11 +1,14 @@
 * {
+    --maincolor: #ffb3b3;
+    --altcolor: #ffd2b8;
+
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 #game-title {
     text-align: center;
     font-size: 40px;
-    background: linear-gradient(to left, #ffb3b3, #ffd2b8f6);
+    background: linear-gradient(to left, #ffb3b3, #ffd2b8);
     background-clip: text;
     color: transparent;
     margin-bottom: 0;

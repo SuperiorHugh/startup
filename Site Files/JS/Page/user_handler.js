@@ -23,7 +23,7 @@ export function setUserVisual(){
 
 export function updateBackground(){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-    document.body.style.backgroundColor = (storedUser.darkmode ? 'black' : 'white');
+    document.body.style.backgroundColor = (storedUser.darkmode ? 'rgb(34,34,34)' : 'white');
 }
 
 setUserVisual();
