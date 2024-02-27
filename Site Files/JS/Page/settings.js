@@ -1,25 +1,40 @@
+import {updateBackground} from './user_handler.js'
+
+
+
+const visibleemojis = document.getElementById('visible-emojis');
+const darkmode = document.getElementById('dark-mode');
+const autosleep = document.getElementById('auto-sleep');
+const mutegame = document.getElementById('mute-game');
+const mastervolue = document.getElementById('master-volume');
+const emojivolume = document.getElementById('emoji-volume');
+const bobblehead = document.getElementById('bobble-head');
+
+
 let mute = document.getElementById('mute-game');
 let volumeSliders = document.getElementsByClassName("volume-range-input");
 let sliders = document.getElementsByClassName("range-input");
 let sliderColor = "#FFB3B3";
-const darkmode = document.getElementById('darkmode');
 
+darkmode.oninput = function(event){
+    const storedUser = JSON.parse(localStorage.getItem('currentuser'));
 
-darkmode.oninput() = function(){
-    if(darkmode.checked){
-        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+    if(storedUser){
+        storedUser.darkmode = darkmode.checked;
+        localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
+        localStorage.setItem('currentuser', JSON.stringify(storedUser));
 
-        if(storedUser){
-            nonloggedin.style.setProperty('display', 'none');
-            loggedin.style.setProperty('display', 'block');
-
-            usernameVisual.innerText = storedUser.username_val;
-            loginPageButton.innerText = 'Switch Account';
-        } else {
-            alert('log in or sign up to change settings!');
-        }
+        updateBackground();
+        alert('updated')
+    } else {
+        darkmode.checked = false;
+        alert('log in or sign up to change settings!');
     }
 }
+
+
+
+/*-- volume sliders configuration --*/
 
 mute.oninput = function() {
     if(mute.checked){

@@ -6,7 +6,7 @@
     <link rel="icon" href="/Pictures/Icon/favicon.ico">
     <title>Virtual Friend</title>
     <link rel="stylesheet" href="/Site Files/CSS/style.css">
-    <script type="module" src="/Site Files/JS/settings.js"></script>
+    <script type="module" src="/Site Files/JS/Page/settings.js"></script>
     <script type="module" src="/Site Files/JS/Page/user_handler.js"></script>
 </head>
 <body>
@@ -32,19 +32,19 @@
                     <h2>Game Settings</h2>
                     <ul>
                         <li>
-                            <label for="visible-emojis">Visible Emojis</label>
+                            <label>Visible Emojis</label>
                             <br>
-                            <input type="checkbox" name="visible-emojis" class="checkbox-input">
+                            <input type="checkbox" id="visible-emojis" class="checkbox-input">
                         </li>
                         <li>
-                            <label for="darkmode">Dark Mode</label>
+                            <label>Dark Mode</label>
                             <br>
-                            <input id='darkmode' type="checkbox" name="darkmode" class="checkbox-input">
+                            <input type="checkbox" id="dark-mode" class="checkbox-input">
                         </li>
                         <li>
-                            <label for="auto-sleep">Auto Sleep Timer</label>
+                            <label>Auto Sleep Timer</label>
                             <br>
-                            <input type="range" name="auto-sleep" class="range-input" min="0" max="100" step="1" value="0">
+                            <input type="range" id="auto-sleep" class="range-input" min="0" max="100" step="1" value="0">
                         </li>
                     </ul>
                 </div>
@@ -52,19 +52,19 @@
                     <h2>Audio Settings</h2>
                     <ul>
                         <li>
-                            <label for="mute-game">Mute Game</label>
+                            <label>Mute Game</label>
                             <br>
-                            <input type="checkbox" name="mute-game" class="checkbox-input" id="mute-game">
+                            <input type="checkbox" id="mute-game" class="checkbox-input" id="mute-game">
                         </li>
                         <li>
-                            <label for="master-volume">Master Volume</label>
+                            <label>Master Volume</label>
                             <br>
-                            <input type="range" name="master-volume" class="volume-range-input" min="0" max="100" step="1" value="50">
+                            <input type="range" id="master-volume" class="volume-range-input" min="0" max="100" step="1" value="100">
                         </li>
                         <li>
-                            <label for="emoji-volume">Emoji Volume</label>
+                            <label>Emoji Volume</label>
                             <br>
-                            <input type="range" name="emoji-volume" class="volume-range-input" min="0" max="100" step="1" value="0">
+                            <input type="range" id="emoji-volume" class="volume-range-input" min="0" max="100" step="1" value="100">
                         </li>
                     </ul>
                 </div>
@@ -72,9 +72,9 @@
                     <h2>Epic Settings</h2>
                     <ul>
                         <li>
-                            <label for="bobble-head">Bobble Head</label>
+                            <label>Bobble Head</label>
                             <br>
-                            <input type="checkbox" name="bobble-head" class="checkbox-input">
+                            <input type="checkbox" id="bobble-head" class="checkbox-input">
                         </li>
                     </ul>
                 </div>

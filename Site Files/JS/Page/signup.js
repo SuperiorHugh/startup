@@ -10,7 +10,19 @@ form.addEventListener('submit', function (event){
     const username_val = username.value;
     const password_val = password.value;
 
-    const user_data = {email_val, username_val, password_val};
+    const user_data = {
+        //credentials
+        email_val, username_val, password_val,
+
+        //settings
+        visibleemojis: false,
+        darkmode: false,
+        autosleep: 0,
+        mutegame: false,
+        mastervolue: 100,
+        emojivolume: 100,
+        bobblehead: false,
+    };
 
     const existing_user = JSON.parse(localStorage.getItem(email_val));
     

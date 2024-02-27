@@ -21,4 +21,11 @@ export function setUserVisual(){
     }
 }
 
+export function updateBackground(){
+    const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+    document.body.style.backgroundColor = (storedUser.darkmode ? 'black' : 'white');
+}
+
 setUserVisual();
+updateBackground();
+
