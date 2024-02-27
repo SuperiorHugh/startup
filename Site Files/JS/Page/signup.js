@@ -12,12 +12,13 @@ form.addEventListener('submit', function (event){
 
     const user_data = {email_val, username_val, password_val};
 
-    const existing_user = JSON.parse(localStorage.getItem(email));
+    const existing_user = JSON.parse(localStorage.getItem(email_val));
     
     if(existing_user){
         alert("there is already an account with that email!");
     } else {
-        alert("welcome to the Virtual Friend Network");
+        alert("welcome to the Virtual Friend Network, " + username_val + "!");
+        localStorage.setItem(email_val, JSON.stringify(user_data));
         window.location.href = form.action;
     }
 })

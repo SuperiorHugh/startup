@@ -44,13 +44,12 @@ form.addEventListener('submit', function (event){
 
     const user_data = {email_val, password_val};
 
-    const existing_user = JSON.parse(localStorage.getItem(email));
+    const existing_user = JSON.parse(localStorage.getItem(email_val));
     
-    if(existing_user){
-        alert("welcome back, " + existing_user[1] + "!");
+    if(existing_user && existing_user.password_val == password_val){
+        alert("welcome back, " + existing_user.username_val + "!");
         window.location.href = form.action;
     } else {
-        alert('please create a new account!');
-        window.location.href = '/Site Files/HTML/signup.html';
+        alert('unknown user or incorrect password, please try again!');
     }
 })
