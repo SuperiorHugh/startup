@@ -42,12 +42,11 @@ form.addEventListener('submit', function (event){
     const email_val = email.value;
     const password_val = password.value;
 
-    const user_data = {email_val, password_val};
-
     const existing_user = JSON.parse(localStorage.getItem(email_val));
     
     if(existing_user && existing_user.password_val == password_val){
         alert("welcome back, " + existing_user.username_val + "!");
+        localStorage.setItem('currentuser', JSON.stringify(existing_user));
         window.location.href = form.action;
     } else {
         alert('unknown user or incorrect password, please try again!');
