@@ -1,6 +1,12 @@
 * {
     --maincolor: #ffb3b3;
     --altcolor: #ffd2b8;
+    --backgroundcolor: #FFFFFF;
+    --boxshadowcolor: rgba(255, 179, 179, 0.4);
+    --hovercolor: rgba(255, 179, 179, 1);
+    --unselectedcolor: #ffd2b860;
+    --transparentcolor: rgba(0, 0, 0, 0);
+    --textcolor: rgba(0, 0, 0, 0.3);
 
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
@@ -17,7 +23,6 @@
     margin-top: 8px;
     text-align: center;
     display: none;
-    color: rgba(0, 0, 0, 0.3);
 }
 #logged-in {
     margin-top: 8px;
@@ -27,11 +32,6 @@
     background: linear-gradient(to left, #ffb3b3, #ffd2b8f6);
     background-clip: text;
     color: transparent;
-}
-#username-visual {
-    color: rgba(0, 0, 0, 0.3);
-    background: white;
-    background-clip: text;
 }
 
 
