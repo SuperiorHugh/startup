@@ -1,6 +1,5 @@
 import {updateBackground} from './user_handler.js'
 
-
 let volumeSliders = document.getElementsByClassName("volume-range-input");
 let sliders = document.getElementsByClassName("range-input");
 let sliderColor = "#FFB3B3";
