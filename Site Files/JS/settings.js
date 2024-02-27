@@ -2,6 +2,24 @@ let mute = document.getElementById('mute-game');
 let volumeSliders = document.getElementsByClassName("volume-range-input");
 let sliders = document.getElementsByClassName("range-input");
 let sliderColor = "#FFB3B3";
+const darkmode = document.getElementById('darkmode');
+
+
+darkmode.oninput() = function(){
+    if(darkmode.checked){
+        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+
+        if(storedUser){
+            nonloggedin.style.setProperty('display', 'none');
+            loggedin.style.setProperty('display', 'block');
+
+            usernameVisual.innerText = storedUser.username_val;
+            loginPageButton.innerText = 'Switch Account';
+        } else {
+            alert('log in or sign up to change settings!');
+        }
+    }
+}
 
 mute.oninput = function() {
     if(mute.checked){
