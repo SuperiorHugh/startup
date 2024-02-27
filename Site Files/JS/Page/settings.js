@@ -30,10 +30,9 @@ visibleemojis.oninput = function(event){
         alert('log in or sign up to change settings!');
     }
 }
-
+console.log('test')
 darkmode.oninput = function(event){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-
     if(storedUser){
         
         storedUser.darkmode = darkmode.checked;
@@ -62,7 +61,7 @@ autosleep.oninput = function(event){
         localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
     } else {
-        x = 0;
+        autosleep.value = 0;
         alert('log in or sign up to change settings!');
     }
 }
@@ -92,7 +91,7 @@ mastervolume.oninput = function(event){
         localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
     } else {
-        x = 0;
+        mastervolume.value = 0;
         alert('log in or sign up to change settings!');
     }
 }
@@ -107,7 +106,7 @@ emojivolume.oninput = function(event){
         localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
     } else {
-        x = 0;
+        emojivolume.value = 0;
         alert('log in or sign up to change settings!');
     }
 }
