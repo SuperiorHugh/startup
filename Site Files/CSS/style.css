@@ -1,17 +1,21 @@
 * {
-    --maincolor: #ffb3b3;
-    --altcolor: #ffd2b8;
-    --backgroundcolor: #FFFFFF;
-    --boxshadowcolor: rgba(255, 179, 179, 0.4);
-    --hovercolor: rgba(255, 179, 179, 1);
-    --unselectedcolor: #ffd2b860;
-    --transparentcolor: rgba(0, 0, 0, 0);
-    --textcolor: rgba(0, 0, 0, 0.3);
-    --buttoncolor: rgba(255, 230, 230, 1);
-    --buttonhovercolor: rgba(255, 250, 250, 1);
-    --hiddenjokecolor: #FFEEE4;
-
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+body {
+    --maincolor:          #ffb3b3ff;
+    --altcolor:           #ffd2b8ff;
+    --backgroundcolor:    #ffffffff;
+    --boxshadowcolor:     #ffb3b366;
+    --darkboxshadowcolor: #ffb3b366;
+    --hovercolor:         #ffb3b3ff;
+    --unselectedcolor:    #ffeee4ff;
+    --transparentcolor:   #00000000;
+    --textcolor:          #0000004d;
+    --buttoncolor:        #ffe6e6ff;
+    --buttonhovercolor:   #fffafaff;
+
+    background: var(--backgroundcolor);
 }
 
 #game-title {
@@ -37,6 +41,9 @@
     color: transparent;
 }
 
+#username-visual {
+    font-size: 24px;
+}
 
 .horizontal-list {
     display: flex;
@@ -124,6 +131,7 @@ hr {
     border-radius: 8px;
     border: none;
     color: var(--maincolor);
+    background-color: var(--backgroundcolor);
     font-weight: bold;
     padding: 10px;
     transition: width 0.2s ease-out;
@@ -135,7 +143,7 @@ hr {
 }
 
 #credentials div li input::placeholder {
-    color: grey;
+    color: var(--textcolor);
     font-weight: 10;
 }
 
@@ -360,7 +368,7 @@ input.checkbox-input:checked {
 
 #randomdog:hover{
     border-radius: 8px;
-    box-shadow: 0px 0px 40px 0px rgba(255, 179, 179, 0.8);
+    box-shadow: 0px 0px 40px 0px var(--darkboxshadowcolor);
     width: 62%;
     height: 62%;
 }
@@ -451,7 +459,7 @@ tr {
     color: var(--transparentcolor);
     margin-top: 20px;
     font-size: small;
-    background-color: var(--hiddenjokecolor);
+    background-color: var(--unselectedcolor);
     width: 200px;
     margin: auto;
     border-radius: 8px;

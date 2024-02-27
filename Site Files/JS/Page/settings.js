@@ -2,7 +2,11 @@ import {updateBackground} from './user_handler.js'
 
 let volumeSliders = document.getElementsByClassName("volume-range-input");
 let sliders = document.getElementsByClassName("range-input");
-let sliderColor = "#FFB3B3";
+
+let mainColor = getComputedStyle(document.body).getPropertyValue('--maincolor');
+let unselectedColor = getComputedStyle(document.body).getPropertyValue('--unselectedcolor');
+
+let sliderColor = mainColor;
 
 /*-- set up inputs to update player data --*/
 
@@ -40,12 +44,17 @@ darkmode.oninput = function(event){
         darkmode.checked = false;
         alert('log in or sign up to change settings!');
     }
+
+
+
+    updateColors();
+    updateVolSliders();
 }
 
 
 autosleep.oninput = function(event){
     var x = autosleep.value;
-    autosleep.style.background = 'linear-gradient(to right, #FFB3B3 ' + x + '%, #FFEEE4 ' + x + '%)';
+    autosleep.style.background = 'linear-gradient(to right, ' + mainColor + ' ' + x + '%, ' + unselectedColor + ' ' + x + '%)';
 
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
     if(storedUser){
@@ -75,7 +84,7 @@ mutegame.oninput = function(event){
 
 mastervolume.oninput = function(event){
     var x = mastervolume.value;
-    mastervolume.style.background = 'linear-gradient(to right, ' + sliderColor + ' ' + x + '%, #FFEEE4 ' + x + '%)';//#ffb3b3, #ffd2b8;
+    mastervolume.style.background = 'linear-gradient(to right, ' + sliderColor + ' ' + x + '%, ' + unselectedColor + ' ' + x + '%)';
 
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
     if(storedUser){
@@ -90,7 +99,7 @@ mastervolume.oninput = function(event){
 
 emojivolume.oninput = function(event){
     var x = emojivolume.value;
-    emojivolume.style.background = 'linear-gradient(to right, ' + sliderColor + ' ' + x + '%, #FFEEE4 ' + x + '%)';//#ffb3b3, #ffd2b8;
+    emojivolume.style.background = 'linear-gradient(to right, ' + sliderColor + ' ' + x + '%, ' + unselectedColor + ' ' + x + '%)';
 
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
     if(storedUser){
@@ -119,16 +128,33 @@ bobblehead.oninput = function(event){
 
 /*-- set settings to player data --*/
 
+function updateColors(){
+    mainColor = getComputedStyle(document.body).getPropertyValue('--maincolor');
+    unselectedColor = getComputedStyle(document.body).getPropertyValue('--unselectedcolor');
+
+    for(let slider of volumeSliders){
+        var x = slider.value;
+        var color = 'linear-gradient(to right, ' + sliderColor + ' ' + x + '%, ' + unselectedColor + ' ' + x + '%)';
+        slider.style.background = color;
+    }
+    
+    for(let slider of sliders){
+        var x = slider.value;
+        var color = 'linear-gradient(to right, ' + mainColor + ' ' + x + '%, ' + unselectedColor + ' ' + x + '%)';
+        slider.style.background = color;
+    }
+}
+
 function updateVolSliders(){
     if(mutegame.checked){
-        sliderColor = "#FFEEE4";
+        sliderColor = unselectedColor;
     } else {
-        sliderColor = "#FFB3B3";
+        sliderColor = mainColor;
     }
 
     for(let slider of volumeSliders){
         var x = slider.value;
-        var color = 'linear-gradient(to right, ' + sliderColor + ' ' + x + '%, #FFEEE4 ' + x + '%)';//#ffb3b3, #ffd2b8
+        var color = 'linear-gradient(to right, ' + sliderColor + ' ' + x + '%, ' + unselectedColor + ' ' + x + '%)';
         slider.style.background = color;
 
         slider.style.setProperty('--sliderColor', sliderColor);
@@ -146,19 +172,6 @@ if(storedUser){
     bobblehead.checked = storedUser.bobblehead;
 
     updateVolSliders();
-
-    
-
 }
 
-for(let slider of volumeSliders){
-    var x = slider.value;
-    var color = 'linear-gradient(to right, ' + sliderColor + ' ' + x + '%, #FFEEE4 ' + x + '%)';//#ffb3b3, #ffd2b8
-    slider.style.background = color;
-}
-
-for(let slider of sliders){
-    var x = slider.value;
-    var color = 'linear-gradient(to right, #FFB3B3 ' + x + '%, #FFEEE4 ' + x + '%)';//#ffb3b3, #ffd2b8
-    slider.style.background = color;
-}
+updateColors();
