@@ -13,13 +13,13 @@
 #non-logged-in {
     margin-top: 8px;
     text-align: center;
-    display: block;
+    display: none;
     color: rgba(0, 0, 0, 0.3);
 }
 #logged-in {
     margin-top: 8px;
     text-align: center;
-    display: none;
+    display: block;
 
     background: linear-gradient(to left, #ffb3b3, #ffd2b8f6);
     background-clip: text;
@@ -27,6 +27,7 @@
 }
 #username-visual {
     color: rgba(0, 0, 0, 0.3);
+    background: white;
 }
 
 
