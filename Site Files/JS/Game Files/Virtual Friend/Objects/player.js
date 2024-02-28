@@ -45,7 +45,7 @@ export class Player {
     }
 
     //draw self onto given canvas
-    drawSelf(ctx, imageLib){
+    draw(ctx, imageLib){
         ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((this.jumpHeight - this.z) / this.jumpHeight))) + ")";
         ctx.beginPath();
         ctx.ellipse(this.x + 32, this.y + 64, 24 + 8*(1-(this.z / this.jumpHeight)), 8 + 6*(1-(this.z / this.jumpHeight)), 0, 0, 2 * Math.PI);
@@ -56,8 +56,6 @@ export class Player {
         ctx.font = "20px 'Trebuchet MS'";
         ctx.fillStyle = document.body.style.getPropertyValue('--altcolor');
 
-        // Write text on the canvas
-        console.log(this.name.length)
         ctx.fillText(this.name, this.x + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
     }
 }

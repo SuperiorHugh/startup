@@ -3,6 +3,7 @@
 import {Player} from "./Objects/player.js";
 import {loadImages} from "./Helper/image-loading.js";
 import {executePlayerKeyCode, endPlayerKeyCode} from "./Helper/input-handler.js";
+import { EmoteButton } from "./UI/emote-button.js";
 
 
 /*-- display loading and image preloading --*/
@@ -39,7 +40,6 @@ let players = [
     player
 ];
 
-
 /*-- game loop --*/
 
 function gameLoop() {
@@ -47,7 +47,12 @@ function gameLoop() {
     ctx.fillStyle = document.body.style.getPropertyValue('--buttonhovercolor')
     ctx.fillRect(0, 0, displayWidth, displayHeight);
 
-    player.drawSelf(ctx, imageLib);
+    //draw player
     player.tick();
+    player.draw(ctx, imageLib);
     requestAnimationFrame(gameLoop);
+
+    //draw ui
+    let eb = new EmoteButton(canvas);
+    eb.draw(ctx);
 }
