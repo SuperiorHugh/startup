@@ -1,13 +1,9 @@
+import { Player } from "./Objects/Player";
+
 let screen;
 let ctx;
 const width = 600;
 const height = 500;
-
-class Player {
-    constructor (){
-
-    }
-}
 
 window.onload = function(){
     screen = document.getElementById("screen");

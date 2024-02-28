@@ -1,7 +1,7 @@
 /*-- imports --*/
-import {executePlayerKeyCode, endPlayerKeyCode, checkVerticalCollision, move, checkHorizontalCollision} from './movement-input-handler.js'
-import {Platform, DamagePlatform, WarningPlatform, PlatformGenerator} from './Game Files/platform-generation.js'
-import {clamp, lerp} from './Game Files/helper-functions.js'
+import {executePlayerKeyCode, endPlayerKeyCode, checkVerticalCollision, move, checkHorizontalCollision} from './Helper/movement-input-handler.js'
+import {Platform, DamagePlatform, WarningPlatform, PlatformGenerator} from './Objects/platform-generation.js'
+import {clamp, lerp} from './Helper/helper-functions.js'
 
 /*-- initiallize game settings --*/
 let screen;
