@@ -1,4 +1,6 @@
+import {Player} from "./Objects/player.js";
 import {loadImages} from "./Helper/image-loading.js";
+
 
 let canvas;
 let ctx;
@@ -10,14 +12,17 @@ window.onload = async function(){
     canvas.width = displayWidth;
     canvas.height = displayheight;
     ctx = canvas.getContext("2d");
-    
+    ctx.imageSmoothingEnabled = false;
+
     myimages = await loadImages();
 
     gameLoop();
 }
 
+let me = new Player(53, 53);
+
 function gameLoop() {
-    
-    ctx.drawImage(myimages[0], 32, 32)
+
+    ctx.drawImage(myimages.player, me.x, me.y, me.width, me.height);
     requestAnimationFrame(gameLoop);
 }
