@@ -90,6 +90,7 @@ Settings Page
 
 ## HTML Deliverable
 
+> - [x] TODO
 > - [x] Finish login page
 > - [x] Finish register page
 > - [x] Finish gameplay page
@@ -110,12 +111,11 @@ Settings Page
 ## CSS Deliverable
 
 > - [x] TODO
-> - [x] Finish login css
-> - [x] Finish register css
-> - [x] Finish gameplay css
-> - [x] Finish settings css (apart from backend side)
-> - [x] Finish leaderboard page css
-> - Note that I did not style the following, as I went with more of a modular aproach to my site. They are more for structure in my site (although I did style everything)
+> - [x] Finish login CSS
+> - [x] Finish register CSS
+> - [x] Finish gameplay CSS
+> - [x] Finish settings CSS (apart from backend side)
+> - [x] Finish leaderboard page CSS
 > - [x] Proper usage of header
 > - [x] Proper usage of main
 > - [x] Proper usage of footer
@@ -124,12 +124,23 @@ Settings Page
 > - [x] Proper styling of elements
 > - [x] Proper styling of text
 > - [x] Proper styling of image (shown in leaderboard and footer)
-> - [x] Usage of css animation
-> - [x] Usage of css transitions
+> - [x] Usage of CSS animation
+> - [x] Usage of CSS transitions
 
 ## JavaScript Deliverable
 
 > - [ ] TODO
+> - [x] Future login support
+> - [x] Future database support
+> - [x] Future websocket support
+> - [x] Proper JavaScript support
+> - [x] Interactable settings
+> - [x] Changable settings depending on logged in user
+> - [x] Dark mode setting support
+> - [x] Fully functioning login page
+> - [x] Fully functioning register page
+> - [ ] Leaderboard changes depending on stored user data
+> - [x] CSS and JavaScript synchronization through CSS variables
 
 ## Service Deliverable
 
