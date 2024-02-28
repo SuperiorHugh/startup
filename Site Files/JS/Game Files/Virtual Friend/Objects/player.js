@@ -1,5 +1,9 @@
+/*-- imports --*/
+
 import {lerp} from ".././Helper/helper-functions.js";
 
+
+//player class
 export class Player {
     constructor (x, y, name){
         this.x = x;
@@ -13,12 +17,14 @@ export class Player {
         this.moveLeft = 0;
         this.moveRight = 0;
 
+        this.jumpHeight = 32;
         this.speed = 2;
         this.animationTime = 0;
 
         this.name = name;
     }
 
+    //tick player (runs per frame)
     tick(){
         if(!(this.moveRight - this.moveLeft) && !(this.moveDown - this.moveUp)){
             this.animationTime = 0;
@@ -28,8 +34,7 @@ export class Player {
         } else {
             this.animationTime++;
             const animSpd = 7;
-            const jumpHeight = 16;
-            this.z = Math.abs(Math.sin(this.animationTime / animSpd)) * jumpHeight;
+            this.z = Math.abs(Math.sin(this.animationTime / animSpd)) * this.jumpHeight;
             this.width = 48 + Math.abs(Math.sin(this.animationTime / animSpd)) * 16;
             this.height = 48 + Math.abs(Math.cos(this.animationTime / animSpd)) * 16;
         }
@@ -39,10 +44,11 @@ export class Player {
         
     }
 
+    //draw self onto given canvas
     drawSelf(ctx, imageLib){
-        ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((16 - this.z) / 16))) + ")";
+        ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((this.jumpHeight - this.z) / this.jumpHeight))) + ")";
         ctx.beginPath();
-        ctx.ellipse(this.x + 32, this.y + 64, 32 - (this.z / 1.5), 12 - (this.z / 2), 0, 0, 2 * Math.PI);
+        ctx.ellipse(this.x + 32, this.y + 64, 24 + 8*(1-(this.z / this.jumpHeight)), 8 + 6*(1-(this.z / this.jumpHeight)), 0, 0, 2 * Math.PI);
         ctx.fill();
         ctx.closePath();
 

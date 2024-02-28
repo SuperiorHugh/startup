@@ -1,3 +1,6 @@
+/*-- input handling --*/
+
+//begin input
 export function executePlayerKeyCode(player, keyCode){
     if(keyCode == 'KeyW'){
         player.moveUp = 1;
@@ -10,6 +13,7 @@ export function executePlayerKeyCode(player, keyCode){
     }
 }
 
+//end input
 export function endPlayerKeyCode(player, keyCode){
     if(keyCode == 'KeyW'){
         player.moveUp = 0;

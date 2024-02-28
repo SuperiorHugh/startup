@@ -7,6 +7,7 @@ const imageMapping = {
 };
 
 
+//load images asynchronously
 export function loadImages(){
     return new Promise((resolve, reject) => {
         let loadedCount = 0;
