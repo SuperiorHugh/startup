@@ -1,22 +1,23 @@
-import { Player } from "./Objects/Player";
+import {loadImages} from "./Helper/image-loading";
 
-let screen;
+let canvas;
 let ctx;
-const width = 600;
-const height = 500;
+const displayWidth = 600;
+const displayheight = 500;
 
-window.onload = function(){
-    screen = document.getElementById("screen");
-    screen.width = screenWidth;
-    screen.height = screenHeight;
-    ctx = screen.getContext("2d");
+window.onload = async function(){
+    canvas = document.getElementById("screen");
+    canvas.width = displayWidth;
+    canvas.height = displayheight;
+    ctx = canvas.getContext("2d");
     
+    let myimages = await loadImages();
+
     gameLoop();
-    document.addEventListener("keydown", inputStart);
-    document.addEventListener("keyup", inputEnd);
 }
 
 function gameLoop() {
     
+
     requestAnimationFrame(gameLoop);
 }
