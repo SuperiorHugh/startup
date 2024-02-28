@@ -1,7 +1,5 @@
-const imagePaths = [
-    'path1',
-    'path2',
-    'path3',
+export const imagePaths = [
+    '../../Pictures/Game/Entity/player.webp',
 ];
 
 export function loadImages(){
