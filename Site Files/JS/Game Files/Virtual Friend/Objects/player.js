@@ -25,7 +25,8 @@ export class Player {
         } else {
             this.animationTime++;
             const animSpd = 6;
-            this.z = Math.abs(Math.sin(this.animationTime / animSpd)) * 16;
+            const jumpHeight = 16;
+            this.z = Math.abs(Math.sin(this.animationTime / animSpd)) * jumpHeight;
             this.width = 48 + Math.abs(Math.sin(this.animationTime / animSpd)) * 16;
             this.height = 48 + Math.abs(Math.cos(this.animationTime / animSpd)) * 16;
         }
