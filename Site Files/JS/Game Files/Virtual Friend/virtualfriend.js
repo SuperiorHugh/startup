@@ -1,12 +1,14 @@
 import {Player} from "./Objects/player.js";
 import {loadImages} from "./Helper/image-loading.js";
+import {executePlayerKeyCode, endPlayerKeyCode} from "./Helper/input-handler.js";
 
 
 let canvas;
 let ctx;
 const displayWidth = 600;
 const displayheight = 500;
-let myimages;
+let imageLib;
+
 window.onload = async function(){
     canvas = document.getElementById("screen");
     canvas.width = displayWidth;
@@ -14,15 +16,31 @@ window.onload = async function(){
     ctx = canvas.getContext("2d");
     ctx.imageSmoothingEnabled = false;
 
-    myimages = await loadImages();
-
+    imageLib = await loadImages();
+    
     gameLoop();
+    document.addEventListener('keydown', inputStart);
+    document.addEventListener('keyup', inputEnd);
 }
 
-let me = new Player(53, 53);
+
+let player = new Player(53, 53);
+
+function inputStart(event){
+    executePlayerKeyCode(player, event.code);
+}
+function inputEnd(event){
+    endPlayerKeyCode(player, event.code);
+}
+
+let players = [
+    player
+];
 
 function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.drawImage(myimages.player, me.x, me.y, me.width, me.height);
+    player.drawSelf(ctx, imageLib);
+    player.tick();
     requestAnimationFrame(gameLoop);
 }
