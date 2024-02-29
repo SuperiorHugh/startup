@@ -1,6 +1,6 @@
 /*-- imports --*/
 
-import {lerp} from ".././Helper/helper-functions.js";
+import {lerp, getRandomElementFromArray} from ".././Helper/helper-functions.js";
 
 
 //player class
@@ -22,6 +22,10 @@ export class Player {
         this.animationTime = 0;
 
         this.name = name;
+        this.emoteSpeed = 100;
+        this.emoteTimer = 0;
+        this.emotePos = 0;
+        this.emoji = '';
     }
 
     //tick player (runs per frame)
@@ -42,6 +46,13 @@ export class Player {
         this.x += (this.moveRight - this.moveLeft) * this.speed;
         this.y += (this.moveDown - this.moveUp) * this.speed;
         
+
+        if(this.emoteTimer > 0){
+            this.emoteTimer--;
+            this.emotePos = lerp(this.emotePos, 0, 0.2);
+        } else {
+            this.emoji = '';
+        }
     }
 
     //draw self onto given canvas
@@ -54,8 +65,22 @@ export class Player {
 
         ctx.drawImage(imageLib.player, this.x + 32 - (this.width/2), this.y - this.z, this.width, this.height);
         ctx.font = "20px 'Trebuchet MS'";
-        ctx.fillStyle = document.body.style.getPropertyValue('--altcolor');
+        ctx.fillStyle = document.body.style.getPropertyValue('--maincolor');
 
         ctx.fillText(this.name, this.x + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
+        
+        if(this.emoteTimer > 0){
+            ctx.globalAlpha = this.emoteTimer / this.emoteSpeed;
+            ctx.drawImage(imageLib[this.emoji + '-emote'], this.x, this.y - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
+            ctx.globalAlpha = 1;
+        }
+    }
+
+    //emote event
+    emote(){
+        console.log('emoted!');
+        this.emoteTimer = this.emoteSpeed;
+        this.emotePos = 1;
+        this.emoji = getRandomElementFromArray(['happy', 'angry', 'bruh', 'laugh', 'sad']);
     }
 }

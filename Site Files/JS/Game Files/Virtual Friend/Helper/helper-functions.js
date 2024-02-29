@@ -9,3 +9,8 @@ export function clamp(value, min, max){
 export function lerp(current, goto, amount) {
     return current + amount * (goto - current);
 }
+
+//gets a random value from array
+export function getRandomElementFromArray(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}

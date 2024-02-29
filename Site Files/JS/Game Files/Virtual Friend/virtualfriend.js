@@ -22,8 +22,8 @@ let ui = []
 const inputStart = (event) => executePlayerKeyCode(player, event.code);
 const inputEnd = (event) => endPlayerKeyCode(player, event.code);
 const mouseMove = (event) => mouseMoevementEvent(canvas, mousePos, event);
-const mouseDown = (event) => mouseDownEvent(canvas, mousePos, ui, event);
-const mouseUp = (event) => mouseUpEvent(canvas, mousePos, ui, event);
+const mouseDown = (event) => mouseDownEvent(canvas, mousePos, ui, player, event);
+const mouseUp = (event) => mouseUpEvent(canvas, mousePos, ui, player, event);
 
 window.onload = async function(){
     canvas = document.getElementById("screen");

@@ -39,19 +39,19 @@ export function mouseMoevementEvent(canvas, mousePos, event){
 }
 
 //mouse pressed
-export function mouseDownEvent(canvas, mousePos, ui, event){
+export function mouseDownEvent(canvas, mousePos, ui, player, event){
     ui.forEach(function(element){
         if(element.inBound(mousePos.x, mousePos.y)){
-            element.clickDown(mousePos.x, mousePos.y);
+            element.clickDown(mousePos.x, mousePos.y, player);
         }
     })
 }
 
 //mouse released
-export function mouseUpEvent(canvas, mousePos, ui, event){
+export function mouseUpEvent(canvas, mousePos, ui, player, event){
     ui.forEach(function(element){
         if(element.inBound(mousePos.x, mousePos.y)){
-            element.clickUp(mousePos.x, mousePos.y);
+            element.clickUp(mousePos.x, mousePos.y, player);
         }
     })
 }

@@ -24,7 +24,7 @@ form.addEventListener('submit', function (event){
         bobblehead: false,
 
         //data
-        emoteAmount: 0,
+        emotesUsed: 0,
     };
 
     const existing_user = JSON.parse(localStorage.getItem(email_val));

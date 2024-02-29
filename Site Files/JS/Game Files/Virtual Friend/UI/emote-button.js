@@ -44,19 +44,18 @@ export class EmoteButton {
         return Math.sqrt( Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2) ) <= this.radius;
     }
 
-    clickDown(x, y){
-        console.log('down!');
-
+    clickDown(x, y, player){
+        player.emote();
         const storedUser = JSON.parse(localStorage.getItem('currentuser'));
         if(storedUser){
-            storedUser.emoteAmount++;
-            console.log(storedUser.emoteAmount);
+            storedUser.emotesUsed++;
+            console.log(storedUser.emotesUsed);
             localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
             localStorage.setItem('currentuser', JSON.stringify(storedUser));
         }
     }
 
-    clickUp(x, y){
-        console.log('up!')
+    clickUp(x, y, player){
+        
     }
 }
