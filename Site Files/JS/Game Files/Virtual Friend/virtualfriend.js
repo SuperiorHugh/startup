@@ -3,7 +3,8 @@
 import {Player} from "./Objects/player.js";
 import {loadImages} from "./Helper/image-loading.js";
 import {executePlayerKeyCode, endPlayerKeyCode, mouseMoevementEvent, mouseDownEvent, mouseUpEvent} from "./Helper/input-handler.js";
-import { EmoteButton } from "./UI/emote-button.js";
+import {EmoteButton} from "./UI/emote-button.js";
+import {EmoteSlotButton} from "./UI/emote-slot-button.js";
 
 
 /*-- display loading and image preloading --*/
@@ -15,7 +16,12 @@ const displayHeight = 500;
 let imageLib;
 let mousePos = {x: 0, y: 0};
 
-let eb;
+let eb;     //emote button
+let esb1;   //emote slot button 1
+let esb2;   //emote slot button 2
+let esb3;   //emote slot button 3
+let esb4;   //emote slot button 4
+let esb5;   //emote slot button 5
 let ui = []
 
 
@@ -34,6 +40,12 @@ window.onload = async function(){
     imageLib = await loadImages();
     
     eb = new EmoteButton(canvas); ui.push(eb);
+    esb1 = new EmoteSlotButton(canvas, 80, 80); ui.push(esb1);
+    esb2 = new EmoteSlotButton(canvas, 80, 80); ui.push(esb2);
+    esb3 = new EmoteSlotButton(canvas, 80, 80); ui.push(esb3);
+    esb4 = new EmoteSlotButton(canvas, 80, 80); ui.push(esb4);
+    esb5 = new EmoteSlotButton(canvas, 80, 80); ui.push(esb5);
+    ui.sort((a, b) => a.z - b.z);
 
 
     document.addEventListener('keydown', inputStart);
@@ -68,6 +80,8 @@ function gameLoop() {
 
     //draw ui
     
-    eb.tick(mousePos);
-    eb.draw(ctx);
+    ui.forEach((element) => {
+        element.tick(mousePos); 
+        element.draw(ctx, imageLib)
+    });
 }

@@ -40,18 +40,34 @@ export function mouseMoevementEvent(canvas, mousePos, event){
 
 //mouse pressed
 export function mouseDownEvent(canvas, mousePos, ui, player, event){
+    const hovered = [];
     ui.forEach(function(element){
         if(element.inBound(mousePos.x, mousePos.y)){
-            element.clickDown(mousePos.x, mousePos.y, player);
+            hovered.push(element);
         }
-    })
+    });
+    
+    let max;
+    for(const i of hovered)
+        if(!max || i.z > max.z)
+            max = i;
+    if(max)
+        max.clickDown(mousePos.x, mousePos.y, ui, player);   
 }
 
 //mouse released
 export function mouseUpEvent(canvas, mousePos, ui, player, event){
+    const hovered = [];
     ui.forEach(function(element){
         if(element.inBound(mousePos.x, mousePos.y)){
-            element.clickUp(mousePos.x, mousePos.y, player);
+            hovered.push(element);
         }
     })
+
+    let max;
+    for(const i of hovered)
+        if(!max || i.z > max.z)
+            max = i;
+    if(max)
+        max.clickUp(mousePos.x, mousePos.y, ui, player);  
 }

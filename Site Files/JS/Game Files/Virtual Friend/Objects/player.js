@@ -78,7 +78,6 @@ export class Player {
 
     //emote event
     emote(){
-        console.log('emoted!');
         this.emoteTimer = this.emoteSpeed;
         this.emotePos = 1;
         this.emoji = getRandomElementFromArray(['happy', 'angry', 'bruh', 'laugh', 'sad']);

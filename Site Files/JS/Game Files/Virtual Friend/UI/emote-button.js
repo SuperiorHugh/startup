@@ -1,6 +1,7 @@
 /*-- imports --*/
 
 import {lerp} from ".././Helper/helper-functions.js";
+import {EmoteSlotButton} from "./emote-slot-button.js";
 
 
 /*-- emote ui button --*/
@@ -10,6 +11,7 @@ export class EmoteButton {
         this.canvas = canvas;
         this.x = canvas.width / 2;
         this.y = canvas.height;
+        this.z = 2;
 
         this.radius = 80;
         this.insideRadius = 60;
@@ -44,18 +46,18 @@ export class EmoteButton {
         return Math.sqrt( Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2) ) <= this.radius;
     }
 
-    clickDown(x, y, player){
-        player.emote();
-        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-        if(storedUser){
-            storedUser.emotesUsed++;
-            console.log(storedUser.emotesUsed);
-            localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
-            localStorage.setItem('currentuser', JSON.stringify(storedUser));
-        }
+    clickDown(x, y, ui, player){
+        // player.emote();
+        // const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+        // if(storedUser){
+        //     storedUser.emotesUsed++;
+        //     console.log('emotebutton');
+        //     localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
+        //     localStorage.setItem('currentuser', JSON.stringify(storedUser));
+        // }
     }
 
-    clickUp(x, y, player){
+    clickUp(x, y, ui, player){
         
     }
 }
