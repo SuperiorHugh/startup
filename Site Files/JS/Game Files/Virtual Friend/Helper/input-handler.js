@@ -11,6 +11,7 @@ export function executePlayerKeyCode(player, keyCode){
     } else if(keyCode == 'KeyD'){
         player.moveRight = 1;
     }
+    
 }
 
 //end input
@@ -24,4 +25,33 @@ export function endPlayerKeyCode(player, keyCode){
     } else if(keyCode == 'KeyD'){
         player.moveRight = 0;
     }
+}
+
+//mouse move
+export function mouseMoevementEvent(canvas, mousePos, event){
+    const clientRect = canvas.getBoundingClientRect();
+
+    const mouseX = (event.clientX - clientRect.left) * (canvas.width / clientRect.width);
+    const mouseY = (event.clientY - clientRect.top) * (canvas.height / clientRect.height);
+
+    mousePos.x = mouseX;
+    mousePos.y = mouseY;
+}
+
+//mouse pressed
+export function mouseDownEvent(canvas, mousePos, ui, event){
+    ui.forEach(function(element){
+        if(element.inBound(mousePos.x, mousePos.y)){
+            element.clickDown(mousePos.x, mousePos.y);
+        }
+    })
+}
+
+//mouse released
+export function mouseUpEvent(canvas, mousePos, ui, event){
+    ui.forEach(function(element){
+        if(element.inBound(mousePos.x, mousePos.y)){
+            element.clickUp(mousePos.x, mousePos.y);
+        }
+    })
 }

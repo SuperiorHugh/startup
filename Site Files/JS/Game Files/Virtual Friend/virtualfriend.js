@@ -2,7 +2,7 @@
 
 import {Player} from "./Objects/player.js";
 import {loadImages} from "./Helper/image-loading.js";
-import {executePlayerKeyCode, endPlayerKeyCode} from "./Helper/input-handler.js";
+import {executePlayerKeyCode, endPlayerKeyCode, mouseMoevementEvent, mouseDownEvent, mouseUpEvent} from "./Helper/input-handler.js";
 import { EmoteButton } from "./UI/emote-button.js";
 
 
@@ -13,9 +13,17 @@ let ctx;
 const displayWidth = 600;
 const displayHeight = 500;
 let imageLib;
+let mousePos = {x: 0, y: 0};
+
+let eb;
+let ui = []
+
 
 const inputStart = (event) => executePlayerKeyCode(player, event.code);
 const inputEnd = (event) => endPlayerKeyCode(player, event.code);
+const mouseMove = (event) => mouseMoevementEvent(canvas, mousePos, event);
+const mouseDown = (event) => mouseDownEvent(canvas, mousePos, ui, event);
+const mouseUp = (event) => mouseUpEvent(canvas, mousePos, ui, event);
 
 window.onload = async function(){
     canvas = document.getElementById("screen");
@@ -25,9 +33,15 @@ window.onload = async function(){
     ctx.imageSmoothingEnabled = false;
     imageLib = await loadImages();
     
-    gameLoop();
+    eb = new EmoteButton(canvas); ui.push(eb);
+
+
     document.addEventListener('keydown', inputStart);
     document.addEventListener('keyup', inputEnd);
+    canvas.addEventListener('mousemove', mouseMove);
+    canvas.addEventListener('mousedown', mouseDown);
+    canvas.addEventListener('mouseup', mouseUp);
+    gameLoop();
 }
 
 
@@ -53,6 +67,7 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 
     //draw ui
-    let eb = new EmoteButton(canvas);
+    
+    eb.tick(mousePos);
     eb.draw(ctx);
 }
