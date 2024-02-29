@@ -77,9 +77,9 @@ export class Player {
     }
 
     //emote event
-    emote(){
+    emote(emoji){
         this.emoteTimer = this.emoteSpeed;
         this.emotePos = 1;
-        this.emoji = getRandomElementFromArray(['happy', 'angry', 'bruh', 'laugh', 'sad']);
+        this.emoji = emoji;
     }
 }

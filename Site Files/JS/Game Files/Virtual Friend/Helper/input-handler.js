@@ -39,7 +39,7 @@ export function mouseMoevementEvent(canvas, mousePos, event){
 }
 
 //mouse pressed
-export function mouseDownEvent(canvas, mousePos, ui, player, event){
+export function mouseDownEvent(canvas, mousePos, ui, player, imageLib, event){
     const hovered = [];
     ui.forEach(function(element){
         if(element.inBound(mousePos.x, mousePos.y)){
@@ -52,11 +52,11 @@ export function mouseDownEvent(canvas, mousePos, ui, player, event){
         if(!max || i.z > max.z)
             max = i;
     if(max)
-        max.clickDown(mousePos.x, mousePos.y, ui, player);   
+        max.clickDown(mousePos.x, mousePos.y, ui, player, imageLib);   
 }
 
 //mouse released
-export function mouseUpEvent(canvas, mousePos, ui, player, event){
+export function mouseUpEvent(canvas, mousePos, ui, player, imageLib, event){
     const hovered = [];
     ui.forEach(function(element){
         if(element.inBound(mousePos.x, mousePos.y)){
@@ -69,5 +69,5 @@ export function mouseUpEvent(canvas, mousePos, ui, player, event){
         if(!max || i.z > max.z)
             max = i;
     if(max)
-        max.clickUp(mousePos.x, mousePos.y, ui, player);  
+        max.clickUp(mousePos.x, mousePos.y, ui, player, imageLib);  
 }

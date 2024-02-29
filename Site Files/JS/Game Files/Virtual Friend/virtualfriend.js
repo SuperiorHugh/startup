@@ -28,8 +28,8 @@ let ui = []
 const inputStart = (event) => executePlayerKeyCode(player, event.code);
 const inputEnd = (event) => endPlayerKeyCode(player, event.code);
 const mouseMove = (event) => mouseMoevementEvent(canvas, mousePos, event);
-const mouseDown = (event) => mouseDownEvent(canvas, mousePos, ui, player, event);
-const mouseUp = (event) => mouseUpEvent(canvas, mousePos, ui, player, event);
+const mouseDown = (event) => mouseDownEvent(canvas, mousePos, ui, player, imageLib, event);
+const mouseUp = (event) => mouseUpEvent(canvas, mousePos, ui, player, imageLib, event);
 
 window.onload = async function(){
     canvas = document.getElementById("screen");
@@ -40,11 +40,11 @@ window.onload = async function(){
     imageLib = await loadImages();
     
     eb = new EmoteButton(canvas); ui.push(eb);
-    esb1 = new EmoteSlotButton(canvas, 80, 80); ui.push(esb1);
-    esb2 = new EmoteSlotButton(canvas, 80, 80); ui.push(esb2);
-    esb3 = new EmoteSlotButton(canvas, 80, 80); ui.push(esb3);
-    esb4 = new EmoteSlotButton(canvas, 80, 80); ui.push(esb4);
-    esb5 = new EmoteSlotButton(canvas, 80, 80); ui.push(esb5);
+    esb1 = new EmoteSlotButton(canvas, canvas.width*(1/10), canvas.height*(7/8), 'laugh'); ui.push(esb1);
+    esb2 = new EmoteSlotButton(canvas, canvas.width*(3/10), canvas.height*(6/8), 'happy'); ui.push(esb2);
+    esb3 = new EmoteSlotButton(canvas, canvas.width*(5/10), canvas.height*(5/8), 'bruh'); ui.push(esb3);
+    esb4 = new EmoteSlotButton(canvas, canvas.width*(7/10), canvas.height*(6/8), 'sad'); ui.push(esb4);
+    esb5 = new EmoteSlotButton(canvas, canvas.width*(9/10), canvas.height*(7/8), 'angry'); ui.push(esb5);
     ui.sort((a, b) => a.z - b.z);
 
 

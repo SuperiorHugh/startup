@@ -46,7 +46,7 @@ export class EmoteButton {
         return Math.sqrt( Math.pow(x - this.x, 2) + Math.pow(y - this.y, 2) ) <= this.radius;
     }
 
-    clickDown(x, y, ui, player){
+    clickDown(x, y, ui, player, imageLib){
         // player.emote();
         // const storedUser = JSON.parse(localStorage.getItem('currentuser'));
         // if(storedUser){
@@ -55,9 +55,17 @@ export class EmoteButton {
         //     localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
         //     localStorage.setItem('currentuser', JSON.stringify(storedUser));
         // }
+        ui.forEach((element) => {
+            if(element instanceof EmoteSlotButton)
+                element.active = !element.active;
+                element.clicked = false;
+        });
     }
 
-    clickUp(x, y, ui, player){
-        
+    clickUp(x, y, ui, player, imageLib){
+        ui.forEach((element) => {
+            if(element instanceof EmoteSlotButton)
+                element.active = false;
+        });
     }
 }
