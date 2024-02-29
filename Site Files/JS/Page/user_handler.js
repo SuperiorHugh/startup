@@ -34,17 +34,17 @@ const defaultcolors = {
 }
 
 const darkmodecolors = {
-    'maincolor':          '#90aaff',
-    'altcolor':           '#918fd7',
-    'backgroundcolor':    '#202020',
+    'maincolor':          '#90aaffff',
+    'altcolor':           '#918fd7ff',
+    'backgroundcolor':    '#202020ff',
     'boxshadowcolor':     '#7590ff66',
     'darkboxshadowcolor': '#7590ff66',
-    'hovercolor':         '#7590ff',
-    'unselectedcolor':    '#c3d0ff',
+    'hovercolor':         '#7590ffff',
+    'unselectedcolor':    '#c3d0ffff',
     'transparentcolor':   '#00000000',
     'textcolor':          '#ffffff4d',
-    'buttoncolor':        '#7590ff',
-    'buttonhovercolor':   '#3b4f80',
+    'buttoncolor':        '#7590ffff',
+    'buttonhovercolor':   '#3b4f80ff',
 }
 
 

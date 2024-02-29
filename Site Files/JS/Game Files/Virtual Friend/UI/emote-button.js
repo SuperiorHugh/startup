@@ -45,7 +45,15 @@ export class EmoteButton {
     }
 
     clickDown(x, y){
-        console.log('down!')
+        console.log('down!');
+
+        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+        if(storedUser){
+            storedUser.emoteAmount++;
+            console.log(storedUser.emoteAmount);
+            localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
+            localStorage.setItem('currentuser', JSON.stringify(storedUser));
+        }
     }
 
     clickUp(x, y){

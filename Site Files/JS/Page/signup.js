@@ -22,6 +22,9 @@ form.addEventListener('submit', function (event){
         mastervolue: 100,
         emojivolume: 100,
         bobblehead: false,
+
+        //data
+        emoteAmount: 0,
     };
 
     const existing_user = JSON.parse(localStorage.getItem(email_val));
