@@ -9,8 +9,20 @@ let players = [ // get from db //TODO
 ];
 
 
-router.get('/', (req, res) => {
-    res.send(players);
+router.get('/login', (req, res) => {
+    if(players.find(player => {player.email === req.email && player.password === req.password})){
+        res.send({allowed: true});
+    } else {
+        res.send({allowed: false});
+    } 
+})
+
+router.get('/register', (req, res) => {
+    if(players.find(player => {player.email === req.email})){
+        res.send({allowed: false});
+    } else {
+        res.send({allowed: true});
+    }
 })
 
 router.post('/', (req, res) => {

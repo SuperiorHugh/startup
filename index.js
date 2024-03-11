@@ -9,10 +9,12 @@ app.use(express.static('.'));
 
 const leaderboardRoute = require('./Site Files/JS/API/Back End/leaderboard-api');
 app.use('/api/leaderboard', leaderboardRoute);
+const usersRoute = require('./Site Files/JS/API/Back End/players-api');
+app.use('/api/users', usersRoute);
 
 
 //if visited unknown, goto homepage
-app.use((_req, res) => {
+app.use((req, res) => {
     res.sendFile('index.html', { root: '.' });
 });
 
