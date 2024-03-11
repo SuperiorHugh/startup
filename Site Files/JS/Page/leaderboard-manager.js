@@ -1,5 +1,34 @@
 let leaderboard = document.getElementById("leaderboard");
 
+
+const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+// if(storedUser){
+//     createStat(storedUser);
+//     createNDummyStats(100, 2);
+// } else {
+//     createNDummyStats(100, 1);
+// }
+
+let leaderboardArr = [];
+async function loadLeaderboard(){
+    let leaderboardArr = [];
+    try {
+        const response = await fetch('/api/leaderboard');
+        leaderboardArr = await response.json();
+    } catch {
+        const localLeaderboard = localStorage.getItem('leaderboard');
+        if(localLeaderboard){
+            leaderboardArr = JSON.parse(localLeaderboard);
+        }
+    }
+    
+    leaderboardArr.forEach((item, i) => {
+        createStat(item);
+    });
+}
+
+loadLeaderboard()
+
 function createNDummyStats(n, startRank) {
     createDummyStat(startRank);
 
@@ -8,13 +37,6 @@ function createNDummyStats(n, startRank) {
             createNDummyStats(n - 1, startRank + 1);
         }, 50);
     }
-}
-const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-if(storedUser){
-    createStat(storedUser);
-    createNDummyStats(100, 2);
-} else {
-    createNDummyStats(100, 1);
 }
 
 function createDummyStat(setRank){

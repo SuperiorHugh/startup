@@ -10,14 +10,25 @@ app.use(express.static('.'));
 let apiRouter = express.Router();
 app.use('/api', apiRouter);
 
-apiRouter.get('/', (req, res) => {
-    res.json({data: "here's your data"});
-});
-
 app.use((_req, res) => {
     res.sendFile('index.html', { root: '.' });
 });
-console.log('test1')
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
+});
+
+let leaderboard = [{username_val: 'he', emotesUsed: 5}];
+function updateLeaderboard(scoreData, leaderboard){
+    leaderboard.push(scoreData);
+    return leaderboard;
+}
+
+apiRouter.get('/leaderboard', (req, res) => {
+    res.send(leaderboard);
+})
+
+apiRouter.post('/leaderboard', (req, res) => {
+    leaderboard = updateLeaderboard(req.body, leaderboard);
+    res.send(leaderboard);
 })
