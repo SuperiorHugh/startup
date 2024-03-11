@@ -31,7 +31,7 @@ form.addEventListener('submit', function (event){
 
     const existingUser = JSON.parse(localStorage.getItem(email));
     
-    if(existingUser){
+    if(existingUser){//TODO make sure to get data from db for future reference
         alert("there is already an account with that email!");
     } else {
         alert("welcome to the Virtual Friend Network, " + username + "!");
