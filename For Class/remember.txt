@@ -4,4 +4,12 @@ leaderboard-api.js
 user-api.js
 signup.js
 
+make sure to use players api for logging in and registering
+
+
+create new directory in services
+upload services to new directory
+pm2 the new service
+update caddy to have new service subdomain
+restart caddy
 
