@@ -129,7 +129,7 @@ Settings Page
 
 ## JavaScript Deliverable
 
-> - [ ] TODO
+> - [x] TODO
 > - [x] Future login support
 > - [x] Future database support
 > - [x] Future websocket support
@@ -139,8 +139,14 @@ Settings Page
 > - [x] Dark mode setting support
 > - [x] Fully functioning login page
 > - [x] Fully functioning register page
-> - [ ] Leaderboard changes depending on stored user data
+> - [x] Leaderboard changes depending on stored user data
 > - [x] CSS and JavaScript synchronization through CSS variables
+> - [x] Proper implementation of emojis system
+> - [x] Proper implementation of image preloading
+> - [x] Proper implementation of player movement
+> - [x] Usage of multiple file pathing to create clean environment
+> - [x] Finish Javascript Polish
+> - [x] Commented JavaScript code for future reference
 
 ## Service Deliverable
 
