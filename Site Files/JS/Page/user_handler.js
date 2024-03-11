@@ -12,7 +12,7 @@ export function setUserVisual(){
         nonloggedin.style.setProperty('display', 'none');
         loggedin.style.setProperty('display', 'block');
 
-        usernameVisual.innerText = storedUser.username_val;
+        usernameVisual.innerText = storedUser.username;
     } else {
         nonloggedin.style.setProperty('display', 'block');
         loggedin.style.setProperty('display', 'none');

@@ -23,7 +23,7 @@ visibleemojis.oninput = function(event){
 
     if(storedUser){
         storedUser.visibleemojis = visibleemojis.checked;
-        localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
+        localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
     } else {
         visibleemojis.checked = false;
@@ -36,7 +36,7 @@ darkmode.oninput = function(event){
     if(storedUser){
         
         storedUser.darkmode = darkmode.checked;
-        localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
+        localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
         updateBackground();
     } else {
@@ -58,7 +58,7 @@ autosleep.oninput = function(event){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
     if(storedUser){
         storedUser.autosleep = x;
-        localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
+        localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
     } else {
         autosleep.value = 0;
@@ -71,7 +71,7 @@ mutegame.oninput = function(event){
 
     if(storedUser){
         storedUser.mutegame = mutegame.checked;
-        localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
+        localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
 
         updateVolSliders();
@@ -88,7 +88,7 @@ mastervolume.oninput = function(event){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
     if(storedUser){
         storedUser.mastervolume = x;
-        localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
+        localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
     } else {
         mastervolume.value = 0;
@@ -103,7 +103,7 @@ emojivolume.oninput = function(event){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
     if(storedUser){
         storedUser.emojivolume = x;
-        localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
+        localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
     } else {
         emojivolume.value = 0;
@@ -116,7 +116,7 @@ bobblehead.oninput = function(event){
 
     if(storedUser){
         storedUser.bobblehead = bobblehead.checked;
-        localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
+        localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
     } else {
         bobblehead.checked = false;

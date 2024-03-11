@@ -1,18 +1,20 @@
 const form = document.querySelector('form');
-const email = document.getElementById('email');
-const username = document.getElementById('username');
-const password = document.getElementById('password');
+const emailForm = document.getElementById('email');
+const usernameForm = document.getElementById('username');
+const passwordForm = document.getElementById('password');
 
 form.addEventListener('submit', function (event){
     event.preventDefault();
 
-    const email_val = email.value;
-    const username_val = username.value;
-    const password_val = password.value;
+    const email = emailForm.value;
+    const username = usernameForm.value;
+    const password = passwordForm.value;
 
-    const user_data = {
+    const userData = {
         //credentials
-        email_val, username_val, password_val,
+        email, 
+        username, 
+        password,
 
         //settings
         visibleemojis: false,
@@ -24,17 +26,17 @@ form.addEventListener('submit', function (event){
         bobblehead: false,
 
         //data
-        emotesUsed: 0,
+        emotesused: 0,
     };
 
-    const existing_user = JSON.parse(localStorage.getItem(email_val));
+    const existingUser = JSON.parse(localStorage.getItem(email));
     
-    if(existing_user){
+    if(existingUser){
         alert("there is already an account with that email!");
     } else {
-        alert("welcome to the Virtual Friend Network, " + username_val + "!");
-        localStorage.setItem(email_val, JSON.stringify(user_data));
-        localStorage.setItem('currentuser', JSON.stringify(user_data));
+        alert("welcome to the Virtual Friend Network, " + username + "!");
+        localStorage.setItem(email, JSON.stringify(userData));
+        localStorage.setItem('currentuser', JSON.stringify(userData));
         window.location.href = form.action;
     }
 })

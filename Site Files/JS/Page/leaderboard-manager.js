@@ -73,8 +73,8 @@ function createStat(userData){
     const emotesUsed = document.createElement("td");
 
     rank.innerHTML = 1;
-    player.innerHTML = userData.username_val;
-    emotesUsed.innerHTML = userData.emotesUsed;
+    player.innerHTML = userData.username;
+    emotesUsed.innerHTML = userData.emotesused;
     
     if(1 <= 3){//TODO
         rank.setAttribute("id", "top" + 1);

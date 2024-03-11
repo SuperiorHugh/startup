@@ -18,7 +18,7 @@ app.listen(port, () => {
     console.log(`listening on port ${port}`);
 });
 
-let leaderboard = [{username_val: 'he', emotesUsed: 5}];
+let leaderboard = [{username: 'big baguette lord', emotesused: 5}]; // get from db TODO
 function updateLeaderboard(scoreData, leaderboard){
     leaderboard.push(scoreData);
     return leaderboard;
