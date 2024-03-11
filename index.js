@@ -7,6 +7,14 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-var apiRouter = express.Router();
-app.use('/api')
+let apiRouter = express.Router();
+app.use('/api', apiRouter);
 
+apiRouter.get('/', (req, res) => {
+    res.send({data: "here's your data"});
+});
+
+
+app.listen(port, () => {
+    console.log(`listening on port ${port}`);
+})
