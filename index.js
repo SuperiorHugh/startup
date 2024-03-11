@@ -18,9 +18,17 @@ app.listen(port, () => {
     console.log(`listening on port ${port}`);
 });
 
-let leaderboard = [{username: 'big baguette lord', emotesused: 5}]; // get from db TODO
+
+let leaderboard = [ // get from db //TODO
+    {username: 'medium baguete lord', emotesused: 32}, //placeholders for real players
+    {username: 'big baguette lord', emotesused: 56}, 
+    {username: 'aspiring baguette lord', emotesused: 3}
+];
+leaderboard.sort((a, b) => b.emotesused - a.emotesused);
+
 function updateLeaderboard(scoreData, leaderboard){
     leaderboard.push(scoreData);
+    leaderboard.sort((a, b) => b.emotesused - a.emotesused);
     return leaderboard;
 }
 

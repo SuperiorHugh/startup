@@ -23,7 +23,7 @@ async function loadLeaderboard(){
     }
     
     leaderboardArr.forEach((item, i) => {
-        createStat(item);
+        createStat(item, i + 1);
     });
 }
 
@@ -63,7 +63,7 @@ function createDummyStat(setRank){
     leaderboard.appendChild(leaderboardStat);
 }
 
-function createStat(userData){
+function createStat(userData, userRank){
     const leaderboardStat = document.createElement("tr");
     leaderboardStat.setAttribute("class", "leaderboard-stat");
 
@@ -72,12 +72,12 @@ function createStat(userData){
     const player = document.createElement("td");
     const emotesUsed = document.createElement("td");
 
-    rank.innerHTML = 1;
+    rank.innerHTML = userRank;
     player.innerHTML = userData.username;
     emotesUsed.innerHTML = userData.emotesused;
     
-    if(1 <= 3){//TODO
-        rank.setAttribute("id", "top" + 1);
+    if(userRank <= 3){
+        rank.setAttribute("id", "top" + userRank);
     }
 
     leaderboardStat.appendChild(rank);
