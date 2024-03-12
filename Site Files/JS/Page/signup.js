@@ -23,8 +23,7 @@ form.addEventListener('submit', async function (event){
         alert("there is already an account with that email!");
     } else {
         alert("welcome to the Virtual Friend Network, " + username + "!");
-        localStorage.setItem(email, JSON.stringify(userData));
-        localStorage.setItem('currentuser', JSON.stringify(userData));
+        localStorage.setItem('currentuser', JSON.stringify(userData.player));
         window.location.href = form.action;
     }
 })

@@ -5,25 +5,34 @@ const usernameVisual = document.getElementById('username-visual');
 nonloggedin.style.setProperty('display', 'block');
 loggedin.style.setProperty('display', 'none');
 
-export function setUserVisual(){
+export async function setUserVisual(){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+    if(!storedUser)
+        return;
+    const userRequest = await fetch(`/api/users/player-exists`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            email: storedUser.email
+        }),
+    })
+    const userData = await userRequest.json();
 
-    if(storedUser && storedUser.accountver === 1){
+    if(userData.exists && storedUser && storedUser.accountver === 1){
         nonloggedin.style.setProperty('display', 'none');
         loggedin.style.setProperty('display', 'block');
 
         usernameVisual.innerText = storedUser.username;
-    } else if (storedUser && storedUser.accountver != 1){
+    } else if (userData.exists && storedUser && storedUser.accountver != 1){
         nonloggedin.style.setProperty('display', 'block');
         loggedin.style.setProperty('display', 'none');
         usernameVisual.innerText = 'Guest';
         //TODO update account
-        
+
     } else {
-        nonloggedin.style.setProperty('display', 'block');
-        loggedin.style.setProperty('display', 'none');
-        usernameVisual.innerText = 'Guest';
-        alert('Your account is corrupted! please make a new account');
+        localStorage.removeItem('currentuser');
     }
 }
 

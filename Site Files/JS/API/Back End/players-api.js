@@ -50,15 +50,21 @@ router.post('/register', (req, res) => {
             accountver: 1,
         };
         players.push(player);
-        console.log(players);
         res.send({allowed: true, player: player});
     }
 })
 
 router.post('/players', (req, res) => {
     // send player to db //TODO
-    console.log('test')
     res.send(players);
+})
+
+router.post('/player-exists', (req, res) => {
+    if(players.find(player => player.email === req.body.email)){
+        res.send({exists: true});
+    } else {
+        res.send({exists: false});
+    }
 })
 
 
