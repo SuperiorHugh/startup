@@ -21,6 +21,7 @@ router.post('/login', (req, res) => {
     } 
 })
 
+//args: email username password
 router.post('/register', (req, res) => {
     let player = players.find(player => player.email === req.body.email);
     if(player){
@@ -54,11 +55,13 @@ router.post('/register', (req, res) => {
     }
 })
 
+//args:
 router.get('/players', (req, res) => {
     // send player to db //TODO
     res.send(players);
 })
 
+//args: email
 router.post('/player-exists', (req, res) => {
     if(players.find(player => player.email === req.body.email)){
         res.send({exists: true});
@@ -67,8 +70,26 @@ router.post('/player-exists', (req, res) => {
     }
 })
 
+//args: email password setting newval
 router.post('/update-setting', (req, res) => {
-    
+    let player = players.find(player => player.email === req.body.email);
+    if(!player || player.password != req.body.password){
+        res.send({allowed: false});
+        return;
+    }
+    console.log(`successfully updated setting, ${req.body.setting} to ${req.body.newval}`)
+    player[req.body.setting] = req.body.newval;
+})
+
+//args: email password emoteamt
+router.post('/update-emotes', (req, res) => {
+    let player = players.find(player => player.email === req.body.email);
+    if(!player || player.password != req.body.password){
+        res.send({allowed: false});
+        return;
+    }
+
+    player.emotesused = req.body.emotes;
 })
 
 module.exports = router;

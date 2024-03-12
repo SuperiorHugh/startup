@@ -20,9 +20,9 @@ const bobblehead = document.getElementById('bobble-head');
 
 visibleemojis.oninput = function(event){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-
     if(storedUser){
         storedUser.visibleemojis = visibleemojis.checked;
+        updateSetting('visibleemojis', visibleemojis.checked);
         localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
     } else {
@@ -30,12 +30,12 @@ visibleemojis.oninput = function(event){
         alert('log in or sign up to change settings!');
     }
 }
-console.log('test')
+
 darkmode.oninput = function(event){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
     if(storedUser){
-        
         storedUser.darkmode = darkmode.checked;
+        updateSetting('darkmode', darkmode.checked);
         localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
         updateBackground();
@@ -65,12 +65,13 @@ autosleep.oninput = function(event){
         alert('log in or sign up to change settings!');
     }
 }
+sliderRelease(autosleep, 'autosleep');
 
 mutegame.oninput = function(event){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-
     if(storedUser){
         storedUser.mutegame = mutegame.checked;
+        updateSetting('mutegame', mutegame.checked);
         localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
 
@@ -95,6 +96,8 @@ mastervolume.oninput = function(event){
         alert('log in or sign up to change settings!');
     }
 }
+sliderRelease(mastervolume, 'mastervolume');
+
 
 emojivolume.oninput = function(event){
     var x = emojivolume.value;
@@ -110,12 +113,15 @@ emojivolume.oninput = function(event){
         alert('log in or sign up to change settings!');
     }
 }
+sliderRelease(emojivolume, 'emojivolume');
+
 
 bobblehead.oninput = function(event){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
 
     if(storedUser){
         storedUser.bobblehead = bobblehead.checked;
+        updateSetting('bobblehead', bobblehead.checked);
         localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
     } else {
@@ -124,8 +130,30 @@ bobblehead.oninput = function(event){
     }
 }
 
+/*-- function for sending post requests to server --*/
 
-/*-- set settings to player data --*/
+async function updateSetting(setting, newval){
+    const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+    await fetch('/api/users/update-setting', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            email: storedUser.email,
+            password: storedUser.password,
+            setting: setting,
+            newval: newval,
+        })
+    })
+}
+
+function sliderRelease(slider, setting){
+    slider.addEventListener('mouseup', () => {updateSetting(setting, slider.value)});
+    slider.addEventListener('touchend', () => {updateSetting(setting, slider.value)});
+}
+
+/** slider configuration **/
 
 function updateColors(){
     mainColor = getComputedStyle(document.body).getPropertyValue('--maincolor');
@@ -159,6 +187,8 @@ function updateVolSliders(){
         slider.style.setProperty('--sliderColor', sliderColor);
     }
 }
+
+/*-- set settings to show player data --*/
 
 let storedUser = JSON.parse(localStorage.getItem('currentuser'));
 if(storedUser){

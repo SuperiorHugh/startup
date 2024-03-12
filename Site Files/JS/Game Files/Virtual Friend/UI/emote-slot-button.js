@@ -71,7 +71,6 @@ export class EmoteSlotButton {
         const storedUser = JSON.parse(localStorage.getItem('currentuser'));
         if(storedUser){
             storedUser.emotesUsed++;
-            console.log('emote slot button');
             localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
             localStorage.setItem('currentuser', JSON.stringify(storedUser));
         }
@@ -88,7 +87,7 @@ export class EmoteSlotButton {
             const storedUser = JSON.parse(localStorage.getItem('currentuser'));
             if(storedUser){
                 storedUser.emotesUsed++;
-                console.log('emote slot button');
+                
                 localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
                 localStorage.setItem('currentuser', JSON.stringify(storedUser));
             }
@@ -96,8 +95,6 @@ export class EmoteSlotButton {
                 if(element instanceof EmoteButton)
                     element.clickDown(x, y, ui, player);
             });
-        } else{
-            console.log('ewd')
         }
     }
 }
