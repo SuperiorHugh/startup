@@ -7,8 +7,6 @@ app.use(express.json());
 
 app.use(express.static('.'));
 
-const leaderboardRoute = require('./Site Files/JS/API/Back End/leaderboard-api');
-app.use('/api/leaderboard', leaderboardRoute);
 const usersRoute = require('./Site Files/JS/API/Back End/players-api');
 app.use('/api/users', usersRoute);
 

@@ -11,17 +11,11 @@ const storedUser = JSON.parse(localStorage.getItem('currentuser'));
 
 let leaderboardArr = [];
 async function loadLeaderboard(){
-    let leaderboardArr = [];
-    try {
-        const response = await fetch('/api/leaderboard');
-        leaderboardArr = await response.json();
-    } catch {
-        const localLeaderboard = localStorage.getItem('leaderboard');
-        if(localLeaderboard){
-            leaderboardArr = JSON.parse(localLeaderboard);
-        }
-    }
-    
+    const response = await fetch('/api/users/players', {
+        method: "POST"
+    });
+    leaderboardArr = await response.json();
+    leaderboardArr.sort((a, b) => b.emotesused - a.emotesused);
     leaderboardArr.forEach((item, i) => {
         createStat(item, i + 1);
     });

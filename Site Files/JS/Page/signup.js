@@ -3,38 +3,23 @@ const emailForm = document.getElementById('email');
 const usernameForm = document.getElementById('username');
 const passwordForm = document.getElementById('password');
 
-form.addEventListener('submit', function (event){
+form.addEventListener('submit', async function (event){
     event.preventDefault();
 
     const email = emailForm.value;
     const username = usernameForm.value;
     const password = passwordForm.value;
-
-    const userData = {
-        //credentials
-        email, 
-        username, 
-        password,
-
-        //settings
-        visibleemojis: false,
-        darkmode: false,
-        autosleep: 0,
-        mutegame: false,
-        mastervolue: 100,
-        emojivolume: 100,
-        bobblehead: false,
-
-        //data
-        emotesused: 0,
-
-        //updating
-        accountver: 1,
-    };
-
-    const existingUser = JSON.parse(localStorage.getItem(email));
     
-    if(existingUser){//TODO make sure to get data from db for future reference
+    const userRequest = await fetch(`/api/users/register`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email, username, password}),
+    });
+    const userData = await userRequest.json();
+    console.log(userData.allowed)
+    if(!userData.allowed){//TODO make sure to get data from db for future reference
         alert("there is already an account with that email!");
     } else {
         alert("welcome to the Virtual Friend Network, " + username + "!");
