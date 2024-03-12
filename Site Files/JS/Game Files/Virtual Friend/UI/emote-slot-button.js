@@ -68,11 +68,11 @@ export class EmoteSlotButton {
 
     clickDown(x, y, ui, player, imageLib){
         player.emote(this.emoji);
+        
         const storedUser = JSON.parse(localStorage.getItem('currentuser'));
         if(storedUser){
             storedUser.emotesUsed++;
-            localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
-            localStorage.setItem('currentuser', JSON.stringify(storedUser));
+            this.addToEmotes();
         }
         ui.forEach((element) => {
             if(element instanceof EmoteButton)
@@ -87,14 +87,26 @@ export class EmoteSlotButton {
             const storedUser = JSON.parse(localStorage.getItem('currentuser'));
             if(storedUser){
                 storedUser.emotesUsed++;
-                
-                localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
-                localStorage.setItem('currentuser', JSON.stringify(storedUser));
+                this.addToEmotes();
             }
             ui.forEach((element) => {
                 if(element instanceof EmoteButton)
                     element.clickDown(x, y, ui, player);
             });
         }
+    }
+
+    addToEmotes(){
+        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+        fetch('/api/users/add-emote', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: storedUser.email,
+                password: storedUser.password,
+            })
+        })
     }
 }

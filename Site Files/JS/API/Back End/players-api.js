@@ -82,14 +82,14 @@ router.post('/update-setting', (req, res) => {
 })
 
 //args: email password emoteamt
-router.post('/update-emotes', (req, res) => {
+router.post('/add-emote', (req, res) => {
     let player = players.find(player => player.email === req.body.email);
     if(!player || player.password != req.body.password){
         res.send({allowed: false});
         return;
     }
 
-    player.emotesused = req.body.emotes;
+    player.emotesused++;
 })
 
 module.exports = router;
