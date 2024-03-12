@@ -18,4 +18,6 @@
 > Notes for day 3
 - cd OneDrive/Desktop/GitHub/startup
 - ./deployFiles.sh -k /c/Users/hught/OneDrive/Desktop/forwindows.pem -h virtualfriend.click -s startup
+- ./deployService.sh -k /c/Users/hught/OneDrive/Desktop/forwindows.pem -h virtualfriend.click -s startup
 - ssh -i /c/Users/hught/OneDrive/Desktop/forwindows.pem ubuntu@virtualfriend.click
+- nano Caddyfile
