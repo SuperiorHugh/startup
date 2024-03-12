@@ -150,7 +150,16 @@ Settings Page
 
 ## Service Deliverable
 
-> - [ ] TODO
+> - [x] TODO
+> - [x] HTTP service using Node.js and Express
+> - [x] Frontend served up using Express static middleware
+> - [x] Frontend calls third party service endpoints
+> - [x] Backend provides service endpoints
+> - [x] Frontend calls your service endpoints
+> - [x] Account Backend connecting
+> - [x] Leaderboard connected to backend
+> - [x] Different files for routing for more organised code
+> - [x] Auto login using localStorage
 
 ## DB Deliverable
 

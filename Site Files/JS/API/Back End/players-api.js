@@ -54,7 +54,7 @@ router.post('/register', (req, res) => {
     }
 })
 
-router.post('/players', (req, res) => {
+router.get('/players', (req, res) => {
     // send player to db //TODO
     res.send(players);
 })
@@ -67,5 +67,8 @@ router.post('/player-exists', (req, res) => {
     }
 })
 
+router.post('/update-setting', (req, res) => {
+    
+})
 
 module.exports = router;

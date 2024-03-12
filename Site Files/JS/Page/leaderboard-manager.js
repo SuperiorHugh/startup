@@ -12,7 +12,7 @@ const storedUser = JSON.parse(localStorage.getItem('currentuser'));
 let leaderboardArr = [];
 async function loadLeaderboard(){
     const response = await fetch('/api/users/players', {
-        method: "POST"
+        method: "GET"
     });
     leaderboardArr = await response.json();
     leaderboardArr.sort((a, b) => b.emotesused - a.emotesused);
