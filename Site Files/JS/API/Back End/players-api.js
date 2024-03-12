@@ -9,20 +9,25 @@ let players = [ // get from db //TODO
 ];
 
 
-router.get('/login', (req, res) => {
-    let player = players.find(player => {player.email === req.email && player.password === req.password});
+router.post('/login', (req, res) => {
+    console.log(`password => ${req.body.password}, email => ${req.body.email}`);
+    let player = players.find(player => {player.email === req.body.email && player.password === req.body.password});
     if(player){
+        console.log('allowed player login');
         res.send({allowed: true, player: player});
     } else {
+        console.log('player login disallowed');
         res.send({allowed: false});
     } 
 })
 
-router.get('/register', (req, res) => {
+router.post('/register', (req, res) => {
     let player = players.find(player => {player.email === req.email});
     if(player){
+        console.log('disallowed player sign up');
         res.send({allowed: false});
     } else {
+        console.log('allowed player sign up');
         res.send({allowed: true, player: player});
     }
 })

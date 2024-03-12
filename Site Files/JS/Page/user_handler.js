@@ -8,14 +8,22 @@ loggedin.style.setProperty('display', 'none');
 export function setUserVisual(){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
 
-    if(storedUser){
+    if(storedUser && storedUser.accountver === 1){
         nonloggedin.style.setProperty('display', 'none');
         loggedin.style.setProperty('display', 'block');
 
         usernameVisual.innerText = storedUser.username;
+    } else if (storedUser && storedUser.accountver != 1){
+        nonloggedin.style.setProperty('display', 'block');
+        loggedin.style.setProperty('display', 'none');
+        usernameVisual.innerText = 'Guest';
+        //TODO update account
+        
     } else {
         nonloggedin.style.setProperty('display', 'block');
         loggedin.style.setProperty('display', 'none');
+        usernameVisual.innerText = 'Guest';
+        alert('Your account is corrupted! please make a new account');
     }
 }
 
