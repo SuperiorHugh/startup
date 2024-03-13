@@ -32,7 +32,7 @@ export class Player {
     }
 
     //tick player (runs per frame)
-    tick(){
+    tick(environment){
         if(!(this.moveRight - this.moveLeft) && !(this.moveDown - this.moveUp)){
             this.animationTime = 0;
             this.z = lerp(this.z, 0, 0.2);
@@ -79,6 +79,11 @@ export class Player {
             ctx.drawImage(imageLib[this.emoji + '-emote'], this.x, this.y - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
             ctx.globalAlpha = 1;
         }
+
+        //TODO testing
+        ctx.fillStyle = 'red';
+        ctx.fillRect(this.x-5,this.y-5,10,10);
+        ctx.fillStyle = 'red';
     }
 
     //emote event

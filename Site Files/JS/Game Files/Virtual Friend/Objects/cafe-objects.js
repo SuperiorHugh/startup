@@ -3,6 +3,8 @@ export class Chair {
     constructor(x, y, orientation){
         this.x = x;
         this.y = y;
+        this.collidable = false;
+
         this.orientation = orientation;
 
     }
@@ -26,6 +28,11 @@ export class Table {
     constructor(x, y){
         this.x = x;
         this.y = y;
+        this.collidable = true;
+        this.lb = this.x;       //left bound
+        this.rb = this.x + 132; //right bound
+        this.tb = this.y;       //top bound
+        this.bb = this.y + 84;  //bottom bound
     }
 
     tick(){
@@ -40,6 +47,18 @@ export class Table {
         ctx.closePath();
 
         ctx.drawImage(imageLib[`table`], this.x, this.y, 132, 84);
+
+        //TODO testing
+        ctx.beginPath();
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 4;
+        ctx.moveTo(this.lb, this.tb);
+        ctx.lineTo(this.lb, this.bb);
+        ctx.lineTo(this.rb, this.bb);
+        ctx.lineTo(this.rb, this.tb);
+        ctx.lineTo(this.lb, this.tb);
+        ctx.stroke();
+        ctx.closePath();
     }
 }
 
@@ -47,14 +66,32 @@ export class BarTable {
     constructor(x, y){
         this.x = x;
         this.y = y;
+        this.collidable = true;
+        this.lb = this.x + 16;       //left bound
+        this.rb = this.x + 224; //right bound
+        this.tb = this.y;       //top bound
+        this.bb = this.y + 32;  //bottom bound
     }
 
     tick(){
-
+    
     }
 
     draw(ctx, imageLib){
         ctx.drawImage(imageLib[`bar-table`], this.x, this.y, 224, 48);
+
+
+        //TODO testing
+        ctx.beginPath();
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 4;
+        ctx.moveTo(this.lb, this.tb);
+        ctx.lineTo(this.lb, this.bb);
+        ctx.lineTo(this.rb, this.bb);
+        ctx.lineTo(this.rb, this.tb);
+        ctx.lineTo(this.lb, this.tb);
+        ctx.stroke();
+        ctx.closePath();
     }
 }
 
@@ -79,6 +116,7 @@ export class Bartender {
     constructor(x, y){
         this.x = x;
         this.y = y;
+        this.collidable = false;
     }
 
     tick(){

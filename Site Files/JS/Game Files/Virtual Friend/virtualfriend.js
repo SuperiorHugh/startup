@@ -106,7 +106,7 @@ function gameLoop() {
     background.tick();
     background.draw(ctx, imageLib);
     environment.forEach((item, i) => {
-        item.tick();
+        item.tick(environment);
         item.draw(ctx, imageLib);
     })
     requestAnimationFrame(gameLoop);
