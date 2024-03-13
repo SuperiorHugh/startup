@@ -12,4 +12,3 @@ upload services to new directory
 pm2 the new service
 update caddy to have new service subdomain
 restart caddy
-
