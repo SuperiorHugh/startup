@@ -6,6 +6,7 @@ import {executePlayerKeyCode, endPlayerKeyCode, mouseMoevementEvent, mouseDownEv
 import {EmoteButton} from "./UI/emote-button.js";
 import {EmoteSlotButton} from "./UI/emote-slot-button.js";
 import {EmoteAmount} from "./UI/emote-amount.js";
+import {Chair, Table, BarTable, TileGround, Bartender} from "./Objects/cafe-objects.js";
 
 
 /*-- display loading and image preloading --*/
@@ -66,9 +67,31 @@ window.onload = async function(){
 
 let player = new Player(53, 53, document.getElementById('username-visual').innerText, ui, gui);
 
+/*-- create environment --*/
+
+let chair1 = new Chair(256, 256, 'front');
+let chair2 = new Chair(312, 256, 'back');
+let chair3 = new Chair(312, 312, 'right');
+let chair4 = new Chair(256, 312, 'left');
+let table = new Table(128, 128);
+let bartable = new BarTable(16, 256);
+let bartender = new Bartender(16, 150);
+
+/*-- create background --*/
+
+let background = new TileGround(32, 32);
+
 //allows for future multiplayer support
+
 let environment = [
-    player
+    player,
+    chair1,
+    chair2,
+    chair3,
+    chair4,
+    table,
+    bartable,
+    bartender,
 ];
 
 /*-- game loop --*/
@@ -80,6 +103,8 @@ function gameLoop() {
 
     //draw environment (players, objs, etc.)
     environment.sort((a, b) => a.y - b.y);//draw in correct order
+    background.tick();
+    background.draw(ctx, imageLib);
     environment.forEach((item, i) => {
         item.tick();
         item.draw(ctx, imageLib);

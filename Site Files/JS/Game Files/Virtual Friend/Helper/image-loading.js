@@ -17,11 +17,11 @@ const imagePaths = [
     '../../Pictures/Game/Environment/chair-right.webp',
     '../../Pictures/Game/Environment/table.webp',
     '../../Pictures/Game/Environment/tile-ground.webp',
-    
+    '../../Pictures/Game/Entity/bartender.webp',
 ];
 const imageMapping = {
     0: 'player',
-    
+
     1: 'angry-emote',
     2: 'bruh-emote',
     3: 'happy-emote',
@@ -38,7 +38,7 @@ const imageMapping = {
     12: 'chair-right',
     13: 'table',
     14: 'tile-ground',
-
+    15: 'bartender',
 };
 
 

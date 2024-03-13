@@ -9,8 +9,8 @@ export class Player {
         this.x = x;
         this.y = y;
         this.z = 0;
-        this.width = 64;
-        this.height = 64;
+        this.width = 56;
+        this.height = 56;
 
         this.moveUp = 0;
         this.moveDown = 0;
@@ -36,8 +36,8 @@ export class Player {
         if(!(this.moveRight - this.moveLeft) && !(this.moveDown - this.moveUp)){
             this.animationTime = 0;
             this.z = lerp(this.z, 0, 0.2);
-            this.width = lerp(this.width, 64, 0.2);
-            this.height = lerp(this.height, 64, 0.2);
+            this.width = lerp(this.width, 56, 0.2);
+            this.height = lerp(this.height, 56, 0.2);
         } else {
             this.animationTime++;
             const animSpd = 7;
@@ -62,7 +62,7 @@ export class Player {
     draw(ctx, imageLib){
         ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((this.jumpHeight - this.z) / this.jumpHeight))) + ")";
         ctx.beginPath();
-        ctx.ellipse(this.x + 32, this.y + 64, 24 + 8*(1-(this.z / this.jumpHeight)), 8 + 6*(1-(this.z / this.jumpHeight)), 0, 0, 2 * Math.PI);
+        ctx.ellipse(this.x + 32, this.y + 56, 24 + 8*(1-(this.z / this.jumpHeight)), 8 + 6*(1-(this.z / this.jumpHeight)), 0, 0, 2 * Math.PI);
         ctx.fill();
         ctx.closePath();
 
