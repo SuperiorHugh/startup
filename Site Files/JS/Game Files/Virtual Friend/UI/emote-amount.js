@@ -29,17 +29,16 @@ export class EmoteAmount {
         ctx.rect(this.x + 48, this.y, 256, 32);
         ctx.clip();
         
-        ctx.fillStyle = 'black';
-        ctx.font = "30px 'Trebuchet MS'";
+        ctx.font = "bold 30px 'Trebuchet MS'";
         //prev
         ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
         ctx.fillText(`${this.prevAmt}`, this.x + 50 , this.y + 29 + ((1 + this.time) * 30));
-        ctx.fillStyle = 'black';
+        ctx.fillStyle = document.body.style.getPropertyValue('--altcolor');
         ctx.fillText(`${this.prevAmt}`, this.x + 48 , this.y + 27 + ((1 + this.time) * 30));
         //cur
         ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
         ctx.fillText(`${this.amt}`, this.x + 50 , this.y + 29 + (this.time * 30));
-        ctx.fillStyle = 'black';
+        ctx.fillStyle = document.body.style.getPropertyValue('--altcolor');
         ctx.fillText(`${this.amt}`, this.x + 48 , this.y + 27 + (this.time * 30));
 
         ctx.fillStyle = 'white';
