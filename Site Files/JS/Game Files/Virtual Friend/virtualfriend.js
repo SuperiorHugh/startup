@@ -67,7 +67,7 @@ window.onload = async function(){
 let player = new Player(53, 53, document.getElementById('username-visual').innerText, ui, gui);
 
 //allows for future multiplayer support
-let players = [
+let environment = [
     player
 ];
 
@@ -78,13 +78,15 @@ function gameLoop() {
     ctx.fillStyle = document.body.style.getPropertyValue('--buttonhovercolor')
     ctx.fillRect(0, 0, displayWidth, displayHeight);
 
-    //draw player
-    player.tick();
-    player.draw(ctx, imageLib);
+    //draw environment (players, objs, etc.)
+    environment.sort((a, b) => a.y - b.y);//draw in correct order
+    environment.forEach((item, i) => {
+        item.tick();
+        item.draw(ctx, imageLib);
+    })
     requestAnimationFrame(gameLoop);
 
     //draw ui
-    
     ui.forEach((element) => {
         element.tick(mousePos); 
         element.draw(ctx, imageLib)
