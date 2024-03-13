@@ -9,16 +9,36 @@ const imagePaths = [
 
     '../../Pictures/Game/Environment/shop-icon.webp',
     '../../Pictures/Game/UI/emotes.webp',
+
+    '../../Pictures/Game/Environment/bar-table.webp',
+    '../../Pictures/Game/Environment/chair-back.webp',
+    '../../Pictures/Game/Environment/chair-front.webp',
+    '../../Pictures/Game/Environment/chair-left.webp',
+    '../../Pictures/Game/Environment/chair-right.webp',
+    '../../Pictures/Game/Environment/table.webp',
+    '../../Pictures/Game/Environment/tile-ground.webp',
+    
 ];
 const imageMapping = {
     0: 'player',
+    
     1: 'angry-emote',
     2: 'bruh-emote',
     3: 'happy-emote',
     4: 'laugh-emote',
     5: 'sad-emote',
+
     6: 'shop-icon',
     7: 'emotes',
+
+    8: 'bar-table',
+    9: 'chair-back',
+    10: 'chair-front',
+    11: 'chair-left',
+    12: 'chair-right',
+    13: 'table',
+    14: 'tile-ground',
+
 };
 
 
