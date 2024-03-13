@@ -5,5 +5,17 @@ user-api.js
 signup.js
 
 add collisions
+player go through environment list
+if item is collidable
+collision checks
+get closest collision, and if collided, tp to edge
+do for x axis, and then y axis
+
+
+
 interact orb when close
  - press e or click on orb to interact
+ - only need 1 obj of item
+ - will tp to the nearest interactable obj
+ - will light up only if player is within range of obj root
+ 
