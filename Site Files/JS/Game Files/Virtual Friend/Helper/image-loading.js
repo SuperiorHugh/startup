@@ -6,6 +6,9 @@ const imagePaths = [
     '../../Pictures/Game/Emote/happy-emote.webp',
     '../../Pictures/Game/Emote/laugh-emote.webp',
     '../../Pictures/Game/Emote/sad-emote.webp',
+
+    '../../Pictures/Game/Environment/shop-icon.webp',
+    '../../Pictures/Game/UI/emotes.webp',
 ];
 const imageMapping = {
     0: 'player',
@@ -14,6 +17,8 @@ const imageMapping = {
     3: 'happy-emote',
     4: 'laugh-emote',
     5: 'sad-emote',
+    6: 'shop-icon',
+    7: 'emotes',
 };
 
 

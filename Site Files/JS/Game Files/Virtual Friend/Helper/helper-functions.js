@@ -14,3 +14,9 @@ export function lerp(current, goto, amount) {
 export function getRandomElementFromArray(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
+
+//lerps value to goto by specific amount, and will teleport to goto if within tp range
+export function tpLerp(current, goto, amount, tp) {
+    let lerped = current + amount * (goto - current);
+    return Math.abs(lerped - current) <= tp ? goto : lerped;
+}

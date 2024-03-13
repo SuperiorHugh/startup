@@ -5,7 +5,7 @@ import {lerp, getRandomElementFromArray} from ".././Helper/helper-functions.js";
 
 //player class
 export class Player {
-    constructor (x, y, name){
+    constructor (x, y, name, ui, gui){
         this.x = x;
         this.y = y;
         this.z = 0;
@@ -26,6 +26,9 @@ export class Player {
         this.emoteTimer = 0;
         this.emotePos = 0;
         this.emoji = '';
+
+        this.ui = ui;
+        this.gui = gui;
     }
 
     //tick player (runs per frame)
@@ -67,6 +70,8 @@ export class Player {
         ctx.font = "20px 'Trebuchet MS'";
         ctx.fillStyle = document.body.style.getPropertyValue('--maincolor');
 
+        if(this.name === 'Guest')
+            ctx.fillStyle = '#CCCCCC';
         ctx.fillText(this.name, this.x + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
         
         if(this.emoteTimer > 0){
@@ -81,5 +86,13 @@ export class Player {
         this.emoteTimer = this.emoteSpeed;
         this.emotePos = 1;
         this.emoji = emoji;
+
+        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+        if(storedUser && storedUser.username != 'GUEST'){
+            this.gui[0].emote(storedUser.emotesused);
+        } else {
+            this.gui[0].emote(0);
+        }
+        
     }
 }

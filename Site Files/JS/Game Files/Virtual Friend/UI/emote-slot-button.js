@@ -48,7 +48,7 @@ export class EmoteSlotButton {
 
     draw(ctx, imageLib){
         ctx.globalAlpha = 0.5 * this.gotoPercent;
-        ctx.fillStyle = document.body.style.getPropertyValue('--altcolor');;
+        ctx.fillStyle = document.body.style.getPropertyValue('--altcolor');
         ctx.beginPath();
         ctx.ellipse(this.x, this.y, this.radius, this.radius, 0, 0, 2 * Math.PI);
         ctx.fill();
@@ -67,12 +67,9 @@ export class EmoteSlotButton {
     }
 
     clickDown(x, y, ui, player, imageLib){
-        player.emote(this.emoji);
-        
         const storedUser = JSON.parse(localStorage.getItem('currentuser'));
         if(storedUser){
-            storedUser.emotesUsed++;
-            this.addToEmotes();
+            this.addToEmotes(player,storedUser);
         }
         ui.forEach((element) => {
             if(element instanceof EmoteButton)
@@ -83,11 +80,9 @@ export class EmoteSlotButton {
 
     clickUp(x, y, ui, player, imageLib){
         if(!this.clicked){
-            player.emote(this.emoji);
             const storedUser = JSON.parse(localStorage.getItem('currentuser'));
             if(storedUser){
-                storedUser.emotesUsed++;
-                this.addToEmotes();
+                this.addToEmotes(player, storedUser);
             }
             ui.forEach((element) => {
                 if(element instanceof EmoteButton)
@@ -96,8 +91,11 @@ export class EmoteSlotButton {
         }
     }
 
-    addToEmotes(){
-        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+    addToEmotes(player, storedUser){
+        
+        storedUser.emotesused++;
+        
+        localStorage.setItem('currentuser', JSON.stringify(storedUser));
         fetch('/api/users/add-emote', {
             method: 'POST',
             headers: {
@@ -108,5 +106,6 @@ export class EmoteSlotButton {
                 password: storedUser.password,
             })
         })
+        player.emote(this.emoji);
     }
 }

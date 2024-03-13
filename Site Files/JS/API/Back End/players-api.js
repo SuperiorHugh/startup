@@ -10,7 +10,6 @@ let players = [ // get from db //TODO
 
 
 router.post('/login', (req, res) => {
-    console.log(`password => ${req.body.password}, email => ${req.body.email}`);
     let player = players.find(player => player.email === req.body.email && player.password === req.body.password);
     if(player){
         console.log('allowed player login');
@@ -77,7 +76,6 @@ router.post('/update-setting', (req, res) => {
         res.send({allowed: false});
         return;
     }
-    console.log(`successfully updated setting, ${req.body.setting} to ${req.body.newval}`)
     player[req.body.setting] = req.body.newval;
 })
 

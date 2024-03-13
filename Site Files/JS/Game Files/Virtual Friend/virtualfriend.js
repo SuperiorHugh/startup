@@ -5,6 +5,7 @@ import {loadImages} from "./Helper/image-loading.js";
 import {executePlayerKeyCode, endPlayerKeyCode, mouseMoevementEvent, mouseDownEvent, mouseUpEvent} from "./Helper/input-handler.js";
 import {EmoteButton} from "./UI/emote-button.js";
 import {EmoteSlotButton} from "./UI/emote-slot-button.js";
+import {EmoteAmount} from "./UI/emote-amount.js";
 
 
 /*-- display loading and image preloading --*/
@@ -22,7 +23,10 @@ let esb2;   //emote slot button 2
 let esb3;   //emote slot button 3
 let esb4;   //emote slot button 4
 let esb5;   //emote slot button 5
-let ui = []
+let ui = [];    //interactable
+
+let ea;     //emote amount
+let gui = [];   //pure graphical
 
 
 const inputStart = (event) => executePlayerKeyCode(player, event.code);
@@ -45,6 +49,7 @@ window.onload = async function(){
     esb3 = new EmoteSlotButton(canvas, canvas.width*(5/10), canvas.height*(5/8), 'bruh'); ui.push(esb3);
     esb4 = new EmoteSlotButton(canvas, canvas.width*(7/10), canvas.height*(6/8), 'sad'); ui.push(esb4);
     esb5 = new EmoteSlotButton(canvas, canvas.width*(9/10), canvas.height*(7/8), 'angry'); ui.push(esb5);
+    ea = new EmoteAmount(32, 32); gui.push(ea);
     ui.sort((a, b) => a.z - b.z);
 
 
@@ -59,7 +64,7 @@ window.onload = async function(){
 
 /*-- create player --*/
 
-let player = new Player(53, 53, document.getElementById('username-visual').innerText);
+let player = new Player(53, 53, document.getElementById('username-visual').innerText, ui, gui);
 
 //allows for future multiplayer support
 let players = [
@@ -81,6 +86,11 @@ function gameLoop() {
     //draw ui
     
     ui.forEach((element) => {
+        element.tick(mousePos); 
+        element.draw(ctx, imageLib)
+    });
+
+    gui.forEach((element) => {
         element.tick(mousePos); 
         element.draw(ctx, imageLib)
     });

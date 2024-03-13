@@ -47,14 +47,6 @@ export class EmoteButton {
     }
 
     clickDown(x, y, ui, player, imageLib){
-        // player.emote();
-        // const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-        // if(storedUser){
-        //     storedUser.emotesUsed++;
-        //     console.log('emotebutton');
-        //     localStorage.setItem(storedUser.email_val, JSON.stringify(storedUser));
-        //     localStorage.setItem('currentuser', JSON.stringify(storedUser));
-        // }
         ui.forEach((element) => {
             if(element instanceof EmoteSlotButton)
                 element.active = !element.active;

@@ -7,33 +7,58 @@ loggedin.style.setProperty('display', 'none');
 
 export async function setUserVisual(){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-    if(!storedUser)
-        return;
-    const userRequest = await fetch(`/api/users/player-exists`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            email: storedUser.email
-        }),
-    })
-    const userData = await userRequest.json();
+    let userRequest;
+    let userData;
+    if(storedUser){
+        userRequest = await fetch(`/api/users/player-exists`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: storedUser.email
+            }),
+        })
+        userData = await userRequest.json();
+    }
+    
+    
 
-    if(userData.exists && storedUser && storedUser.accountver === 1){
+    
+    if(userData && userData.exists && storedUser && storedUser.accountver === 1){
         nonloggedin.style.setProperty('display', 'none');
         loggedin.style.setProperty('display', 'block');
 
         usernameVisual.innerText = storedUser.username;
-    } else if (userData.exists && storedUser && storedUser.accountver != 1){
+    } else if (userData && userData.exists && storedUser && storedUser.accountver != 1){
         nonloggedin.style.setProperty('display', 'block');
         loggedin.style.setProperty('display', 'none');
-        usernameVisual.innerText = 'Guest';
         //TODO update account
 
     } else {
-        localStorage.removeItem('currentuser');
+        localStorage.setItem('currentuser', JSON.stringify({
+            //credentials
+            email: 'GUEST', 
+            username: 'GUEST', 
+            password: 'GUEST',
+    
+            //settings
+            visibleemojis: false,
+            darkmode: false,
+            autosleep: 0,
+            mutegame: false,
+            mastervolue: 100,
+            emojivolume: 100,
+            bobblehead: false,
+    
+            //data
+            emotesused: 0,
+    
+            //updating
+            accountver: 1,
+        }));
     }
+    
 }
 
 const defaultcolors = {
