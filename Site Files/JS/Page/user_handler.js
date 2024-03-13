@@ -85,8 +85,8 @@ const darkmodecolors = {
     'unselectedcolor':    '#c3d0ffff',
     'transparentcolor':   '#00000000',
     'textcolor':          '#ffffff4d',
-    'buttoncolor':        '#7590ffff',
-    'buttonhovercolor':   '#3b4f80ff',
+    'buttoncolor':        '#3b4f80ff',
+    'buttonhovercolor':   '#7590ffff',
 }
 
 

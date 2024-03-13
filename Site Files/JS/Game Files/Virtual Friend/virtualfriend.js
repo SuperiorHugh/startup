@@ -98,7 +98,7 @@ let environment = [
 
 function gameLoop() {
     ctx.clearRect(0, 0, displayWidth, displayHeight);
-    ctx.fillStyle = document.body.style.getPropertyValue('--buttonhovercolor')
+    ctx.fillStyle = document.body.style.getPropertyValue('--buttoncolor')
     ctx.fillRect(0, 0, displayWidth, displayHeight);
 
     //draw environment (players, objs, etc.)
