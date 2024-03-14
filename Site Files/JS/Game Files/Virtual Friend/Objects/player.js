@@ -29,10 +29,21 @@ export class Player {
 
         this.ui = ui;
         this.gui = gui;
+        this.collidable = false;
+        this.interactable = false;
+
+        this.lb = this.x;
+        this.rb = this.x + this.width;
+        this.tb = this.y + (this.height / 2);
+        this.bb = this.y + (this.height / 2);
     }
 
     //tick player (runs per frame)
     tick(environment){
+        this.lb = this.x;
+        this.rb = this.x + this.width;
+        this.tb = this.y + (this.height / 2);
+        this.bb = this.y + (this.height / 2);
         if(!(this.moveRight - this.moveLeft) && !(this.moveDown - this.moveUp)){
             this.animationTime = 0;
             this.z = lerp(this.z, 0, 0.2);

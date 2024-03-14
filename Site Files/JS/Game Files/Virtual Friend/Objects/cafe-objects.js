@@ -6,7 +6,6 @@ export class Chair {
         this.collidable = false;
 
         this.orientation = orientation;
-
     }
 
     tick(){
@@ -29,6 +28,8 @@ export class Table {
         this.x = x;
         this.y = y;
         this.collidable = true;
+        this.interactable = false;
+
         this.lb = this.x;       //left bound
         this.rb = this.x + 132; //right bound
         this.tb = this.y;       //top bound
@@ -67,6 +68,8 @@ export class BarTable {
         this.x = x;
         this.y = y;
         this.collidable = true;
+        this.interactable = false;
+
         this.lb = this.x + 16;       //left bound
         this.rb = this.x + 224; //right bound
         this.tb = this.y;       //top bound
@@ -117,6 +120,7 @@ export class Bartender {
         this.x = x;
         this.y = y;
         this.collidable = false;
+        this.interactable = true;
     }
 
     tick(){
