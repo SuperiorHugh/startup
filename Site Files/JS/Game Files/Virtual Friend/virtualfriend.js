@@ -65,21 +65,23 @@ window.onload = async function(){
 
 /*-- create player --*/
 
-let player = new Player(53, 53, document.getElementById('username-visual').innerText, ui, gui);
+let player = new Player(displayWidth/2 - 58/2, displayHeight/2 - 58/2, document.getElementById('username-visual').innerText, ui, gui);
 
 /*-- create environment --*/
 
-let chair1 = new Chair(256, 256, 'front');
-let chair2 = new Chair(312, 256, 'back');
-let chair3 = new Chair(312, 312, 'right');
-let chair4 = new Chair(256, 312, 'left');
-let table = new Table(128, 128);
-let bartable = new BarTable(16, 256);
-let bartender = new Bartender(16, 150);
+let chair1 = new Chair(256, 256, 'right');
+let chair2 = new Chair(416, 256, 'back');
+let chair3 = new Chair(530, 190, 'right');
+let chair4 = new Chair(140, 185, 'front');
+let chair5 = new Chair(30, 256, 'left');
+let table = new Table(displayWidth * (1/6), 256);
+let table2 = new Table(displayWidth * (5/6) - 132, 196);
+let bartable = new BarTable(displayWidth/2 - 224/2, 128);
+let bartender = new Bartender(displayWidth/2 - 58/2, 76);
 
 /*-- create background --*/
 
-let background = new TileGround(32, 32);
+let background = new TileGround(displayWidth/2 - 436/2, displayHeight/2 - 312/2);
 
 //allows for future multiplayer support
 
@@ -89,7 +91,9 @@ let environment = [
     chair2,
     chair3,
     chair4,
+    chair5,
     table,
+    table2,
     bartable,
     bartender,
 ];
