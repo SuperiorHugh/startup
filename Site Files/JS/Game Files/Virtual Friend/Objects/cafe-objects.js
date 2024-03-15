@@ -30,10 +30,10 @@ export class Table {
         this.collidable = true;
         this.interactable = false;
 
-        this.lb = this.x;       //left bound
-        this.rb = this.x + 132; //right bound
-        this.tb = this.y;       //top bound
-        this.bb = this.y + 84;  //bottom bound
+        this.lb = this.x;               //left bound
+        this.rb = this.x + 132;         //right bound
+        this.tb = this.y;               //top bound
+        this.bb = this.y + 84 - 29;     //bottom bound
     }
 
     tick(){
@@ -48,18 +48,6 @@ export class Table {
         ctx.closePath();
 
         ctx.drawImage(imageLib[`table`], this.x, this.y, 132, 84);
-
-        //TODO testing
-        ctx.beginPath();
-        ctx.strokeStyle = 'red';
-        ctx.lineWidth = 4;
-        ctx.moveTo(this.lb, this.tb);
-        ctx.lineTo(this.lb, this.bb);
-        ctx.lineTo(this.rb, this.bb);
-        ctx.lineTo(this.rb, this.tb);
-        ctx.lineTo(this.lb, this.tb);
-        ctx.stroke();
-        ctx.closePath();
     }
 }
 
@@ -70,7 +58,7 @@ export class BarTable {
         this.collidable = true;
         this.interactable = false;
 
-        this.lb = this.x + 16;       //left bound
+        this.lb = this.x;       //left bound
         this.rb = this.x + 224; //right bound
         this.tb = this.y;       //top bound
         this.bb = this.y + 32;  //bottom bound
@@ -82,19 +70,6 @@ export class BarTable {
 
     draw(ctx, imageLib){
         ctx.drawImage(imageLib[`bar-table`], this.x, this.y, 224, 48);
-
-
-        //TODO testing
-        ctx.beginPath();
-        ctx.strokeStyle = 'red';
-        ctx.lineWidth = 4;
-        ctx.moveTo(this.lb, this.tb);
-        ctx.lineTo(this.lb, this.bb);
-        ctx.lineTo(this.rb, this.bb);
-        ctx.lineTo(this.rb, this.tb);
-        ctx.lineTo(this.lb, this.tb);
-        ctx.stroke();
-        ctx.closePath();
     }
 }
 

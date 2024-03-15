@@ -1,7 +1,7 @@
 /*-- imports --*/
 
 import {lerp, getRandomElementFromArray} from ".././Helper/helper-functions.js";
-
+import {horizontalCollision, verticalCollision} from "../Helper/movement-handler.js";
 
 //player class
 export class Player {
@@ -34,16 +34,16 @@ export class Player {
 
         this.lb = this.x;
         this.rb = this.x + this.width;
-        this.tb = this.y + (this.height / 2);
-        this.bb = this.y + (this.height / 2);
+        this.tb = this.y + (this.height / 2) - 1;
+        this.bb = this.y + (this.height / 2) + 1;
     }
 
     //tick player (runs per frame)
     tick(environment){
         this.lb = this.x;
-        this.rb = this.x + this.width;
-        this.tb = this.y + (this.height / 2);
-        this.bb = this.y + (this.height / 2);
+        this.rb = this.x + 56;
+        this.tb = this.y + (56 / 2) - 1;
+        this.bb = this.y + (56 / 2) + 1;
         if(!(this.moveRight - this.moveLeft) && !(this.moveDown - this.moveUp)){
             this.animationTime = 0;
             this.z = lerp(this.z, 0, 0.2);
@@ -57,9 +57,14 @@ export class Player {
             this.height = 48 + Math.abs(Math.cos(this.animationTime / animSpd)) * 16;
         }
 
-        this.x += (this.moveRight - this.moveLeft) * this.speed;
-        this.y += (this.moveDown - this.moveUp) * this.speed;
-        
+        let hc = horizontalCollision(this, environment, (this.moveRight - this.moveLeft) * this.speed);
+        let vc = verticalCollision(this, environment, (this.moveDown - this.moveUp) * this.speed);
+        if(hc) this.x = hc;
+        if(vc) this.y = vc;
+        if(!hc)
+            this.x += (this.moveRight - this.moveLeft) * this.speed;
+        if(!vc)
+            this.y += (this.moveDown - this.moveUp) * this.speed;
 
         if(this.emoteTimer > 0){
             this.emoteTimer--;
@@ -73,11 +78,11 @@ export class Player {
     draw(ctx, imageLib){
         ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((this.jumpHeight - this.z) / this.jumpHeight))) + ")";
         ctx.beginPath();
-        ctx.ellipse(this.x + 32, this.y + 56, 24 + 8*(1-(this.z / this.jumpHeight)), 8 + 6*(1-(this.z / this.jumpHeight)), 0, 0, 2 * Math.PI);
+        ctx.ellipse(this.x + 28, this.y + 56, 24 + 8*(1-(this.z / this.jumpHeight)), 8 + 6*(1-(this.z / this.jumpHeight)), 0, 0, 2 * Math.PI);
         ctx.fill();
         ctx.closePath();
-
-        ctx.drawImage(imageLib.player, this.x + 32 - (this.width/2), this.y - this.z, this.width, this.height);
+        
+        ctx.drawImage(imageLib.player, this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
         ctx.font = "20px 'Trebuchet MS'";
         ctx.fillStyle = document.body.style.getPropertyValue('--maincolor');
 
@@ -91,10 +96,6 @@ export class Player {
             ctx.globalAlpha = 1;
         }
 
-        //TODO testing
-        ctx.fillStyle = 'red';
-        ctx.fillRect(this.x-5,this.y-5,10,10);
-        ctx.fillStyle = 'red';
     }
 
     //emote event
@@ -109,6 +110,5 @@ export class Player {
         } else {
             this.gui[0].emote(0);
         }
-        
     }
 }
