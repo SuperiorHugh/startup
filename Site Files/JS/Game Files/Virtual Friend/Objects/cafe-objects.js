@@ -3,9 +3,14 @@ export class Chair {
     constructor(x, y, orientation){
         this.x = x;
         this.y = y;
-        this.collidable = false;
 
+        this.width = 40;
+        this.height = 68;
+
+        this.collidable = false;
+        this.interactable = true;
         this.orientation = orientation;
+        this.interacting = false;
     }
 
     tick(){
@@ -19,7 +24,21 @@ export class Chair {
         ctx.fill();
         ctx.closePath();
 
-        ctx.drawImage(imageLib[`chair-${this.orientation}`], this.x, this.y, 40, 68);
+        ctx.drawImage(imageLib[`chair-${this.orientation}`], this.x, this.y, this.width, this.height);
+    }
+
+    interact(x, y, ui, player, imageLib){//TODO
+        if(!this.interacting){
+            this.interacting = true;
+            player.sitting = true;
+            player.x = this.x;
+            player.y = this.y + (this.orientation === 'back' ? -0.01 : 0.01);
+            console.log('now interacting!')
+        } else {
+            this.interacting = false;
+            player.sitting = false;
+            console.log('exit interaction')
+        }
     }
 }
 
@@ -27,6 +46,8 @@ export class Table {
     constructor(x, y){
         this.x = x;
         this.y = y;
+        this.width = 132;
+        this.height = 84;
         this.collidable = true;
         this.interactable = false;
 
@@ -55,6 +76,8 @@ export class BarTable {
     constructor(x, y){
         this.x = x;
         this.y = y;
+        this.width = 224;
+        this.height = 48;
         this.collidable = true;
         this.interactable = false;
 
@@ -94,6 +117,8 @@ export class Bartender {
     constructor(x, y){
         this.x = x;
         this.y = y;
+        this.width = 56;
+        this.height = 56;
         this.collidable = false;
         this.interactable = true;
     }

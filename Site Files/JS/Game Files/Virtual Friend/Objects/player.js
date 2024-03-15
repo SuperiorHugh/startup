@@ -36,6 +36,8 @@ export class Player {
         this.rb = this.x + this.width;
         this.tb = this.y + (this.height / 2) - 1;
         this.bb = this.y + (this.height / 2) + 1;
+
+        this.sitting = false;
     }
 
     //tick player (runs per frame)

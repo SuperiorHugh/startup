@@ -7,6 +7,8 @@ import {EmoteButton} from "./UI/emote-button.js";
 import {EmoteSlotButton} from "./UI/emote-slot-button.js";
 import {EmoteAmount} from "./UI/emote-amount.js";
 import {Chair, Table, BarTable, TileGround, Bartender} from "./Objects/cafe-objects.js";
+import {InteractOrb} from "./UI/interact-orb.js";
+import {lerp} from "./Helper/helper-functions.js";
 
 
 /*-- display loading and image preloading --*/
@@ -24,6 +26,7 @@ let esb2;   //emote slot button 2
 let esb3;   //emote slot button 3
 let esb4;   //emote slot button 4
 let esb5;   //emote slot button 5
+let iorb;   //interact orb
 let ui = [];    //interactable
 
 let ea;     //emote amount
@@ -50,8 +53,10 @@ window.onload = async function(){
     esb3 = new EmoteSlotButton(canvas, canvas.width*(5/10), canvas.height*(5/8), 'bruh'); ui.push(esb3);
     esb4 = new EmoteSlotButton(canvas, canvas.width*(7/10), canvas.height*(6/8), 'sad'); ui.push(esb4);
     esb5 = new EmoteSlotButton(canvas, canvas.width*(9/10), canvas.height*(7/8), 'angry'); ui.push(esb5);
-    ea = new EmoteAmount(32, 32); gui.push(ea);
+    iorb = new InteractOrb(128, 128); ui.push(iorb);
     ui.sort((a, b) => a.z - b.z);
+
+    ea = new EmoteAmount(32, 32); gui.push(ea);
 
 
     document.addEventListener('keydown', inputStart);
@@ -112,17 +117,48 @@ function gameLoop() {
     environment.forEach((item, i) => {
         item.tick(environment);
         item.draw(ctx, imageLib);
-    })
-    requestAnimationFrame(gameLoop);
+    });
 
     //draw ui
     ui.forEach((element) => {
         element.tick(mousePos); 
         element.draw(ctx, imageLib)
     });
-
+    //draw gui
     gui.forEach((element) => {
         element.tick(mousePos); 
         element.draw(ctx, imageLib)
     });
+
+    e(environment);
+    requestAnimationFrame(gameLoop);
+}
+
+//player in range of usable env
+
+function e(environment){
+    let interactables = []
+    environment.forEach((val, i) => {
+        if(val.interactable){
+            let dist = Math.sqrt(Math.pow(player.x - val.x, 2) + Math.pow(player.y - val.y, 2));
+            if(dist < 80)
+                interactables.push([val, dist]);
+        }
+    })
+    let nearestInteractable;
+    for(const i of interactables)
+        if(!nearestInteractable || i[1] < nearestInteractable[1])
+            nearestInteractable = i;
+    console.log(iorb.radius)
+    if(nearestInteractable && iorb.radius > 0){
+        iorb.x = lerp(iorb.x, nearestInteractable[0].x + nearestInteractable[0].width/2, 0.1);
+        iorb.y = lerp(iorb.y, nearestInteractable[0].y + nearestInteractable[0].height/2, 0.1);
+        iorb.subject = nearestInteractable[0];
+    } else if (nearestInteractable && iorb.radius == 0){
+        iorb.x = nearestInteractable[0].x + nearestInteractable[0].width/2;
+        iorb.y = nearestInteractable[0].y + nearestInteractable[0].height/2;
+        iorb.subject = nearestInteractable[0];
+    } else {
+        iorb.subject = null;
+    }
 }

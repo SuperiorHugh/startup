@@ -79,6 +79,7 @@ export class EmoteSlotButton {
     }
 
     clickUp(x, y, ui, player, imageLib){
+        console.log('test')
         if(!this.clicked){
             const storedUser = JSON.parse(localStorage.getItem('currentuser'));
             if(storedUser){
