@@ -58,10 +58,14 @@ function getTopPlayers(amt){
     const query = {};
     const options = {
         sort: {emotesused: -1},
-        limit: 100,
+        limit: amt,
     };
-    const cursor = scoreCollection.find(query, options);
+    const cursor = playerCollection.find(query, options);
     return cursor.toArray();
+}
+
+function editSetting(email, password){
+    
 }
 
 module.exports = {
