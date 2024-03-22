@@ -22,6 +22,7 @@ mkdir dist
 cp -r "Pictures" dist
 cp -r "Site Files" dist
 cp *.js dist
+cp *.json dist
 cp *.html dist
 
 # Step 2
