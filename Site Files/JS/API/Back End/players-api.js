@@ -13,9 +13,9 @@ let players = [ // get from db //TODO
 ];
 
 
-router.post('/login', (req, res) => {
-    let player = players.find(player => player.email === req.body.email && player.password === req.body.password);
-    if(player){
+router.post('/login', async (req, res) => {
+    const player = await db.getPlayer(req.body.email);
+    if(player && await bcrypt.compare(req.body.password, player.password)){
         console.log('allowed player login');
         res.send({allowed: true, player: player});
     } else {
@@ -25,35 +25,14 @@ router.post('/login', (req, res) => {
 })
 
 //args: email username password
-router.post('/register', (req, res) => {
-    let player = players.find(player => player.email === req.body.email);
+router.post('/register', async (req, res) => {
+    const player = await db.getPlayer(req.body.email);
     if(player){
         console.log('disallowed player sign up');
         res.send({allowed: false});
     } else {
         console.log('allowed player sign up');
-        player = {
-            //credentials
-            email: req.body.email, 
-            username: req.body.username, 
-            password: req.body.password,
-    
-            //settings
-            visibleemojis: false,
-            darkmode: false,
-            autosleep: 0,
-            mutegame: false,
-            mastervolue: 100,
-            emojivolume: 100,
-            bobblehead: false,
-    
-            //data
-            emotesused: 0,
-    
-            //updating
-            accountver: 1,
-        };
-        players.push(player);
+        const player = db.createPlayer(req.body.email, req.body.username, req.body.password);
         res.send({allowed: true, player: player});
     }
 })
@@ -93,5 +72,17 @@ router.post('/add-emote', (req, res) => {
 
     player.emotesused++;
 })
+
+function setAuthCookie(res, authToken) {
+    res.cookie('token', authToken, {
+      secure: true,
+      httpOnly: true,
+      sameSite: 'strict',
+    });
+}
+
+function deleteAuthCookie(res){
+    res.clearCookie('token');
+}
 
 module.exports = router;

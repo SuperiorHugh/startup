@@ -8,7 +8,11 @@ const port = process.env.PORT || 4000;
 
 app.use(express.json());
 
+app.use(cookieParser());
+
 app.use(express.static('.'));
+
+app.set('trust proxy', true);
 
 const usersRoute = require('./Site Files/JS/API/Back End/players-api');
 app.use('/api/users', usersRoute);
