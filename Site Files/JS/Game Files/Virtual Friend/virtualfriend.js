@@ -149,7 +149,7 @@ function e(environment){
     for(const i of interactables)
         if(!nearestInteractable || i[1] < nearestInteractable[1])
             nearestInteractable = i;
-    console.log(iorb.radius)
+    
     if(nearestInteractable && iorb.radius > 0){
         iorb.x = lerp(iorb.x, nearestInteractable[0].x + nearestInteractable[0].width/2, 0.1);
         iorb.y = lerp(iorb.y, nearestInteractable[0].y + nearestInteractable[0].height/2, 0.1);
