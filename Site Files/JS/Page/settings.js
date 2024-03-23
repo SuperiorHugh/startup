@@ -22,6 +22,21 @@ const bobblehead = document.getElementById('bobble-head');
 
 let storedUser = JSON.parse(localStorage.getItem('currentuser'));
 if(storedUser){
+    let emailSU = storedUser.email;
+    let passwordSU = storedUser.password;
+    const response = await fetch('/api/users/login', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({emailSU, passwordSU}),
+    });
+    if(response.allowed){
+        storedUser = response.player;
+        localStorage.setItem('currentuser', response.player);
+    }
+    
+
     visibleemojis.checked = storedUser.visibleemojis;
     darkmode.checked = storedUser.darkmode;
     autosleep.value = storedUser.autosleep;

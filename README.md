@@ -173,7 +173,7 @@ Settings Page
 > - [x] Account login connected to database
 > - [x] Settings connected to database
 > - [x] Account creation connected to database
-
+> - [x] Disallowed settings usage if not logged in
 
 ## Web Socket Deliverable
 
