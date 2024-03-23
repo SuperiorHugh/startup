@@ -64,14 +64,11 @@ function getTopPlayers(amt){
     return cursor.toArray();
 }
 
-function editSetting(email, setting, newval){
-    let update = {};
-    update[setting] = newval;
-
+function editSetting(email, setting, newval) {
     playerCollection.updateOne(
-        {email: email},
-        {$set: update}
-    );   
+        { email: email },
+        { $set: { [setting]: newval } }
+    );
 }
 
 function addEmote(email){
