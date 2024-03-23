@@ -18,6 +18,24 @@ const mastervolume = document.getElementById('master-volume');
 const emojivolume = document.getElementById('emoji-volume');
 const bobblehead = document.getElementById('bobble-head');
 
+/*-- set settings to show player data --*/
+
+let storedUser = JSON.parse(localStorage.getItem('currentuser'));
+if(storedUser){
+    visibleemojis.checked = storedUser.visibleemojis;
+    darkmode.checked = storedUser.darkmode;
+    autosleep.value = storedUser.autosleep;
+    mutegame.checked = storedUser.mutegame;
+    mastervolume.value = storedUser.mastervolume;
+    emojivolume.value = storedUser.emojivolume;
+    bobblehead.checked = storedUser.bobblehead;
+
+    updateVolSliders();
+}
+
+updateColors();
+
+
 visibleemojis.oninput = function(event){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
     if(storedUser){
@@ -188,19 +206,3 @@ function updateVolSliders(){
     }
 }
 
-/*-- set settings to show player data --*/
-
-let storedUser = JSON.parse(localStorage.getItem('currentuser'));
-if(storedUser){
-    visibleemojis.checked = storedUser.visibleemojis;
-    darkmode.checked = storedUser.darkmode;
-    autosleep.value = storedUser.autosleep;
-    mutegame.checked = storedUser.mutegame;
-    mastervolume.value = storedUser.mastervolume;
-    emojivolume.value = storedUser.emojivolume;
-    bobblehead.checked = storedUser.bobblehead;
-
-    updateVolSliders();
-}
-
-updateColors();

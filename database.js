@@ -1,7 +1,7 @@
-import { MongoClient } from 'mongodb';
-import bcrypt from 'bcrypt';
-import uuid from 'uuid';
-import config from './dbConfig.json';
+const { MongoClient } = require('mongodb');
+const bcrypt = require('bcrypt');
+const uuid = require('uuid');
+const config = require('./dbConfig.json');
 
 const dbUrl = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(dbUrl);
@@ -17,11 +17,11 @@ const playerCollection = db.collection('player');
 });
 
 function getPlayer(email){
-    return userCollection.findOne({email: email});
+    return playerCollection.findOne({email: email});
 }
 
 function getPlayerFromToken(token){
-    return userCollection.findOne({token: token});
+    return playerCollection.findOne({token: token});
 }
 
 async function createPlayer(email, username, password){
@@ -37,10 +37,10 @@ async function createPlayer(email, username, password){
         //settings
         visibleemojis: false,
         darkmode: false,
-        autosleep: 0,
+        autosleep: '0',
         mutegame: false,
-        mastervolue: 100,
-        emojivolume: 100,
+        mastervolume: '100',
+        emojivolume: '100',
         bobblehead: false,
 
         //data
@@ -64,13 +64,29 @@ function getTopPlayers(amt){
     return cursor.toArray();
 }
 
-function editSetting(email, password){
-    
+function editSetting(email, setting, newval){
+    let update = {};
+    update[setting] = newval;
+
+    playerCollection.updateOne(
+        {email: email},
+        {$set: update}
+    );   
 }
+
+function addEmote(email){
+    playerCollection.updateOne(
+        {email: email},
+        {$inc: { emotesused: 1 }}
+    );
+}
+
 
 module.exports = {
     getPlayer,
     getPlayerFromToken,
     createPlayer,
     getTopPlayers,
+    editSetting,
+    addEmote,
 };

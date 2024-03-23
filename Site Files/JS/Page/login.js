@@ -17,7 +17,7 @@ form.addEventListener('submit', async function (event){
     })
     const userData = await userRequest.json();
 
-    if(userData.allowed && userData.player.password === password){
+    if(userData.allowed){
         alert("welcome back, " + userData.player.username + "!");
         localStorage.setItem('currentuser', JSON.stringify(userData.player));
         window.location.href = form.action;
