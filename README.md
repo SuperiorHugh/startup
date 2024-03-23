@@ -163,12 +163,12 @@ Settings Page
 
 ## DB Deliverable
 
-> - [ ] TODO
+> - [x] TODO
 > - [x] Supports new user registration
 > - [x] Supports existing user authentication
-> - [ ] Stores application data in MongoDB
-> - [ ] Stores and retrieves credentials in MongoDB
-> - [ ] Restricts application functionality based upon authentication
+> - [x] Stores application data in MongoDB
+> - [x] Stores and retrieves credentials in MongoDB
+> - [x] Restricts application functionality based upon authentication
 
 
 ## Web Socket Deliverable
