@@ -169,6 +169,10 @@ Settings Page
 > - [x] Stores application data in MongoDB
 > - [x] Stores and retrieves credentials in MongoDB
 > - [x] Restricts application functionality based upon authentication
+> - [x] Leaderboard backend connected to database
+> - [x] Account login connected to database
+> - [x] Settings connected to database
+> - [x] Account creation connected to database
 
 
 ## Web Socket Deliverable
