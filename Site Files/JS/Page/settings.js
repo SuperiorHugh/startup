@@ -35,9 +35,7 @@ if(storedUser){
 
 updateColors();
 
-
 visibleemojis.oninput = function(event){
-    
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
     if(storedUser.username != 'GUEST'){
         storedUser.visibleemojis = visibleemojis.checked;
