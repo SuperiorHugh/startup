@@ -37,8 +37,9 @@ updateColors();
 
 
 visibleemojis.oninput = function(event){
+    
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-    if(storedUser){
+    if(storedUser.username != 'GUEST'){
         storedUser.visibleemojis = visibleemojis.checked;
         updateSetting('visibleemojis', visibleemojis.checked);
         localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
@@ -51,7 +52,7 @@ visibleemojis.oninput = function(event){
 
 darkmode.oninput = function(event){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-    if(storedUser){
+    if(storedUser.username != 'GUEST'){
         storedUser.darkmode = darkmode.checked;
         updateSetting('darkmode', darkmode.checked);
         localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
@@ -74,7 +75,7 @@ autosleep.oninput = function(event){
     autosleep.style.background = 'linear-gradient(to right, ' + mainColor + ' ' + x + '%, ' + unselectedColor + ' ' + x + '%)';
 
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-    if(storedUser){
+    if(storedUser.username != 'GUEST'){
         storedUser.autosleep = x;
         localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
@@ -87,7 +88,7 @@ sliderRelease(autosleep, 'autosleep');
 
 mutegame.oninput = function(event){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-    if(storedUser){
+    if(storedUser.username != 'GUEST'){
         storedUser.mutegame = mutegame.checked;
         updateSetting('mutegame', mutegame.checked);
         localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
@@ -105,7 +106,7 @@ mastervolume.oninput = function(event){
     mastervolume.style.background = 'linear-gradient(to right, ' + sliderColor + ' ' + x + '%, ' + unselectedColor + ' ' + x + '%)';
 
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-    if(storedUser){
+    if(storedUser.username != 'GUEST'){
         storedUser.mastervolume = x;
         localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
@@ -122,7 +123,7 @@ emojivolume.oninput = function(event){
     emojivolume.style.background = 'linear-gradient(to right, ' + sliderColor + ' ' + x + '%, ' + unselectedColor + ' ' + x + '%)';
 
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-    if(storedUser){
+    if(storedUser.username != 'GUEST'){
         storedUser.emojivolume = x;
         localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
@@ -137,7 +138,7 @@ sliderRelease(emojivolume, 'emojivolume');
 bobblehead.oninput = function(event){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
 
-    if(storedUser){
+    if(storedUser.username != 'GUEST'){
         storedUser.bobblehead = bobblehead.checked;
         updateSetting('bobblehead', bobblehead.checked);
         localStorage.setItem(storedUser.email, JSON.stringify(storedUser));
