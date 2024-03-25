@@ -1,6 +1,6 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
-const db = require('../../../../database.js');
+const db = require('../../../../../database.js');
 const express = require('express');
 let router = express.Router();
 

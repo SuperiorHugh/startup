@@ -6,7 +6,7 @@
     <link rel="icon" href="/Pictures/Icon/favicon.ico">
     <title>Virtual Friend</title>
     <link rel="stylesheet" href="/Site Files/CSS/style.css">
-    <script type="module" src="/Site Files/JS/Page/signup.js"></script>
+    <script type="module" src="/Site Files/JS/Page/login.js"></script>
     <script type="module" src="/Site Files/JS/Page/user_handler.js"></script>
 </head>
 <body>
@@ -15,25 +15,22 @@
         <h3 id="non-logged-in">You are currently not logged in</h3>
         <h3 id="logged-in">Logged in as: <span id="username-visual">Joebiden131</span></h3>
         <nav class="horizontal-list">
-            <a href="/index.html" class="menu-button" id="login-page-button">Login</a>
+            <a href="/Site Files/HTML/index.html" class="menu-button" id="login-page-button">Login</a>
             <a href="/Site Files/HTML/signup.html"class="menu-button">Sign Up</a>
             <a href="/Site Files/HTML/gameplay.html"class="menu-button">Play</a>
             <a href="/Site Files/HTML/settings.html"class="menu-button">Settings</a>
             <a href="/Site Files/HTML/leaderboard.html" class="menu-button">Leaderboard</a>
         </nav>
     </header>
-
+    
     <main>
         <form action="/Site Files/HTML/gameplay.html" method="post">
             <div id="credentials-wrapper">
-                <h2 id="login-title">Sign Up</h2>
+                <h2 id="login-title">Login</h2>
                 <ul id="credentials">
                     <div>
                         <li>
                             <input id="email" type="text" class="text-input" name="emailText" placeholder="Email" required>
-                        </li>
-                        <li>
-                            <input id="username" type="text" class="text-input" name="usernameText" placeholder="Username" required>
                         </li>
                         <li>
                             <input id="password" type="password" class="text-input" name="passwordText" placeholder="Password" required>
@@ -45,11 +42,11 @@
                 </div>
             </div>
         </form>
-    
+        
         <div id=no-account-prompt>
-            <p>Already have an account?</p>
-            <a href="/index.html">Log In Here</a>
-        </div>
+            <p>Don't have an account?</p>
+            <a href="/Site Files/HTML/signup.html">Sign Up Here</a>
+        </div>    
     </main>
 
     <hr>

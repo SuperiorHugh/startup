@@ -6,7 +6,8 @@
     <link rel="icon" href="/Pictures/Icon/favicon.ico">
     <title>Virtual Friend</title>
     <link rel="stylesheet" href="/Site Files/CSS/style.css">
-    <script type="module" src="/Site Files/JS/Page/login.js"></script>
+    <script type="module" src="/Site Files/JS/API/Front End/3rd-party-api.js"></script>
+    <script type="module" src="/Site Files/JS/Page/leaderboard-manager.js"></script>
     <script type="module" src="/Site Files/JS/Page/user_handler.js"></script>
 </head>
 <body>
@@ -15,38 +16,34 @@
         <h3 id="non-logged-in">You are currently not logged in</h3>
         <h3 id="logged-in">Logged in as: <span id="username-visual">Joebiden131</span></h3>
         <nav class="horizontal-list">
-            <a href="/index.html" class="menu-button" id="login-page-button">Login</a>
+            <a href="/Site Files/HTML/index.html" class="menu-button" id="login-page-button">Login</a>
             <a href="/Site Files/HTML/signup.html"class="menu-button">Sign Up</a>
             <a href="/Site Files/HTML/gameplay.html"class="menu-button">Play</a>
             <a href="/Site Files/HTML/settings.html"class="menu-button">Settings</a>
             <a href="/Site Files/HTML/leaderboard.html" class="menu-button">Leaderboard</a>
         </nav>
     </header>
-    
+
     <main>
-        <form action="/Site Files/HTML/gameplay.html" method="post">
-            <div id="credentials-wrapper">
-                <h2 id="login-title">Login</h2>
-                <ul id="credentials">
-                    <div>
-                        <li>
-                            <input id="email" type="text" class="text-input" name="emailText" placeholder="Email" required>
-                        </li>
-                        <li>
-                            <input id="password" type="password" class="text-input" name="passwordText" placeholder="Password" required>
-                        </li>
-                    </div>
-                </ul>
-                <div>
-                    <button id="login-button" type="submit">Submit</button>
-                </div>
+        <div class="scroll-menu-wrapper">
+            <div class="scroll-menu">
+                <table id="leaderboard">
+                    <tr id="leaderboard-header">
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Emotes Used</th>
+                    </tr>
+                </table>
             </div>
-        </form>
+        </div>
         
-        <div id=no-account-prompt>
-            <p>Don't have an account?</p>
-            <a href="/Site Files/HTML/signup.html">Sign Up Here</a>
-        </div>    
+        <div id="random-apis">
+            <h3>Say hi to my pet dog, <span id="randomword"></span>!</h3>
+            <img id="randomdog" width="300" height="300" alt="random dog">
+    
+            <p id="jokesetup"></p>
+            <p id="jokedelivery"></p>
+        </div>
     </main>
 
     <hr>

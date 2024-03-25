@@ -11,6 +11,16 @@ import {InteractOrb} from "./UI/interact-orb.js";
 import {lerp} from "./Helper/helper-functions.js";
 
 
+/*-- socket connection --*/
+
+const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+socket.onopen = (event) => {
+    socket.send('hello from client!');
+}
+
+
 /*-- display loading and image preloading --*/
 
 let canvas;
