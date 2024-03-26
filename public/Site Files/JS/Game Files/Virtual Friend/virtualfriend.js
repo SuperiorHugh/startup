@@ -10,6 +10,16 @@ import {Chair, Table, BarTable, TileGround, Bartender} from "./Objects/cafe-obje
 import {InteractOrb} from "./UI/interact-orb.js";
 import {lerp} from "./Helper/helper-functions.js";
 
+/*-- create player --*/
+
+let ui = [];    //interactable
+let gui = [];   //pure graphical
+const displayWidth = 600;
+const displayHeight = 500;
+const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+
+let player = new Player(displayWidth/2 - 58/2, displayHeight/2 - 58/2, storedUser.username, ui, gui);
+
 
 /*-- socket connection --*/
 
@@ -17,7 +27,21 @@ const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
 const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
 
 socket.onopen = (event) => {
-    socket.send('hello from client!');
+    socket.send(JSON.stringify({
+        event: 'connection',
+        name: player.name,
+        x: player.x,
+        y: player.y,
+    }));
+}
+socket.onclose = (event) => {
+    socket.send(JSON.stringify({
+        event: 'disconnection'
+    }));
+}
+
+socket.onmessage = (event) => {
+    console.log('received message from server:', event.data);
 }
 
 
@@ -25,8 +49,6 @@ socket.onopen = (event) => {
 
 let canvas;
 let ctx;
-const displayWidth = 600;
-const displayHeight = 500;
 let imageLib;
 let mousePos = {x: 0, y: 0};
 
@@ -37,11 +59,7 @@ let esb3;   //emote slot button 3
 let esb4;   //emote slot button 4
 let esb5;   //emote slot button 5
 let iorb;   //interact orb
-let ui = [];    //interactable
-
 let ea;     //emote amount
-let gui = [];   //pure graphical
-
 
 const inputStart = (event) => executePlayerKeyCode(player, event.code);
 const inputEnd = (event) => endPlayerKeyCode(player, event.code);
@@ -63,6 +81,13 @@ window.onload = async function(){
     esb3 = new EmoteSlotButton(canvas, canvas.width*(5/10), canvas.height*(5/8), 'bruh'); ui.push(esb3);
     esb4 = new EmoteSlotButton(canvas, canvas.width*(7/10), canvas.height*(6/8), 'sad'); ui.push(esb4);
     esb5 = new EmoteSlotButton(canvas, canvas.width*(9/10), canvas.height*(7/8), 'angry'); ui.push(esb5);
+    addEventListener("beforeunload", (event) => {
+        esb1.postEmotes();
+        esb2.postEmotes();
+        esb3.postEmotes();
+        esb4.postEmotes();
+        esb5.postEmotes();
+    });
     iorb = new InteractOrb(128, 128); ui.push(iorb);
     ui.sort((a, b) => a.z - b.z);
 
@@ -77,10 +102,6 @@ window.onload = async function(){
     gameLoop();
 }
 
-
-/*-- create player --*/
-
-let player = new Player(displayWidth/2 - 58/2, displayHeight/2 - 58/2, document.getElementById('username-visual').innerText, ui, gui);
 
 /*-- create environment --*/
 

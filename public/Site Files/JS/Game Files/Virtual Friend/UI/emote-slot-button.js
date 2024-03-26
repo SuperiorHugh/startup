@@ -25,6 +25,9 @@ export class EmoteSlotButton {
         this.active = false;
         this.clicked = false;
         this.emoji = emoji;
+
+        this.emoteStack = 0;
+        this.emoteTimer = 0;
     }
 
     tick(mousePos){
@@ -44,6 +47,13 @@ export class EmoteSlotButton {
             this.y = lerp(this.y, this.originY, 0.1);
             this.gotoPercent = lerp(this.gotoPercent, 0, 0.1);
         }
+
+        if(this.emoteTimer === 1){
+            const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+            this.postEmotes();
+            this.emoteTimer = 0;
+        } else if(this.emoteTimer > 0)
+            this.emoteTimer--;
     }
 
     draw(ctx, imageLib){
@@ -79,7 +89,6 @@ export class EmoteSlotButton {
     }
 
     clickUp(x, y, ui, player, imageLib){
-        console.log('test')
         if(!this.clicked){
             const storedUser = JSON.parse(localStorage.getItem('currentuser'));
             if(storedUser){
@@ -94,9 +103,23 @@ export class EmoteSlotButton {
 
     addToEmotes(player, storedUser){
         
+
         storedUser.emotesused++;
-        
         localStorage.setItem('currentuser', JSON.stringify(storedUser));
+        player.emote(this.emoji);
+
+        this.emoteStack++;
+        console.log(`emote timer: ${this.emoteTimer}, emote stack: ${this.emoteStack}`);
+        if(this.emoteTimer > 0)
+            return;
+        this.emoteTimer = 500;
+    }
+    
+    postEmotes(){
+        if(this.emoteStack <= 0)
+            return;
+        
+        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
         fetch('/api/users/add-emote', {
             method: 'POST',
             headers: {
@@ -105,8 +128,10 @@ export class EmoteSlotButton {
             body: JSON.stringify({
                 email: storedUser.email,
                 password: storedUser.password,
+                amt: this.emoteStack,
             })
-        })
-        player.emote(this.emoji);
+        });
+        this.emoteStack = 0;
+        console.log('posted emotes');
     }
 }

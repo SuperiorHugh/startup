@@ -52,11 +52,11 @@ router.post('/update-setting', async (req, res) => {
     }
 });
 
-//args: email password emoteamt
+//args: email password amt
 router.post('/add-emote', async (req, res) => {
     const player = await db.getPlayer(req.body.email);
     if(player && req.body.password == player.password){
-        db.addEmote(req.body.email);
+        db.addEmote(req.body.email, req.body.amt);
     }
 });
 

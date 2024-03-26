@@ -15,7 +15,7 @@ app.use('/api/users', usersRoute);
 
 //if visited unknown, goto homepage
 app.use((req, res) => {
-    res.sendFile('index.html', { root: './public' });
+    res.sendFile('Site Files/HTML/index.html', { root: './public' });
 });
 
 let server = app.listen(port, () => {
@@ -35,9 +35,17 @@ server.on('upgrade', (req, socket, head) => {
 
 wss.on('connection', (ws, req) => {
     console.log('connection approved');
-    connections.push(ws);
+    connections.push({ws, x: 32, y: 32});
 
     ws.on('message', (data) => {
-        console.log(`recieved message from client: ${data}`);
+        data = JSON.parse(data);
+        console.log(`recieved event: ${data.event}`);
     });
+
+    ws.on('close', () => {
+        console.log(`connection closed`);
+    });
+
+    ws.send('whats up');
 });
+

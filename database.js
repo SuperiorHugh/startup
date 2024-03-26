@@ -67,14 +67,14 @@ function getTopPlayers(amt){
 function editSetting(email, setting, newval) {
     playerCollection.updateOne(
         { email: email },
-        { $set: { [setting]: newval } }
+        {$set: {[setting]: newval }},
     );
 }
 
-function addEmote(email){
+function addEmote(email, amt){
     playerCollection.updateOne(
         {email: email},
-        {$inc: { emotesused: 1 }}
+        {$inc: {emotesused: amt}},
     );
 }
 

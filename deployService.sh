@@ -19,8 +19,7 @@ printf "\n----> Deploying $service to $hostname with $key\n"
 printf "\n----> Build the distribution package\n"
 rm -rf dist
 mkdir dist
-cp -r "Pictures" dist
-cp -r "Site Files" dist
+cp -r "public" dist
 cp *.js dist
 cp *.json dist
 cp *.html dist
@@ -41,7 +40,7 @@ printf "\n----> Deploy the service on the target\n"
 ssh -i "$key" ubuntu@$hostname << ENDSSH
 bash -i
 cd services/${service}
-npm install express cookie-parser mongodb bcrypt uuid
+npm install express cookie-parser mongodb bcrypt uuid ws
 pm2 restart ${service}
 ENDSSH
 
