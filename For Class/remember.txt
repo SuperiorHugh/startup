@@ -20,6 +20,15 @@ movement message:
 {id: PLAYERID, x: PLAYERX, y: PLAYERY, moving: PLAYERMOVING}
 emote message:
 {id: PLAYERID, emote: PLAYEREMOTE}
+connection message:
+[
+    {id: PLAYERID, x: PLAYERX, y: PLAYERY, moving: PLAYERMOVING},
+    {id: PLAYERID, x: PLAYERX, y: PLAYERY, moving: PLAYERMOVING},
+    etc...
+]
+
 
 
 messages will be shared between server and clients (ie: wont be different)
+
+when connecting all prexisting players will be sent to client
