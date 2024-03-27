@@ -120,6 +120,7 @@ export class Player {
         this.emoteTimer = this.emoteSpeed;
         this.emotePos = 1;
         this.emoji = emoji;
+        this.socket.send(JSON.stringify({event:'emote', email: this.email, emoji: this.emoji}));
 
         const storedUser = JSON.parse(localStorage.getItem('currentuser'));
         if(storedUser && storedUser.username != 'GUEST'){
@@ -197,7 +198,7 @@ export class SocketPlayer {
         ctx.font = "20px 'Trebuchet MS'";
         ctx.fillStyle = document.body.style.getPropertyValue('--maincolor');
 
-        if(this.name === 'Guest')
+        if(this.name.toLowerCase() === 'guest')
             ctx.fillStyle = '#CCCCCC';
         ctx.fillText(this.name, this.x + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
         
@@ -214,12 +215,5 @@ export class SocketPlayer {
         this.emoteTimer = this.emoteSpeed;
         this.emotePos = 1;
         this.emoji = emoji;
-
-        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-        if(storedUser && storedUser.username != 'GUEST'){
-            this.gui[0].emote(storedUser.emotesused);
-        } else {
-            this.gui[0].emote(0);
-        }
     }
 }

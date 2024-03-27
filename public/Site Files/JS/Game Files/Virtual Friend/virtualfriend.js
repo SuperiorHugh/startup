@@ -42,6 +42,7 @@ socket.onopen = (event) => {
 socket.onmessage = (event) => {
     let data = JSON.parse(event.data);
     console.log(data);
+    let cur;
     switch(data.event){
         case "init-connect"://args: connections(array)
             data.connections.forEach((obj, i) => {
@@ -54,15 +55,17 @@ socket.onmessage = (event) => {
             environment.push(new SocketPlayer(data.x, data.y, data.name, data.email));
             break;
         case "movement"://args: email, x, y, moving
-            let cur = environment.find(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
+            cur = environment.find(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
             cur.x = data.x;
             cur.y = data.y;
             cur.moving = data.moving;
             break;
         case "emote"://args: email, emote
+            cur = environment.find(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
+            cur.emote(data.emoji);
+            
             break;
         case "disconnect"://args: email
-            
             let index = environment.findIndex(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
             if(player.email === data.email){
                 console.log('breh');

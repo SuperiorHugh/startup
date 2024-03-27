@@ -39,7 +39,7 @@ wss.on('connection', (ws, req) => {
 
     ws.on('message', (data) => {
         data = JSON.parse(data);
-        
+        let player;
         switch(data.event){
             case "connect"://args: email, name, x, y
                 let testIndex = connections.findIndex(player => {return player.email === data.email});
@@ -55,16 +55,16 @@ wss.on('connection', (ws, req) => {
                 console.log(connections.length)
                 break;
             case "movement"://args: email, x, y, moving
-                let player = connections.find(player => {return player.email === data.email});
+                player = connections.find(player => {return player.email === data.email});
                 player.x = data.x;
                 player.y = data.y;
                 player.moving = data.moving;
 
                 sendToConnections(data.email, {event: "movement", email: data.email, x: data.x, y: data.y, moving: data.moving});
                 break;
-            case "emote"://args: email, emote
+            case "emote"://args: email, emoji
                 player = connections.find(player => {return player.email === data.email});
-                sendToConnections(data.email, {event: "emote", email: data.email, emote: data.emote});
+                sendToConnections(data.email, {event: "emote", email: data.email, emoji: data.emoji});
                 break;
         }
     });
