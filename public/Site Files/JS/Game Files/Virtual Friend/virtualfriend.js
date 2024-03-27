@@ -1,6 +1,6 @@
 /*-- imports --*/
 
-import {Player} from "./Objects/player.js";
+import {Player, SocketPlayer} from "./Objects/player.js";
 import {loadImages} from "./Helper/image-loading.js";
 import {executePlayerKeyCode, endPlayerKeyCode, mouseMoevementEvent, mouseDownEvent, mouseUpEvent} from "./Helper/input-handler.js";
 import {EmoteButton} from "./UI/emote-button.js";
@@ -18,7 +18,7 @@ const displayWidth = 600;
 const displayHeight = 500;
 const storedUser = JSON.parse(localStorage.getItem('currentuser'));
 
-let player = new Player(displayWidth/2 - 58/2, displayHeight/2 - 58/2, storedUser.username, ui, gui);
+
 
 
 /*-- socket connection --*/
@@ -26,22 +26,52 @@ let player = new Player(displayWidth/2 - 58/2, displayHeight/2 - 58/2, storedUse
 const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
 const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
 
+let player = new Player(displayWidth/2 - 58/2, displayHeight/2 - 58/2, storedUser.username, ui, gui, socket, storedUser.email);
+let environment = [];
+
 socket.onopen = (event) => {
     socket.send(JSON.stringify({
-        event: 'connection',
+        event: 'connect',
+        email: storedUser.email,
         name: player.name,
         x: player.x,
         y: player.y,
     }));
 }
-socket.onclose = (event) => {
-    socket.send(JSON.stringify({
-        event: 'disconnection'
-    }));
-}
 
 socket.onmessage = (event) => {
-    console.log('received message from server:', event.data);
+    let data = JSON.parse(event.data);
+    console.log(data);
+    switch(data.event){
+        case "init-connect"://args: connections(array)
+            data.connections.forEach((obj, i) => {
+                if(obj.email === player.email)
+                    return;
+                environment.push(new SocketPlayer(obj.x, obj.y, obj.name, obj.email));
+            });
+            break;
+        case "connect"://args: email, name, x, y
+            environment.push(new SocketPlayer(data.x, data.y, data.name, data.email));
+            break;
+        case "movement"://args: email, x, y, moving
+            let cur = environment.find(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
+            cur.x = data.x;
+            cur.y = data.y;
+            cur.moving = data.moving;
+            break;
+        case "emote"://args: email, emote
+            break;
+        case "disconnect"://args: email
+            let index = environment.findIndex(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
+            if(player.email === data.email){
+                alert('your account connected from a different location!');
+                window.location.href = '/Site Files/HTML/index.html';
+            }
+            if (index !== -1) {
+                environment.splice(index, 1);
+            }
+            break;
+    }
 }
 
 
@@ -121,7 +151,7 @@ let background = new TileGround(displayWidth/2 - 436/2, displayHeight/2 - 312/2)
 
 //allows for future multiplayer support
 
-let environment = [
+environment = [
     player,
     chair1,
     chair2,

@@ -5,7 +5,7 @@ import {horizontalCollision, verticalCollision} from "../Helper/movement-handler
 
 //player class
 export class Player {
-    constructor (x, y, name, ui, gui){
+    constructor (x, y, name, ui, gui, socket, email){
         this.x = x;
         this.y = y;
         this.z = 0;
@@ -38,6 +38,9 @@ export class Player {
         this.bb = this.y + (this.height / 2) + 1;
 
         this.sitting = false;
+        this.socket = socket;
+        this.email = email;
+        this.movementEnd = true;
     }
 
     //tick player (runs per frame)
@@ -63,10 +66,116 @@ export class Player {
         let vc = verticalCollision(this, environment, (this.moveDown - this.moveUp) * this.speed);
         if(hc) this.x = hc;
         if(vc) this.y = vc;
-        if(!hc)
+        if(!hc){
             this.x += (this.moveRight - this.moveLeft) * this.speed;
-        if(!vc)
+            this.movementEnd = false;
+        }   
+        if(!vc){
             this.y += (this.moveDown - this.moveUp) * this.speed;
+            this.movementEnd = false;
+        }
+
+        if(((this.moveRight - this.moveLeft) != 0 || (this.moveDown - this.moveUp) != 0)){
+            this.socket.send(JSON.stringify({event: 'movement', email: this.email, x: this.x, y: this.y, moving: true}));
+        } else if(!this.movementEnd){
+            this.movementEnd = true;
+            this.socket.send(JSON.stringify({event: 'movement', email: this.email, x: this.x, y: this.y, moving: false}));
+        }
+        
+        
+        if(this.emoteTimer > 0){
+            this.emoteTimer--;
+            this.emotePos = lerp(this.emotePos, 0, 0.2);
+        } else {
+            this.emoji = '';
+        }
+    }
+
+    //draw self onto given canvas
+    draw(ctx, imageLib){
+        ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((this.jumpHeight - this.z) / this.jumpHeight))) + ")";
+        ctx.beginPath();
+        ctx.ellipse(this.x + 28, this.y + 56, 24 + 8*(1-(this.z / this.jumpHeight)), 8 + 6*(1-(this.z / this.jumpHeight)), 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        
+        ctx.drawImage(imageLib.player, this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+        ctx.font = "20px 'Trebuchet MS'";
+        ctx.fillStyle = document.body.style.getPropertyValue('--maincolor');
+
+        if(this.name === 'Guest')
+            ctx.fillStyle = '#CCCCCC';
+        ctx.fillText(this.name, this.x + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
+        
+        if(this.emoteTimer > 0){
+            ctx.globalAlpha = this.emoteTimer / this.emoteSpeed;
+            ctx.drawImage(imageLib[this.emoji + '-emote'], this.x, this.y - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
+            ctx.globalAlpha = 1;
+        }
+
+    }
+
+    //emote event
+    emote(emoji){
+        this.emoteTimer = this.emoteSpeed;
+        this.emotePos = 1;
+        this.emoji = emoji;
+
+        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+        if(storedUser && storedUser.username != 'GUEST'){
+            this.gui[0].emote(storedUser.emotesused);
+        } else {
+            this.gui[0].emote(0);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+export class SocketPlayer {
+    constructor (x, y, name, email){
+        this.x = x;
+        this.y = y;
+        this.z = 0;
+        this.width = 56;
+        this.height = 56;
+
+        this.jumpHeight = 32;
+        this.animationTime = 0;
+
+        this.name = name;
+        this.emoteSpeed = 100;
+        this.emoteTimer = 0;
+        this.emotePos = 0;
+        this.emoji = '';
+
+        this.collidable = false;
+        this.interactable = false;
+
+        this.sitting = false;
+        this.email = email;
+        this.moving = false;
+    }
+
+    //tick player (runs per frame)
+    tick(environment){
+        if(!this.moving){
+            this.animationTime = 0;
+            this.z = lerp(this.z, 0, 0.2);
+            this.width = lerp(this.width, 56, 0.2);
+            this.height = lerp(this.height, 56, 0.2);
+        } else {
+            this.animationTime++;
+            const animSpd = 7;
+            this.z = Math.abs(Math.sin(this.animationTime / animSpd)) * this.jumpHeight;
+            this.width = 48 + Math.abs(Math.sin(this.animationTime / animSpd)) * 16;
+            this.height = 48 + Math.abs(Math.cos(this.animationTime / animSpd)) * 16;
+        }
 
         if(this.emoteTimer > 0){
             this.emoteTimer--;
