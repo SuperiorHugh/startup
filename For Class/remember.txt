@@ -28,7 +28,6 @@ connection message:
 ]
 
 
-
 messages will be shared between server and clients (ie: wont be different)
 
 when connecting all prexisting players will be sent to client
