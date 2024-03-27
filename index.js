@@ -45,7 +45,6 @@ wss.on('connection', (ws, req) => {
                 let testIndex = connections.findIndex(player => {return player.email === data.email});
                 if(testIndex !== -1){
                     sendToConnections('', {event: "disconnect", email: data.email});
-                    connections.splice(testIndex, 1);
                 }
                 sendToConnections(data.email, {event: "connect", email: data.email, name: data.name, x: data.x, y: data.y});
 
@@ -53,6 +52,7 @@ wss.on('connection', (ws, req) => {
                 connections.push({ws, email: data.email, name: data.name, x: data.x, y: data.y, moving: false});
                 email = data.email;
                 console.log('connect event recieved, email:' + data.email);
+                console.log(connections.length)
                 break;
             case "movement"://args: email, x, y, moving
                 let player = connections.find(player => {return player.email === data.email});
@@ -67,21 +67,6 @@ wss.on('connection', (ws, req) => {
                 sendToConnections(data.email, {event: "emote", email: data.email, emote: data.emote});
                 break;
         }
-        /*
-        movement message:
-            {event: 'movement', email: PLAYEREMAIL, x: PLAYERX, y: PLAYERY}
-        emote message:
-            {event: 'emote', email: PLAYEREMAIL, emote: PLAYEREMOTE}
-        connection message:
-            {
-                event: 'connection', 
-                data: [
-                    {email: PLAYEREMAIL, x: PLAYERX, y: PLAYERY, moving: PLAYERMOVING},
-                    {email: PLAYEREMAIL, x: PLAYERX, y: PLAYERY, moving: PLAYERMOVING},
-                    etc...
-                ]
-            }
-        */
     });
 
     ws.on('close', () => {
@@ -89,7 +74,7 @@ wss.on('connection', (ws, req) => {
             return;
         
         sendToConnections(email, {event: "disconnect", email: email});
-        connections.splice(connections.findIndex(player => {return player.email === email}), 1);
+        connections.splice(connections.findIndex(player => {return player.email === email}), 1);//TODO
     });
 });
 

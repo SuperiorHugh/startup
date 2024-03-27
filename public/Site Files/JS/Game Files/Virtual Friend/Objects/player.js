@@ -66,11 +66,11 @@ export class Player {
         let vc = verticalCollision(this, environment, (this.moveDown - this.moveUp) * this.speed);
         if(hc) this.x = hc;
         if(vc) this.y = vc;
-        if(!hc){
+        if(!hc && ((this.moveRight - this.moveLeft) != 0 || (this.moveDown - this.moveUp) != 0)){
             this.x += (this.moveRight - this.moveLeft) * this.speed;
             this.movementEnd = false;
         }   
-        if(!vc){
+        if(!vc && ((this.moveRight - this.moveLeft) != 0 || (this.moveDown - this.moveUp) != 0)){
             this.y += (this.moveDown - this.moveUp) * this.speed;
             this.movementEnd = false;
         }

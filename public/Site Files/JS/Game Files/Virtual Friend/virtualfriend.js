@@ -62,10 +62,13 @@ socket.onmessage = (event) => {
         case "emote"://args: email, emote
             break;
         case "disconnect"://args: email
+            
             let index = environment.findIndex(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
             if(player.email === data.email){
+                console.log('breh');
                 alert('your account connected from a different location!');
                 window.location.href = '/Site Files/HTML/index.html';
+                return;
             }
             if (index !== -1) {
                 environment.splice(index, 1);
