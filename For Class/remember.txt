@@ -1,12 +1,25 @@
-update db for..
+when buying use a negative emojis value
 
-leaderboard-api.js
-user-api.js
-signup.js
+moveable purchase menu
+- buttons make calls
 
-interact orb when close
- - press e or click on orb to interact
- - only need 1 obj of item
- - will tp to the nearest interactable obj
- - will light up only if player is within range of obj root
- 
+
+make new socketPlayer() class
+- if moving === true
+ - jumping anim
+- x, y = serverplayerid.x, serverplayerid.y (potentially an interpolation system)
+
+
+when new server sends new player event:
+- create new socketPlayer
+- socketplayer id = server player id
+- any data change to server player id will be sent to socketplayer id
+
+    from server
+movement message:
+{id: PLAYERID, x: PLAYERX, y: PLAYERY, moving: PLAYERMOVING}
+emote message:
+{id: PLAYERID, emote: PLAYEREMOTE}
+
+
+messages will be shared between server and clients (ie: wont be different)
