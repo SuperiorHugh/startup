@@ -33,6 +33,7 @@ export class Chair {
             player.sitting = true;
             player.x = this.x;
             player.y = this.y + (this.orientation === 'back' ? -0.01 : 0.01);
+            player.socket.send(JSON.stringify({event: 'movement', email: player.email, x: player.x, y: player.y, moving: false}));
             console.log('now interacting!')
         } else {
             this.interacting = false;

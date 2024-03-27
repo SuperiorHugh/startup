@@ -103,7 +103,7 @@ export class Player {
         ctx.font = "20px 'Trebuchet MS'";
         ctx.fillStyle = document.body.style.getPropertyValue('--maincolor');
 
-        if(this.name === 'Guest')
+        if(this.name.toLowerCase() === 'guest')
             ctx.fillStyle = '#CCCCCC';
         ctx.fillText(this.name, this.x + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
         
