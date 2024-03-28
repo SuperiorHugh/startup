@@ -1,3 +1,5 @@
+import {lerp, getRandomElementFromArray} from ".././Helper/helper-functions.js";
+
 
 export class Chair {
     constructor(x, y, orientation){
@@ -104,7 +106,6 @@ export class TileGround {
     }
 
     tick(){
-
     }
 
     draw(ctx, imageLib){
@@ -122,10 +123,35 @@ export class Bartender {
         this.height = 56;
         this.collidable = false;
         this.interactable = true;
+        this.interacting = false;
+
+        this.emojishopElement = document.getElementById('emojishop');
+        this.buttons = Array.from(document.getElementsByClassName('buy-button'));
+        this.emojishopElement.addEventListener('transitionend', this.transitionEnd.bind(this));
+        this.time = 0;
+
+        this.restPos = 100;
+        this.interactPos = 100;
+        this.restHeight = 0;
+        this.interactHeight = 200;
     }
 
     tick(){
-
+        if(this.interacting){
+            this.emojishopElement.style.visibility = 'visible';
+            this.emojishopElement.style.top = `${this.interactPos}px`;
+            this.emojishopElement.style.height = `${this.interactHeight}px`;
+            this.buttons.forEach((val, i) => {
+                val.style.color = document.body.style.getPropertyValue('--maincolor');;
+            });
+        } else {
+            this.emojishopElement.style.top = `${this.restPos}px`;
+            this.emojishopElement.style.height = `${this.restHeight}px`;
+            this.buttons.forEach((val, i) => {
+                val.style.color = document.body.style.getPropertyValue('--transparentcolor');;
+            });
+        }
+        
     }
 
     draw(ctx, imageLib){
@@ -136,5 +162,21 @@ export class Bartender {
         ctx.closePath();
 
         ctx.drawImage(imageLib[`bartender`], this.x, this.y, 56, 56);
+    }
+
+    interact(x, y, ui, player, imageLib){//TODO
+        if(!this.interacting){
+            this.interacting = true;
+            console.log('now interacting!')
+        } else {
+            this.interacting = false;
+            console.log('exit interaction')
+        }
+    }
+
+    transitionEnd(){
+        if (!this.interacting) {
+            this.emojishopElement.style.visibility = 'hidden';
+        }
     }
 }

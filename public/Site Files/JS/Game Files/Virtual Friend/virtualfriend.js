@@ -10,6 +10,7 @@ import {Chair, Table, BarTable, TileGround, Bartender} from "./Objects/cafe-obje
 import {InteractOrb} from "./UI/interact-orb.js";
 import {lerp} from "./Helper/helper-functions.js";
 
+
 /*-- create player --*/
 
 let ui = [];    //interactable
@@ -17,8 +18,6 @@ let gui = [];   //pure graphical
 const displayWidth = 600;
 const displayHeight = 500;
 const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-
-console.log(storedUser);
 
 
 /*-- socket connection --*/
@@ -41,7 +40,6 @@ socket.onopen = (event) => {
 
 socket.onmessage = (event) => {
     let data = JSON.parse(event.data);
-    console.log(data);
     let cur;
     switch(data.event){
         case "init-connect"://args: connections(array)
@@ -68,7 +66,6 @@ socket.onmessage = (event) => {
         case "disconnect"://args: email
             let index = environment.findIndex(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
             if(player.email === data.email){
-                console.log('breh');
                 alert('your account connected from a different location!');
                 window.location.href = '/Site Files/HTML/index.html';
                 return;
@@ -205,7 +202,7 @@ function gameLoop() {
 }
 
 //player in range of usable env
-
+let currentInteractable;
 function e(environment){
     let interactables = []
     environment.forEach((val, i) => {
@@ -219,6 +216,15 @@ function e(environment){
     for(const i of interactables)
         if(!nearestInteractable || i[1] < nearestInteractable[1])
             nearestInteractable = i;
+    
+    if(currentInteractable !== nearestInteractable){
+        if(currentInteractable && currentInteractable.interacting){
+            console.log('disinteracted!!!')
+            currentInteractable.interacting = false;
+        }
+        currentInteractable = nearestInteractable;
+    }
+    
     
     if(nearestInteractable && iorb.radius > 0){
         iorb.x = lerp(iorb.x, nearestInteractable[0].x + nearestInteractable[0].width/2, 0.1);

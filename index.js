@@ -35,7 +35,6 @@ server.on('upgrade', (req, socket, head) => {
 });
 
 wss.on('connection', (ws, req) => {
-    console.log('connection approved');
     let email;
 
     ws.on('message', (data) => {
@@ -46,7 +45,6 @@ wss.on('connection', (ws, req) => {
                 if(data.name === 'GUEST'){
                     guestCount++;
                     data.name += '-' + guestCount;
-                    console.log(data.email);
                     ws.send(JSON.stringify({event: 'guest-data', name: data.name}));
                 }
 
@@ -68,8 +66,6 @@ wss.on('connection', (ws, req) => {
                 
                 connections.push({ws, email: data.email, name: data.name, x: data.x, y: data.y, moving: false});
                 email = data.email;
-                console.log('connect event recieved, email:' + data.email);
-                console.log(connections.length);
                 break;
             case "movement"://args: email, x, y, moving
                 player = connections.find(player => {return player.email === data.email});

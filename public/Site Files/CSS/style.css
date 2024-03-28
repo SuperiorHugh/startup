@@ -474,3 +474,52 @@ tr {
     color: var(--textcolor);
     background-color: var(--backgroundcolor); 
 }
+
+#emojishop {
+    left: calc(50% - 200px);
+    z-index: 3;
+    position: absolute;
+    width: 400px;
+    height: 150px;
+    border-radius: 8px;
+    background: linear-gradient(to left, var(--maincolor), var(--altcolor));
+    box-shadow: 0px 0px 20px 0px var(--boxshadowcolor);
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    transition: top 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), height 0.2s cubic-bezier(0.25, 0.1, 0.25, 1), color 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    font-size: 20px;
+}
+
+.buy-button {
+    border: none;
+    background-color: var(--buttoncolor);
+    width: 25%;
+    height: 75%;
+    border-radius: 8px;
+    
+    font-size: 20px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.buy-button:hover {
+    cursor: pointer;
+    background-color:var(--buttonhovercolor);
+    box-shadow: 0px 0px 20px 0px var(--textcolor);
+}
+
+.shop-icon {
+    image-rendering: optimizeSpeed; /* Older versions of IE */
+    image-rendering: -moz-crisp-edges; /* Firefox */
+    image-rendering: -webkit-optimize-contrast; /* Webkit (Safari/Chrome) */
+    image-rendering: optimize-contrast; /* CSS3 Proposed */
+    image-rendering: pixelated; /* Chrome 41+, Firefox 36+, Safari 8+ */
+    image-rendering: crisp-edges; /* Chrome 49+, Firefox 59+, Safari 13+ */
+    height: 40%;
+}
