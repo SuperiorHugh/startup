@@ -47,8 +47,17 @@ wss.on('connection', (ws, req) => {
                     sendToConnections('', {event: "disconnect", email: data.email});
                 }
                 sendToConnections(data.email, {event: "connect", email: data.email, name: data.name, x: data.x, y: data.y});
-
-                ws.send(JSON.stringify({event: "init-connect", connections}));
+                
+                const noncircularConnections = connections.map((val, i) => {
+                    return {
+                        email: val.email,
+                        name: val.name,
+                        x: val.x,
+                        y: val.y,
+                        moving: val.moving,
+                    };
+                });
+                ws.send(JSON.stringify({event: "init-connect", connections: noncircularConnections}));
                 connections.push({ws, email: data.email, name: data.name, x: data.x, y: data.y, moving: false});
                 email = data.email;
                 console.log('connect event recieved, email:' + data.email);
