@@ -38,7 +38,8 @@ export async function setUserVisual(){
     } else {
         localStorage.setItem('currentuser', JSON.stringify({
             //credentials
-            email: 'GUEST', 
+            
+            email: 'GUEST' + Math.floor(Math.random() * 100000000), 
             username: 'GUEST', 
             password: 'GUEST',
     

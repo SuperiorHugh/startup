@@ -25,6 +25,7 @@ let server = app.listen(port, () => {
 
 /*-- websocket setup --*/
 const connections = [];
+let guestCount = 0;
 
 const wss = new WebSocketServer({noServer: true});
 server.on('upgrade', (req, socket, head) => {
@@ -42,10 +43,16 @@ wss.on('connection', (ws, req) => {
         let player;
         switch(data.event){
             case "connect"://args: email, name, x, y
-                let testIndex = connections.findIndex(player => {return player.email === data.email});
-                if(testIndex !== -1){
-                    sendToConnections('', {event: "disconnect", email: data.email});
+                if(data.name === 'GUEST'){
+                    guestCount++;
+                    data.name += '-' + guestCount;
+                    console.log(data.email);
+                    ws.send(JSON.stringify({event: 'guest-data', name: data.name}));
                 }
+
+                let testIndex = connections.findIndex(player => {return player.email === data.email});
+                if(testIndex !== -1)
+                    sendToConnections('', {event: "disconnect", email: data.email});
                 sendToConnections(data.email, {event: "connect", email: data.email, name: data.name, x: data.x, y: data.y});
                 
                 const noncircularConnections = connections.map((val, i) => {
@@ -58,10 +65,11 @@ wss.on('connection', (ws, req) => {
                     };
                 });
                 ws.send(JSON.stringify({event: "init-connect", connections: noncircularConnections}));
+                
                 connections.push({ws, email: data.email, name: data.name, x: data.x, y: data.y, moving: false});
                 email = data.email;
                 console.log('connect event recieved, email:' + data.email);
-                console.log(connections.length)
+                console.log(connections.length);
                 break;
             case "movement"://args: email, x, y, moving
                 player = connections.find(player => {return player.email === data.email});
@@ -94,4 +102,8 @@ function sendToConnections(email, data) {
         
         player.ws.send(JSON.stringify(data));
     });
+}
+
+function isGuest(data){
+    return data.name.toLowerCase().includes('guest');
 }

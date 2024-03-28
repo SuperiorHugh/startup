@@ -18,7 +18,7 @@ const displayWidth = 600;
 const displayHeight = 500;
 const storedUser = JSON.parse(localStorage.getItem('currentuser'));
 
-
+console.log(storedUser);
 
 
 /*-- socket connection --*/
@@ -76,6 +76,9 @@ socket.onmessage = (event) => {
             if (index !== -1) {
                 environment.splice(index, 1);
             }
+            break;
+        case "guest-data"://args: name
+            player.name = data.name;
             break;
     }
 }
