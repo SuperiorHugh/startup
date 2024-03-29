@@ -217,12 +217,13 @@ function e(environment){
         if(!nearestInteractable || i[1] < nearestInteractable[1])
             nearestInteractable = i;
     
-    if(currentInteractable !== nearestInteractable){
+    if(!currentInteractable && nearestInteractable){
+        currentInteractable = nearestInteractable[0];
+    } else if (!nearestInteractable){
         if(currentInteractable && currentInteractable.interacting){
-            console.log('disinteracted!!!')
             currentInteractable.interacting = false;
         }
-        currentInteractable = nearestInteractable;
+        currentInteractable = null;
     }
     
     
