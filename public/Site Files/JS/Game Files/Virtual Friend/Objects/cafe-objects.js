@@ -130,7 +130,7 @@ export class Bartender {
         this.emojishopElement.addEventListener('transitionend', this.transitionEnd.bind(this));
         this.time = 0;
 
-        this.restPos = 100;
+        this.restPos = 200;
         this.interactPos = 100;
         this.restHeight = 0;
         this.interactHeight = 200;
