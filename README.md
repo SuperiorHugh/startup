@@ -177,7 +177,16 @@ Settings Page
 
 ## Web Socket Deliverable
 
-> - [ ] TODO
+> - [x] TODO
+> - [x] Backend listens for WebSocket connection
+> - [x] Frontend makes WebSocket connection
+> - [x] Data sent over WebSocket connection
+> - [x] WebSocket data displayed in the application interface
+> - [x] Multiple packet types
+> - [x] Multiple logins from single account disallowed
+> - [x] Numbered guest accounts
+> - [x] Emoting multiplayer support
+> - [x] Remove player client support
 
 ## React Deliverable
 
