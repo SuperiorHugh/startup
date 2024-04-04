@@ -24,6 +24,25 @@ function getPlayerFromToken(token){
     return playerCollection.findOne({token: token});
 }
 
+const playerVals = [
+    //settings
+    ["visibleemojis", false],
+    ["darkmode", false],
+    ["autosleep", '0'],
+    ["mutegame", false],
+    ["mastervolume", '100'],
+    ["emojivolume", '100'],
+    ["bobblehead", false],
+
+    //data
+    ["emotesused", 0],
+    ["purchased", []],
+    ["testing", 0],
+
+    //updating
+    ["accountver", 2], //change val in user_handler.js if updating accountver
+];
+
 async function createPlayer(email, username, password){
     const passwordHash = await bcrypt.hash(password, 10);
 
@@ -33,23 +52,10 @@ async function createPlayer(email, username, password){
         username: username, 
         password: passwordHash,
         token: uuid.v4(),
-
-        //settings
-        visibleemojis: false,
-        darkmode: false,
-        autosleep: '0',
-        mutegame: false,
-        mastervolume: '100',
-        emojivolume: '100',
-        bobblehead: false,
-
-        //data
-        emotesused: 0,
-        purchased:[],
-
-        //updating
-        accountver: 2,
     };
+    playerVals.forEach((val, i) => {
+        player[val[0]] = val[1];
+    });
 
     await playerCollection.insertOne(player);
     return player;
@@ -86,6 +92,18 @@ function purchasedEmote(email, emote){
     );
 }
 
+async function updatePlayer(user){
+    for (const val of playerVals) {
+        if(user[val[0]] === undefined || val[0] === 'accountver'){
+            await playerCollection.updateOne(
+                {email: user.email},
+                {$set: {[val[0]]: val[1]}},
+                {upsert: true}
+            );
+        }
+    }
+}
+
 module.exports = {
     getPlayer,
     getPlayerFromToken,
@@ -94,4 +112,5 @@ module.exports = {
     editSetting,
     addEmote,
     purchasedEmote,
+    updatePlayer,
 };

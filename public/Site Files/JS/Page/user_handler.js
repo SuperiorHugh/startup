@@ -25,16 +25,43 @@ export async function setUserVisual(){
     
 
     
-    if(userData && userData.exists && storedUser && storedUser.accountver === 1){
+    if(userData && userData.exists && storedUser && storedUser.accountver === 2){
         nonloggedin.style.setProperty('display', 'none');
         loggedin.style.setProperty('display', 'block');
 
         usernameVisual.innerText = storedUser.username;
-    } else if (userData && userData.exists && storedUser && storedUser.accountver != 1){
-        nonloggedin.style.setProperty('display', 'block');
-        loggedin.style.setProperty('display', 'none');
-        //TODO update account
-
+    } else if (userData && userData.exists && storedUser && storedUser.accountver != 2){
+        // nonloggedin.style.setProperty('display', 'block');
+        // loggedin.style.setProperty('display', 'none');
+        //TODO update account\
+        alert('Detected game update. Account update commencing.')
+        let res = await fetch('/api/users/update-account', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: storedUser.email, 
+                password: storedUser.password, 
+                user: storedUser
+            }),
+        });
+        let data = await res.json();
+        if(data.allowed){
+            alert('Account updated successfully!');
+            const userRequest = await fetch(`/api/users/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({email: storedUser.email, password: storedUser.password}),
+            })
+            const userData = await userRequest.json();//TODO
+            localStorage.setItem('currentuser', JSON.stringify(userData.player));
+            location.reload();
+        } else {
+            alert('error, please re-login! sorry about that :P');
+        }
     } else {
         localStorage.setItem('currentuser', JSON.stringify({
             //credentials
@@ -54,9 +81,10 @@ export async function setUserVisual(){
     
             //data
             emotesused: 0,
+            purchased: [],
     
             //updating
-            accountver: 1,
+            accountver: 2,
         }));
     }
     
@@ -108,6 +136,6 @@ export function updateBackground(){
     } 
 }
 
-setUserVisual();
+await setUserVisual();
 updateBackground();
 

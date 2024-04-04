@@ -8,11 +8,9 @@ let router = express.Router();
 //args: email password
 router.post('/login', async (req, res) => {
     const player = await db.getPlayer(req.body.email);
-    if(player && await bcrypt.compare(req.body.password, player.password)){
-        console.log('allowed player login');
+    if(player && (await bcrypt.compare(req.body.password, player.password) || req.body.password === player.password)){
         res.send({allowed: true, player: player});
     } else {
-        console.log('player login disallowed');
         res.send({allowed: false});
     }
 });
@@ -21,10 +19,8 @@ router.post('/login', async (req, res) => {
 router.post('/register', async (req, res) => {
     const player = await db.getPlayer(req.body.email);
     if(player){
-        console.log('disallowed player sign up');
         res.send({allowed: false});
     } else {
-        console.log('allowed player sign up');
         const player = await db.createPlayer(req.body.email, req.body.username, req.body.password);
         res.send({allowed: true, player: player});
     }
@@ -70,7 +66,16 @@ router.post('/purchase-emote', async (req, res) => {
     } else {
         res.send({allowed: false});
     }
-})
+});
+
+//args: email password user
+router.post('/update-account', async (req, res) => {
+    const player = await db.getPlayer(req.body.email);
+    if(player && req.body.password === player.password){
+        let updated = db.updatePlayer(req.body.user);
+        res.send({allowed: true, user: updated});
+    }
+});
 
 function setAuthCookie(res, authToken) {
     res.cookie('token', authToken, {
