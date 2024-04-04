@@ -44,7 +44,7 @@ export class Player {
     }
 
     //tick player (runs per frame)
-    tick(environment){
+    tick(environment, soundLib){//TODO
         this.lb = this.x;
         this.rb = this.x + 56;
         this.tb = this.y + (56 / 2) - 1;

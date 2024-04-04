@@ -2,6 +2,7 @@
 
 import {Player, SocketPlayer} from "./Objects/player.js";
 import {loadImages} from "./Helper/image-loading.js";
+import {loadSounds} from "./Helper/sound-loading.js";
 import {executePlayerKeyCode, endPlayerKeyCode, mouseMoevementEvent, mouseDownEvent, mouseUpEvent, emotePurchase} from "./Helper/input-handler.js";
 import {EmoteButton} from "./UI/emote-button.js";
 import {EmoteSlotButton} from "./UI/emote-slot-button.js";
@@ -86,6 +87,7 @@ socket.onmessage = (event) => {
 let canvas;
 let ctx;
 let imageLib;
+let soundLib;
 let mousePos = {x: 0, y: 0};
 
 
@@ -149,6 +151,7 @@ window.onload = async function(){
     ctx = canvas.getContext("2d");
     ctx.imageSmoothingEnabled = false;
     imageLib = await loadImages();
+    soundLib = await loadSounds();
     
     eb = new EmoteButton(canvas); ui.push(eb);
     esb1 = new EmoteSlotButton(canvas, canvas.width*(1/10), canvas.height*(7/8), 'laugh'); ui.push(esb1);
@@ -219,21 +222,21 @@ function gameLoop() {
 
     //draw environment (players, objs, etc.)
     environment.sort((a, b) => a.y - b.y);//draw in correct order
-    background.tick();
+    background.tick(soundLib);
     background.draw(ctx, imageLib);
     environment.forEach((item, i) => {
-        item.tick(environment);
+        item.tick(environment, soundLib);
         item.draw(ctx, imageLib);
     });
 
     //draw ui
     ui.forEach((element) => {
-        element.tick(mousePos); 
+        element.tick(mousePos, soundLib); 
         element.draw(ctx, imageLib)
     });
     //draw gui
     gui.forEach((element) => {
-        element.tick(mousePos); 
+        element.tick(mousePos, soundLib); 
         element.draw(ctx, imageLib)
     });
 
