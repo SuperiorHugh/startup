@@ -70,6 +70,7 @@ export class EmoteSlotButton {
         ctx.fill();
         ctx.closePath();
         ctx.drawImage(imageLib[this.emoji + '-emote'], this.x - this.insideRadius * 0.75, this.y - this.insideRadius*0.75, this.insideRadius*1.5, this.insideRadius*1.5);
+        ctx.globalAlpha = 1;
     }
 
     inBound(x, y){

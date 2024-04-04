@@ -6,6 +6,9 @@ const imagePaths = [
     '../../Pictures/Game/Emote/happy-emote.webp',
     '../../Pictures/Game/Emote/laugh-emote.webp',
     '../../Pictures/Game/Emote/sad-emote.webp',
+    '../../Pictures/Game/Emote/surprised-emote.webp',
+    '../../Pictures/Game/Emote/joyful-emote.webp',
+    '../../Pictures/Game/Emote/ching-chong-emote.webp',
 
     '../../Pictures/Game/Environment/shop-icon.webp',
     '../../Pictures/Game/UI/emotes.webp',
@@ -27,18 +30,21 @@ const imageMapping = {
     3: 'happy-emote',
     4: 'laugh-emote',
     5: 'sad-emote',
+    6: 'surprised-emote',
+    7: 'joyful-emote',
+    8: 'ching-chong-emote',
 
-    6: 'shop-icon',
-    7: 'emotes',
+    9: 'shop-icon',
+    10: 'emotes',
 
-    8: 'bar-table',
-    9: 'chair-back',
-    10: 'chair-front',
-    11: 'chair-left',
-    12: 'chair-right',
-    13: 'table',
-    14: 'tile-ground',
-    15: 'bartender',
+    11: 'bar-table',
+    12: 'chair-back',
+    13: 'chair-front',
+    14: 'chair-left',
+    15: 'chair-right',
+    16: 'table',
+    17: 'tile-ground',
+    18: 'bartender',
 };
 
 

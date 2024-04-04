@@ -45,9 +45,10 @@ async function createPlayer(email, username, password){
 
         //data
         emotesused: 0,
+        purchased:[],
 
         //updating
-        accountver: 1,
+        accountver: 2,
     };
 
     await playerCollection.insertOne(player);
@@ -78,6 +79,12 @@ function addEmote(email, amt){
     );
 }
 
+function purchasedEmote(email, emote){
+    playerCollection.updateOne(
+        {email: email},
+        {$push: {purchased: emote}},
+    );
+}
 
 module.exports = {
     getPlayer,
@@ -86,4 +93,5 @@ module.exports = {
     getTopPlayers,
     editSetting,
     addEmote,
+    purchasedEmote,
 };

@@ -2,7 +2,7 @@
 
 import {Player, SocketPlayer} from "./Objects/player.js";
 import {loadImages} from "./Helper/image-loading.js";
-import {executePlayerKeyCode, endPlayerKeyCode, mouseMoevementEvent, mouseDownEvent, mouseUpEvent} from "./Helper/input-handler.js";
+import {executePlayerKeyCode, endPlayerKeyCode, mouseMoevementEvent, mouseDownEvent, mouseUpEvent, emotePurchase} from "./Helper/input-handler.js";
 import {EmoteButton} from "./UI/emote-button.js";
 import {EmoteSlotButton} from "./UI/emote-slot-button.js";
 import {EmoteAmount} from "./UI/emote-amount.js";
@@ -88,6 +88,8 @@ let ctx;
 let imageLib;
 let mousePos = {x: 0, y: 0};
 
+
+
 let eb;     //emote button
 let esb1;   //emote slot button 1
 let esb2;   //emote slot button 2
@@ -97,6 +99,46 @@ let esb5;   //emote slot button 5
 let iorb;   //interact orb
 let ea;     //emote amount
 
+let buy1 = document.getElementById('buy1');
+let buy2 = document.getElementById('buy2');
+let buy3 = document.getElementById('buy3');
+
+canvas = document.getElementById("screen");
+canvas.width = displayWidth;
+canvas.height = displayHeight;
+
+function updatePurchased(){
+    storedUser.purchased.forEach((val, i) => {
+        switch(val){
+            case 'surprised': 
+                ui.push(new EmoteSlotButton(canvas, canvas.width*(3/10), canvas.height*(4/8), val)); 
+                buy1.children[0].innerHTML = 'SOLD OUT';
+                break;
+            case 'joyful': ui.push(new EmoteSlotButton(canvas, canvas.width*(7/10), canvas.height*(4/8), val));
+                buy2.children[0].innerHTML = 'SOLD OUT';
+                break;
+            case 'ching-chong': ui.push(new EmoteSlotButton(canvas, canvas.width*(5/10), canvas.height*(3/8), val));
+                buy3.children[0].innerHTML = 'SOLD OUT';
+                break;
+        }
+        console.log('added ' + val + '!')
+    });
+}
+updatePurchased();
+
+buy1.addEventListener('click', function(event){
+    emotePurchase('surprised', 1000, ea, ui, canvas, canvas.width*(3/10), canvas.height*(4/8))
+});
+buy2.addEventListener('click', function(event){
+    emotePurchase('joyful', 2000, ea, ui, canvas, canvas.width*(7/10), canvas.height*(4/8))
+});
+buy3.addEventListener('click', function(event){
+    emotePurchase('ching-chong', 4000, ea, ui, canvas, canvas.width*(5/10), canvas.height*(3/8))
+});
+
+
+
+
 const inputStart = (event) => executePlayerKeyCode(player, event.code);
 const inputEnd = (event) => endPlayerKeyCode(player, event.code);
 const mouseMove = (event) => mouseMoevementEvent(canvas, mousePos, event);
@@ -104,9 +146,6 @@ const mouseDown = (event) => mouseDownEvent(canvas, mousePos, ui, player, imageL
 const mouseUp = (event) => mouseUpEvent(canvas, mousePos, ui, player, imageLib, event);
 
 window.onload = async function(){
-    canvas = document.getElementById("screen");
-    canvas.width = displayWidth;
-    canvas.height = displayHeight;
     ctx = canvas.getContext("2d");
     ctx.imageSmoothingEnabled = false;
     imageLib = await loadImages();
@@ -174,7 +213,8 @@ environment = [
 
 function gameLoop() {
     ctx.clearRect(0, 0, displayWidth, displayHeight);
-    ctx.fillStyle = document.body.style.getPropertyValue('--buttoncolor')
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = document.body.style.getPropertyValue('--buttoncolor');
     ctx.fillRect(0, 0, displayWidth, displayHeight);
 
     //draw environment (players, objs, etc.)

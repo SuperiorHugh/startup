@@ -47,7 +47,7 @@ router.post('/player-exists', async (req, res) => {
 //args: email password setting newval
 router.post('/update-setting', async (req, res) => {
     const player = await db.getPlayer(req.body.email);
-    if(player && req.body.password == player.password){
+    if(player && req.body.password === player.password){
         db.editSetting(req.body.email, req.body.setting, req.body.newval);
     }
 });
@@ -55,10 +55,22 @@ router.post('/update-setting', async (req, res) => {
 //args: email password amt
 router.post('/add-emote', async (req, res) => {
     const player = await db.getPlayer(req.body.email);
-    if(player && req.body.password == player.password){
+    if(player && req.body.password === player.password){
         db.addEmote(req.body.email, req.body.amt);
     }
 });
+
+//args: email password emote cost
+router.post('/purchase-emote', async (req, res) => {
+    const player = await db.getPlayer(req.body.email);
+    if(player && req.body.password === player.password && player.emotesused >= req.body.cost && !player.purchased.includes(req.body.emote)){
+        db.purchasedEmote(req.body.email, req.body.emote);
+        db.addEmote(req.body.email, -req.body.cost);
+        res.send({allowed: true});
+    } else {
+        res.send({allowed: false});
+    }
+})
 
 function setAuthCookie(res, authToken) {
     res.cookie('token', authToken, {
