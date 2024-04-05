@@ -14,6 +14,9 @@ import {lerp} from "./Helper/helper-functions.js";
 
 /*-- create player --*/
 
+let imageLib = await loadImages();
+let soundLib = loadSounds();
+
 let ui = [];    //interactable
 let gui = [];   //pure graphical
 const displayWidth = 600;
@@ -26,7 +29,7 @@ const storedUser = JSON.parse(localStorage.getItem('currentuser'));
 const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
 const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
 
-let player = new Player(displayWidth/2 - 58/2, displayHeight/2 - 58/2, storedUser.username, ui, gui, socket, storedUser.email);
+let player = new Player(displayWidth/2 - 58/2, displayHeight/2 - 58/2, storedUser.username, ui, gui, socket, storedUser.email, soundLib);
 let environment = [];
 
 socket.onopen = (event) => {
@@ -47,11 +50,11 @@ socket.onmessage = (event) => {
             data.connections.forEach((obj, i) => {
                 if(obj.email === player.email)
                     return;
-                environment.push(new SocketPlayer(obj.x, obj.y, obj.name, obj.email));
+                environment.push(new SocketPlayer(obj.x, obj.y, obj.name, obj.email, soundLib));
             });
             break;
         case "connect"://args: email, name, x, y
-            environment.push(new SocketPlayer(data.x, data.y, data.name, data.email));
+            environment.push(new SocketPlayer(data.x, data.y, data.name, data.email, soundLib));
             break;
         case "movement"://args: email, x, y, moving
             cur = environment.find(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
@@ -86,8 +89,7 @@ socket.onmessage = (event) => {
 
 let canvas;
 let ctx;
-let imageLib;
-let soundLib;
+
 let mousePos = {x: 0, y: 0};
 
 
@@ -150,8 +152,6 @@ const mouseUp = (event) => mouseUpEvent(canvas, mousePos, ui, player, imageLib, 
 window.onload = async function(){
     ctx = canvas.getContext("2d");
     ctx.imageSmoothingEnabled = false;
-    imageLib = await loadImages();
-    soundLib = await loadSounds();
     
     eb = new EmoteButton(canvas); ui.push(eb);
     esb1 = new EmoteSlotButton(canvas, canvas.width*(1/10), canvas.height*(7/8), 'laugh'); ui.push(esb1);
@@ -225,18 +225,18 @@ function gameLoop() {
     background.tick(soundLib);
     background.draw(ctx, imageLib);
     environment.forEach((item, i) => {
-        item.tick(environment, soundLib);
+        item.tick(environment);
         item.draw(ctx, imageLib);
     });
 
     //draw ui
     ui.forEach((element) => {
-        element.tick(mousePos, soundLib); 
+        element.tick(mousePos); 
         element.draw(ctx, imageLib)
     });
     //draw gui
     gui.forEach((element) => {
-        element.tick(mousePos, soundLib); 
+        element.tick(mousePos); 
         element.draw(ctx, imageLib)
     });
 

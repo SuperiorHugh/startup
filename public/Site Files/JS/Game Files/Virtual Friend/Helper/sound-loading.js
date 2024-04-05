@@ -24,22 +24,18 @@ const soundMapping = {
 
 //load images asynchronously
 export function loadSounds(){
-    return new Promise((resolve, reject) => {
-        let loadedCount = 0;
-        const loadedSounds = {};
+    const loadedSounds = {};
+    const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+    soundPaths.forEach(function (path, index) {
+        const sound = new Audio(path);
 
-        soundPaths.forEach(function (path, index) {
-            const sound = new Audio();
-            sound.src = path;
-            sound.onload = function () {
-                loadedCount++;
-                loadedSounds[soundMapping[index]] = sound;
-                if (loadedCount === soundPaths.length)
-                    resolve(loadedSounds);
-            };
-            sound.onerror = function () {
-                reject(new Error(`Failed to load sound at path: ${path}`));
-            };
-        });
+        sound.volume = parseInt(storedUser.mastervolume) / 100;
+        if(soundMapping[index].includes('emote'))
+            sound.volume *= parseInt(storedUser.emojivolume) / 100;
+        if(storedUser.mutegame)
+            sound.volume = 0;
+
+        loadedSounds[soundMapping[index]] = sound;
     });
+    return loadedSounds;
 }

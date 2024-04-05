@@ -5,7 +5,7 @@ import {horizontalCollision, verticalCollision} from "../Helper/movement-handler
 
 //player class
 export class Player {
-    constructor (x, y, name, ui, gui, socket, email){
+    constructor (x, y, name, ui, gui, socket, email, soundLib){
         this.x = x;
         this.y = y;
         this.z = 0;
@@ -41,10 +41,11 @@ export class Player {
         this.socket = socket;
         this.email = email;
         this.movementEnd = true;
+        this.soundLib = soundLib;
     }
 
     //tick player (runs per frame)
-    tick(environment, soundLib){//TODO
+    tick(environment){//TODO
         this.lb = this.x;
         this.rb = this.x + 56;
         this.tb = this.y + (56 / 2) - 1;
@@ -117,6 +118,11 @@ export class Player {
 
     //emote event
     emote(emoji){
+        if(this.soundLib[emoji + '-emote'].paused){
+            this.soundLib[emoji + '-emote'].play();
+        } else {
+            this.soundLib[emoji + '-emote'].currentTime = 0;
+        }
         this.emoteTimer = this.emoteSpeed;
         this.emotePos = 1;
         this.emoji = emoji;
@@ -139,7 +145,7 @@ export class Player {
 
 
 export class SocketPlayer {
-    constructor (x, y, name, email){
+    constructor (x, y, name, email, soundLib){
         this.x = x;
         this.y = y;
         this.z = 0;
@@ -212,6 +218,12 @@ export class SocketPlayer {
 
     //emote event
     emote(emoji){
+        if(this.soundLib[emoji + '-emote'].paused){
+            this.soundLib[emoji + '-emote'].play();
+        } else {
+            this.soundLib[emoji + '-emote'].currentTime = 0;
+        }
+        
         this.emoteTimer = this.emoteSpeed;
         this.emotePos = 1;
         this.emoji = emoji;
