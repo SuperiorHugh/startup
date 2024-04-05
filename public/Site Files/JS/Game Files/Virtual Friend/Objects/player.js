@@ -56,11 +56,19 @@ export class Player {
             this.width = lerp(this.width, 56, 0.2);
             this.height = lerp(this.height, 56, 0.2);
         } else {
+
+            if(this.z < 0.1 && this.soundLib['jump'].paused){
+                this.soundLib['jump'].play();
+            } else if (this.z < 0.1 && !this.soundLib['jump'].paused){
+                this.soundLib['jump'].currentTime = 0;
+            }
+
             this.animationTime++;
             const animSpd = 7;
-            this.z = Math.abs(Math.sin(this.animationTime / animSpd)) * this.jumpHeight;
+            this.z = Math.floor(Math.abs(Math.sin(this.animationTime / animSpd)) * this.jumpHeight);
             this.width = 48 + Math.abs(Math.sin(this.animationTime / animSpd)) * 16;
             this.height = 48 + Math.abs(Math.cos(this.animationTime / animSpd)) * 16;
+            
         }
 
         let hc = horizontalCollision(this, environment, (this.moveRight - this.moveLeft) * this.speed);
@@ -178,9 +186,17 @@ export class SocketPlayer {
             this.width = lerp(this.width, 56, 0.2);
             this.height = lerp(this.height, 56, 0.2);
         } else {
+            console.log(this.z)
+            if(this.z < 0.1 && this.soundLib['socket-jump'].paused){
+                
+                this.soundLib['socket-jump'].play();
+            } else if (this.z < 0.1 && !this.soundLib['socket-jump'].paused){
+                this.soundLib['socket-jump'].currentTime = 0;
+            }
+
             this.animationTime++;
             const animSpd = 7;
-            this.z = Math.abs(Math.sin(this.animationTime / animSpd)) * this.jumpHeight;
+            this.z = Math.floor(Math.abs(Math.sin(this.animationTime / animSpd)) * this.jumpHeight);
             this.width = 48 + Math.abs(Math.sin(this.animationTime / animSpd)) * 16;
             this.height = 48 + Math.abs(Math.cos(this.animationTime / animSpd)) * 16;
         }
