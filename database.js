@@ -26,9 +26,9 @@ function getPlayerFromToken(token){
 
 const playerVals = [
     //settings
-    ["visibleemojis", false],
+    ["visibleemojis", true],
     ["darkmode", false],
-    ["autosleep", '0'],
+    ["autosleep", '100'],
     ["mutegame", false],
     ["mastervolume", '100'],
     ["emojivolume", '100'],

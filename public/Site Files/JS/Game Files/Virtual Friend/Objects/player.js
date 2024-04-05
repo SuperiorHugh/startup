@@ -116,7 +116,8 @@ export class Player {
             ctx.fillStyle = '#CCCCCC';
         ctx.fillText(this.name, this.x + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
         
-        if(this.emoteTimer > 0){
+        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+        if(this.emoteTimer > 0 && storedUser.visibleemojis){
             ctx.globalAlpha = this.emoteTimer / this.emoteSpeed;
             ctx.drawImage(imageLib[this.emoji + '-emote'], this.x, this.y - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
             ctx.globalAlpha = 1;
@@ -225,7 +226,8 @@ export class SocketPlayer {
             ctx.fillStyle = '#CCCCCC';
         ctx.fillText(this.name, this.x + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
         
-        if(this.emoteTimer > 0){
+        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+        if(this.emoteTimer > 0 && storedUser.visibleemojis){
             ctx.globalAlpha = this.emoteTimer / this.emoteSpeed;
             ctx.drawImage(imageLib[this.emoji + '-emote'], this.x, this.y - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
             ctx.globalAlpha = 1;
