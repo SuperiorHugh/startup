@@ -167,6 +167,7 @@ export class SocketPlayer {
         this.sitting = false;
         this.email = email;
         this.moving = false;
+        this.soundLib = soundLib;
     }
 
     //tick player (runs per frame)
