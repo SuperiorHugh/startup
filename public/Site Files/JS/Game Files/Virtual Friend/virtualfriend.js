@@ -50,7 +50,11 @@ socket.onmessage = (event) => {
             data.connections.forEach((obj, i) => {
                 if(obj.email === player.email)
                     return;
-                environment.push(new SocketPlayer(obj.x, obj.y, obj.name, obj.email, soundLib));
+                let cur = new SocketPlayer(obj.x, obj.y, obj.name, obj.email, soundLib);
+                cur.sleeping = obj.sleeping;
+                cur.sitting = obj.sitting;
+                cur.orientation = obj.orientation;
+                environment.push(cur);
             });
             break;
         case "connect"://args: email, name, x, y
@@ -67,10 +71,13 @@ socket.onmessage = (event) => {
             cur.emote(data.emoji);
             break;
         case "sit"://args: email, sitting, orientation
-            console.log(data.sitting);
             cur = environment.find(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
             cur.sitting = data.sitting;
             cur.orientation = data.orientation;
+            break;
+        case "sleep":
+            cur = environment.find(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
+            cur.sleeping = data.sleeping;
             break;
         case "disconnect"://args: email
             let index = environment.findIndex(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});

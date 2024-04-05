@@ -45,6 +45,9 @@ export class Player {
         this.email = email;
         this.movementEnd = true;
         this.soundLib = soundLib;
+
+        this.sleepTimer = 0;
+        this.sleeping = false;
     }
 
     //tick player (runs per frame)
@@ -55,11 +58,16 @@ export class Player {
         this.bb = this.y + (56 / 2) + 1;
         if(!(this.moveRight - this.moveLeft) && !(this.moveDown - this.moveUp)){
             this.animationTime = 0;
+            this.sleepTimer++;
             this.z = lerp(this.z, 0, 0.2);
             this.width = lerp(this.width, 56, 0.2);
             this.height = lerp(this.height, 56, 0.2);
         } else {
-
+            this.sleepTimer = 0;
+            if(this.sleeping){
+                this.sleeping = false;
+                this.socket.send(JSON.stringify({event: 'sleep', email: this.email, sleeping: this.sleeping}));
+            }
             if(this.z < 0.1 && this.soundLib['jump'].paused){
                 this.soundLib['jump'].play();
             } else if (this.z < 0.1 && !this.soundLib['jump'].paused){
@@ -105,6 +113,12 @@ export class Player {
             this.sendSitting = false;
             this.socket.send(JSON.stringify({event: 'sit', email: this.email, sitting: this.sitting, orientation: this.orientation}));
         }
+
+        const storedUser = JSON.parse(localStorage.getItem('currentuser'));
+        if(!this.sleeping && this.sleepTimer > storedUser.autosleep * 10){
+            this.sleeping = true;
+            this.socket.send(JSON.stringify({event: 'sleep', email: this.email, sleeping: this.sleeping}));
+        }
     }
 
     //draw self onto given canvas
@@ -117,7 +131,17 @@ export class Player {
             ctx.fill();
             ctx.closePath();
             
-            ctx.drawImage(imageLib.player, this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+            
+            if(this.sleeping){
+                ctx.drawImage(imageLib['player-sleep'], this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+                ctx.font = "20px 'Trebuchet MS'";
+                ctx.fillStyle = '#CCCCCC';
+                ctx.globalAlpha = Math.abs(Math.sin(this.sleepTimer/60));
+                ctx.fillText('zzz', this.x + spriteXOff + 32 - (ctx.measureText('zzz').width/2), this.y - 8 - (this.z/2));
+                ctx.globalAlpha = 1;
+            } else {
+                ctx.drawImage(imageLib.player, this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+            }
         } else {
             switch(this.orientation){
                 case 'front':
@@ -207,16 +231,22 @@ export class SocketPlayer {
         this.email = email;
         this.moving = false;
         this.soundLib = soundLib;
+
+        this.sleepTimer = 0;
+        this.sleeping = false;
     }
 
     //tick player (runs per frame)
     tick(environment){
         if(!this.moving){
             this.animationTime = 0;
+            this.sleepTimer++;
             this.z = lerp(this.z, 0, 0.2);
             this.width = lerp(this.width, 56, 0.2);
             this.height = lerp(this.height, 56, 0.2);
         } else {
+            this.sleepTimer = 0;
+            this.sleeping = false;
             this.sitting = false;
             console.log(this.z)
             if(this.z < 0.1 && this.soundLib['socket-jump'].paused){
@@ -251,7 +281,16 @@ export class SocketPlayer {
             ctx.fill();
             ctx.closePath();
             
-            ctx.drawImage(imageLib.player, this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+            if(this.sleeping){
+                ctx.drawImage(imageLib['player-sleep'], this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+                ctx.font = "20px 'Trebuchet MS'";
+                ctx.fillStyle = '#CCCCCC';
+                ctx.globalAlpha = Math.abs(Math.sin(this.sleepTimer/60));
+                ctx.fillText('zzz', this.x + spriteXOff + 32 - (ctx.measureText('zzz').width/2), this.y - 8 - (this.z/2));
+                ctx.globalAlpha = 1;
+            } else {
+                ctx.drawImage(imageLib.player, this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+            }
         } else {
             switch(this.orientation){
                 case 'front':

@@ -26,6 +26,7 @@ const imagePaths = [
     '../../Pictures/Game/Entity/player-sit-backward.webp',
     '../../Pictures/Game/Entity/player-sit-left.webp',
     '../../Pictures/Game/Entity/player-sit-right.webp',
+    '../../Pictures/Game/Entity/player-sleep.webp',
 ];
 const imageMapping = {
     0: 'player',
@@ -55,6 +56,7 @@ const imageMapping = {
     20: 'player-sit-backward',
     21: 'player-sit-left',
     22: 'player-sit-right',
+    23: 'player-sleep',
 };
 
 

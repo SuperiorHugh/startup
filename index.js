@@ -60,6 +60,9 @@ wss.on('connection', (ws, req) => {
                         x: val.x,
                         y: val.y,
                         moving: val.moving,
+                        sitting: val.sitting,
+                        orientation: val.orientation,
+                        sleeping: val.sleeping,
                     };
                 });
                 ws.send(JSON.stringify({event: "init-connect", connections: noncircularConnections}));
@@ -78,8 +81,16 @@ wss.on('connection', (ws, req) => {
             case "emote"://args: email, emoji
                 sendToConnections(data.email, {event: "emote", email: data.email, emoji: data.emoji});
                 break;
-            case "sit"://args: email, orientation
+            case "sit"://args: email, sitting, orientation
+                player = connections.find(player => {return player.email === data.email});
+                player.sitting = data.sitting;
+                player.orientation = data.orientation;
                 sendToConnections(data.email, {event: "sit", email: data.email, sitting: data.sitting, orientation: data.orientation});
+                break;
+            case "sleep"://args: email
+                player = connections.find(player => {return player.email === data.email});
+                player.sleeping = data.sleeping;
+                sendToConnections(data.email, {event: "sleep", email: data.email, sleeping: data.sleeping});
                 break;
         }
     });
