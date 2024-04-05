@@ -30,6 +30,10 @@ const imagePaths = [
 
     '../../Pictures/Game/Entity/bobblehead-player.webp',
     '../../Pictures/Game/Entity/bobblehead-player-sleep.webp',
+
+    '../../Pictures/Game/Environment/rings-back.webp',
+    '../../Pictures/Game/Environment/rings-front.webp',
+    '../../Pictures/Game/Environment/trampoline.webp',
 ];
 const imageMapping = {
     0: 'player',
@@ -62,6 +66,10 @@ const imageMapping = {
     23: 'player-sleep',
     24: 'bobblehead-player',
     25: 'bobblehead-player-sleep',
+
+    26: 'rings-back',
+    27: 'rings-front',
+    28: 'trampoline',
 };
 
 
