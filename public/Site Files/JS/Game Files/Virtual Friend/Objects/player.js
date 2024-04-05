@@ -5,12 +5,14 @@ import {horizontalCollision, verticalCollision} from "../Helper/movement-handler
 
 //player class
 export class Player {
-    constructor (x, y, name, ui, gui, socket, email, soundLib){
+    constructor (x, y, name, ui, gui, socket, email, soundLib, bobblehead){
         this.x = x;
         this.y = y;
         this.z = 0;
-        this.width = 56;
-        this.height = 56;
+        this.setWidth = (bobblehead ? 96 : 56);
+        this.setHeight = (bobblehead ? 96 : 56);
+        this.width = this.setWidth;
+        this.height = this.setHeight;
 
         this.moveUp = 0;
         this.moveDown = 0;
@@ -48,6 +50,7 @@ export class Player {
 
         this.sleepTimer = 0;
         this.sleeping = false;
+        this.bobblehead = bobblehead;
     }
 
     //tick player (runs per frame)
@@ -60,8 +63,8 @@ export class Player {
             this.animationTime = 0;
             this.sleepTimer++;
             this.z = lerp(this.z, 0, 0.2);
-            this.width = lerp(this.width, 56, 0.2);
-            this.height = lerp(this.height, 56, 0.2);
+            this.width = lerp(this.width, this.setWidth, 0.2);
+            this.height = lerp(this.height, this.setHeight, 0.2);
         } else {
             this.sleepTimer = 0;
             if(this.sleeping){
@@ -77,8 +80,8 @@ export class Player {
             this.animationTime++;
             const animSpd = 7;
             this.z = Math.floor(Math.abs(Math.sin(this.animationTime / animSpd)) * this.jumpHeight);
-            this.width = 48 + Math.abs(Math.sin(this.animationTime / animSpd)) * 16;
-            this.height = 48 + Math.abs(Math.cos(this.animationTime / animSpd)) * 16;
+            this.width = (this.setWidth * (3 / 4)) + Math.abs(Math.sin(this.animationTime / animSpd)) * (this.setWidth * (1 / 4));
+            this.height = (this.setHeight * (3 / 4)) + Math.abs(Math.cos(this.animationTime / animSpd)) * (this.setHeight * (1 / 4));
             
         }
 
@@ -124,23 +127,29 @@ export class Player {
     //draw self onto given canvas
     draw(ctx, imageLib){
         let spriteXOff = 0;
+        let spriteYOff = (this.bobblehead ? -20 : 0);//TODO
         if(!this.sitting){
             ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((this.jumpHeight - this.z) / this.jumpHeight))) + ")";
             ctx.beginPath();
             ctx.ellipse(this.x + 28, this.y + 56, 24 + 8*(1-(this.z / this.jumpHeight)), 8 + 6*(1-(this.z / this.jumpHeight)), 0, 0, 2 * Math.PI);
             ctx.fill();
             ctx.closePath();
-            
-            
+
             if(this.sleeping){
-                ctx.drawImage(imageLib['player-sleep'], this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+                if(this.bobblehead)
+                    ctx.drawImage(imageLib['bobblehead-player-sleep'], this.x + 28 - (this.width/2), this.y - 40 - this.z, this.width, this.height);
+                else
+                    ctx.drawImage(imageLib['player-sleep'], this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
                 ctx.font = "20px 'Trebuchet MS'";
                 ctx.fillStyle = '#CCCCCC';
                 ctx.globalAlpha = Math.abs(Math.sin(this.sleepTimer/60));
-                ctx.fillText('zzz', this.x + spriteXOff + 32 - (ctx.measureText('zzz').width/2), this.y - 8 - (this.z/2));
+                ctx.fillText('zzz', this.x + spriteXOff + 32 - (ctx.measureText('zzz').width/2), this.y + spriteYOff - 8 - (this.z/2));
                 ctx.globalAlpha = 1;
             } else {
-                ctx.drawImage(imageLib.player, this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+                if(this.bobblehead)
+                    ctx.drawImage(imageLib['bobblehead-player'], this.x + 28 - (this.width/2), this.y - 40 - this.z, this.width, this.height);
+                else
+                    ctx.drawImage(imageLib['player'], this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
             }
         } else {
             switch(this.orientation){
@@ -167,12 +176,12 @@ export class Player {
         ctx.fillStyle = document.body.style.getPropertyValue('--maincolor');
         if(this.name.toLowerCase().includes('guest'))
             ctx.fillStyle = '#CCCCCC';
-        ctx.fillText(this.name, this.x + spriteXOff + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
+        ctx.fillText(this.name, this.x + spriteXOff + 32 - (ctx.measureText(this.name).width/2), this.y + spriteYOff - 32 - (this.z/2));
         
         const storedUser = JSON.parse(localStorage.getItem('currentuser'));
         if(this.emoteTimer > 0 && storedUser.visibleemojis){
             ctx.globalAlpha = this.emoteTimer / this.emoteSpeed;
-            ctx.drawImage(imageLib[this.emoji + '-emote'], this.x + spriteXOff, this.y - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
+            ctx.drawImage(imageLib[this.emoji + '-emote'], this.x + spriteXOff, this.y + spriteYOff - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
             ctx.globalAlpha = 1;
         }
 
@@ -180,6 +189,12 @@ export class Player {
 
     //emote event
     emote(emoji){
+        if(this.sleeping){
+            this.sleepTimer = 0;
+            this.sleeping = false;
+            this.socket.send(JSON.stringify({event: 'sleep', email: this.email, sleeping: this.sleeping}));
+        }
+
         if(this.soundLib[emoji + '-emote'].paused){
             this.soundLib[emoji + '-emote'].play();
         } else {
@@ -207,12 +222,14 @@ export class Player {
 
 
 export class SocketPlayer {
-    constructor (x, y, name, email, soundLib){
+    constructor (x, y, name, email, soundLib, bobblehead){
         this.x = x;
         this.y = y;
         this.z = 0;
-        this.width = 56;
-        this.height = 56;
+        this.setWidth = (bobblehead ? 96 : 56);
+        this.setHeight = (bobblehead ? 96 : 56);
+        this.width = this.setWidth;
+        this.height = this.setHeight;
 
         this.jumpHeight = 32;
         this.animationTime = 0;
@@ -234,6 +251,7 @@ export class SocketPlayer {
 
         this.sleepTimer = 0;
         this.sleeping = false;
+        this.bobblehead = bobblehead;
     }
 
     //tick player (runs per frame)
@@ -242,8 +260,8 @@ export class SocketPlayer {
             this.animationTime = 0;
             this.sleepTimer++;
             this.z = lerp(this.z, 0, 0.2);
-            this.width = lerp(this.width, 56, 0.2);
-            this.height = lerp(this.height, 56, 0.2);
+            this.width = lerp(this.width, this.setWidth, 0.2);
+            this.height = lerp(this.height, this.setHeight, 0.2);
         } else {
             this.sleepTimer = 0;
             this.sleeping = false;
@@ -259,8 +277,8 @@ export class SocketPlayer {
             this.animationTime++;
             const animSpd = 7;
             this.z = Math.floor(Math.abs(Math.sin(this.animationTime / animSpd)) * this.jumpHeight);
-            this.width = 48 + Math.abs(Math.sin(this.animationTime / animSpd)) * 16;
-            this.height = 48 + Math.abs(Math.cos(this.animationTime / animSpd)) * 16;
+            this.width = (this.setWidth * (3 / 4)) + Math.abs(Math.sin(this.animationTime / animSpd)) * (this.setWidth * (1 / 4));
+            this.height = (this.setHeight * (3 / 4)) + Math.abs(Math.cos(this.animationTime / animSpd)) * (this.setHeight * (1 / 4));
         }
 
         if(this.emoteTimer > 0){
@@ -274,6 +292,7 @@ export class SocketPlayer {
     //draw self onto given canvas
     draw(ctx, imageLib){
         let spriteXOff = 0;
+        let spriteYOff = (this.bobblehead ? -20 : 0);
         if(!this.sitting){
             ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((this.jumpHeight - this.z) / this.jumpHeight))) + ")";
             ctx.beginPath();
@@ -282,14 +301,20 @@ export class SocketPlayer {
             ctx.closePath();
             
             if(this.sleeping){
-                ctx.drawImage(imageLib['player-sleep'], this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+                if(this.bobblehead)
+                    ctx.drawImage(imageLib['bobblehead-player-sleep'], this.x + 28 - (this.width/2), this.y - 40 - this.z, this.width, this.height);
+                else
+                    ctx.drawImage(imageLib['player-sleep'], this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
                 ctx.font = "20px 'Trebuchet MS'";
                 ctx.fillStyle = '#CCCCCC';
                 ctx.globalAlpha = Math.abs(Math.sin(this.sleepTimer/60));
-                ctx.fillText('zzz', this.x + spriteXOff + 32 - (ctx.measureText('zzz').width/2), this.y - 8 - (this.z/2));
+                ctx.fillText('zzz', this.x + spriteXOff + 32 - (ctx.measureText('zzz').width/2), this.y + spriteYOff - 8 - (this.z/2));
                 ctx.globalAlpha = 1;
             } else {
-                ctx.drawImage(imageLib.player, this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+                if(this.bobblehead)
+                    ctx.drawImage(imageLib['bobblehead-player'], this.x + 28 - (this.width/2), this.y - 40 - this.z, this.width, this.height);
+                else
+                    ctx.drawImage(imageLib['player'], this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
             }
         } else {
             switch(this.orientation){
@@ -316,12 +341,12 @@ export class SocketPlayer {
 
         if(this.name.toLowerCase() === 'guest')
             ctx.fillStyle = '#CCCCCC';
-        ctx.fillText(this.name, this.x + spriteXOff + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
+        ctx.fillText(this.name, this.x + spriteXOff + 32 - (ctx.measureText(this.name).width/2), this.y + spriteYOff - 32 - (this.z/2));
         
         const storedUser = JSON.parse(localStorage.getItem('currentuser'));
         if(this.emoteTimer > 0 && storedUser.visibleemojis){
             ctx.globalAlpha = this.emoteTimer / this.emoteSpeed;
-            ctx.drawImage(imageLib[this.emoji + '-emote'], this.x + spriteXOff, this.y - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
+            ctx.drawImage(imageLib[this.emoji + '-emote'], this.x + spriteXOff, this.y + spriteYOff - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
             ctx.globalAlpha = 1;
         }
 
@@ -329,6 +354,7 @@ export class SocketPlayer {
 
     //emote event
     emote(emoji){
+
         if(this.soundLib[emoji + '-emote'].paused){
             this.soundLib[emoji + '-emote'].play();
         } else {

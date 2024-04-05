@@ -35,6 +35,8 @@ export class Chair {
     }
 
     interact(x, y, ui, player, imageLib){//TODO
+        if(player.bobblehead)
+            return;
         if(!this.interacting){
             this.interacting = true;
             this.interacter = player;

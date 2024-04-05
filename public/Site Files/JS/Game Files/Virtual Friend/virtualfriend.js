@@ -29,7 +29,7 @@ const storedUser = JSON.parse(localStorage.getItem('currentuser'));
 const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
 const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
 
-let player = new Player(displayWidth/2 - 58/2, displayHeight/2 - 58/2, storedUser.username, ui, gui, socket, storedUser.email, soundLib);
+let player = new Player(displayWidth/2 - 58/2, displayHeight/2 - 58/2, storedUser.username, ui, gui, socket, storedUser.email, soundLib, storedUser.bobblehead);
 let environment = [];
 
 socket.onopen = (event) => {
@@ -39,6 +39,7 @@ socket.onopen = (event) => {
         name: player.name,
         x: player.x,
         y: player.y,
+        bobblehead: player.bobblehead,
     }));
 }
 
@@ -50,15 +51,15 @@ socket.onmessage = (event) => {
             data.connections.forEach((obj, i) => {
                 if(obj.email === player.email)
                     return;
-                let cur = new SocketPlayer(obj.x, obj.y, obj.name, obj.email, soundLib);
+                let cur = new SocketPlayer(obj.x, obj.y, obj.name, obj.email, soundLib, obj.bobblehead);
                 cur.sleeping = obj.sleeping;
                 cur.sitting = obj.sitting;
                 cur.orientation = obj.orientation;
                 environment.push(cur);
             });
             break;
-        case "connect"://args: email, name, x, y
-            environment.push(new SocketPlayer(data.x, data.y, data.name, data.email, soundLib));
+        case "connect"://args: email, name, x, y, bobblehead
+            environment.push(new SocketPlayer(data.x, data.y, data.name, data.email, soundLib, data.bobblehead));
             break;
         case "movement"://args: email, x, y, moving
             cur = environment.find(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});

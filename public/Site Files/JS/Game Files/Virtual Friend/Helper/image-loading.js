@@ -27,6 +27,9 @@ const imagePaths = [
     '../../Pictures/Game/Entity/player-sit-left.webp',
     '../../Pictures/Game/Entity/player-sit-right.webp',
     '../../Pictures/Game/Entity/player-sleep.webp',
+
+    '../../Pictures/Game/Entity/bobblehead-player.webp',
+    '../../Pictures/Game/Entity/bobblehead-player-sleep.webp',
 ];
 const imageMapping = {
     0: 'player',
@@ -57,6 +60,8 @@ const imageMapping = {
     21: 'player-sit-left',
     22: 'player-sit-right',
     23: 'player-sleep',
+    24: 'bobblehead-player',
+    25: 'bobblehead-player-sleep',
 };
 
 
