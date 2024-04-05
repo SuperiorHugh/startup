@@ -21,6 +21,11 @@ const imagePaths = [
     '../../Pictures/Game/Environment/table.webp',
     '../../Pictures/Game/Environment/tile-ground.webp',
     '../../Pictures/Game/Entity/bartender.webp',
+
+    '../../Pictures/Game/Entity/player-sit-forward.webp',
+    '../../Pictures/Game/Entity/player-sit-backward.webp',
+    '../../Pictures/Game/Entity/player-sit-left.webp',
+    '../../Pictures/Game/Entity/player-sit-right.webp',
 ];
 const imageMapping = {
     0: 'player',
@@ -45,6 +50,11 @@ const imageMapping = {
     16: 'table',
     17: 'tile-ground',
     18: 'bartender',
+
+    19: 'player-sit-forward',
+    20: 'player-sit-backward',
+    21: 'player-sit-left',
+    22: 'player-sit-right',
 };
 
 

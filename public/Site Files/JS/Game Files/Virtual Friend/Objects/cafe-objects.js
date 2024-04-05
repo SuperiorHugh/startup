@@ -13,10 +13,15 @@ export class Chair {
         this.interactable = true;
         this.orientation = orientation;
         this.interacting = false;
+        this.interacter;
     }
 
     tick(){
-
+        if(this.interacting && this.interacter.animationTime !== 0){
+            this.interacting = false;
+            this.interacter.sitting = false;
+            this.interacter.sendSitting = true;
+        }
     }
 
     draw(ctx, imageLib){
@@ -32,15 +37,17 @@ export class Chair {
     interact(x, y, ui, player, imageLib){//TODO
         if(!this.interacting){
             this.interacting = true;
+            this.interacter = player;
             player.sitting = true;
+            player.sendSitting = true;
+            player.orientation = this.orientation;
             player.x = this.x;
             player.y = this.y + (this.orientation === 'back' ? -0.01 : 0.01);
             player.socket.send(JSON.stringify({event: 'movement', email: player.email, x: player.x, y: player.y, moving: false}));
-            console.log('now interacting!')
         } else {
             this.interacting = false;
             player.sitting = false;
-            console.log('exit interaction')
+            player.sendSitting = true;
         }
     }
 }
@@ -167,10 +174,8 @@ export class Bartender {
     interact(x, y, ui, player, imageLib){//TODO
         if(!this.interacting){
             this.interacting = true;
-            console.log('now interacting!')
         } else {
             this.interacting = false;
-            console.log('exit interaction')
         }
     }
 

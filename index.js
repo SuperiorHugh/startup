@@ -76,8 +76,10 @@ wss.on('connection', (ws, req) => {
                 sendToConnections(data.email, {event: "movement", email: data.email, x: data.x, y: data.y, moving: data.moving});
                 break;
             case "emote"://args: email, emoji
-                player = connections.find(player => {return player.email === data.email});
                 sendToConnections(data.email, {event: "emote", email: data.email, emoji: data.emoji});
+                break;
+            case "sit"://args: email, orientation
+                sendToConnections(data.email, {event: "sit", email: data.email, sitting: data.sitting, orientation: data.orientation});
                 break;
         }
     });

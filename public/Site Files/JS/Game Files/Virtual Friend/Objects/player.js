@@ -38,7 +38,10 @@ export class Player {
         this.bb = this.y + (this.height / 2) + 1;
 
         this.sitting = false;
+        this.sendSitting = false;
+        this.orientation = 'front';
         this.socket = socket;
+        
         this.email = email;
         this.movementEnd = true;
         this.soundLib = soundLib;
@@ -91,35 +94,61 @@ export class Player {
             this.socket.send(JSON.stringify({event: 'movement', email: this.email, x: this.x, y: this.y, moving: false}));
         }
         
-        
         if(this.emoteTimer > 0){
             this.emoteTimer--;
             this.emotePos = lerp(this.emotePos, 0, 0.2);
         } else {
             this.emoji = '';
         }
+
+        if(this.sendSitting){
+            this.sendSitting = false;
+            this.socket.send(JSON.stringify({event: 'sit', email: this.email, sitting: this.sitting, orientation: this.orientation}));
+        }
     }
 
     //draw self onto given canvas
     draw(ctx, imageLib){
-        ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((this.jumpHeight - this.z) / this.jumpHeight))) + ")";
-        ctx.beginPath();
-        ctx.ellipse(this.x + 28, this.y + 56, 24 + 8*(1-(this.z / this.jumpHeight)), 8 + 6*(1-(this.z / this.jumpHeight)), 0, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
+        let spriteXOff = 0;
+        if(!this.sitting){
+            ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((this.jumpHeight - this.z) / this.jumpHeight))) + ")";
+            ctx.beginPath();
+            ctx.ellipse(this.x + 28, this.y + 56, 24 + 8*(1-(this.z / this.jumpHeight)), 8 + 6*(1-(this.z / this.jumpHeight)), 0, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+            
+            ctx.drawImage(imageLib.player, this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+        } else {
+            switch(this.orientation){
+                case 'front':
+                    spriteXOff = -12;
+                    ctx.drawImage(imageLib['player-sit-forward'], this.x + 20 - (this.width/2), this.y-4 - this.z, this.width, this.height);
+                    break;
+                case 'back':
+                    spriteXOff = -12;
+                    ctx.drawImage(imageLib['player-sit-backward'], this.x + 20 - (this.width/2), this.y-4 - this.z, this.width, this.height);
+                    break;
+                case 'left':
+                    spriteXOff = 0;
+                    ctx.drawImage(imageLib['player-sit-left'], this.x + 32 - (this.width/2), this.y-12 - this.z, this.width, this.height);
+                    break;
+                case 'right':
+                    spriteXOff = -20;
+                    ctx.drawImage(imageLib['player-sit-right'], this.x + 8 - (this.width/2), this.y-12 - this.z, this.width, this.height);
+                    break;
+            }
+        }
         
-        ctx.drawImage(imageLib.player, this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
         ctx.font = "20px 'Trebuchet MS'";
         ctx.fillStyle = document.body.style.getPropertyValue('--maincolor');
-
         if(this.name.toLowerCase().includes('guest'))
             ctx.fillStyle = '#CCCCCC';
-        ctx.fillText(this.name, this.x + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
+        ctx.fillText(this.name, this.x + spriteXOff + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
         
         const storedUser = JSON.parse(localStorage.getItem('currentuser'));
         if(this.emoteTimer > 0 && storedUser.visibleemojis){
             ctx.globalAlpha = this.emoteTimer / this.emoteSpeed;
-            ctx.drawImage(imageLib[this.emoji + '-emote'], this.x, this.y - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
+            ctx.drawImage(imageLib[this.emoji + '-emote'], this.x + spriteXOff, this.y - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
             ctx.globalAlpha = 1;
         }
 
@@ -174,6 +203,7 @@ export class SocketPlayer {
         this.interactable = false;
 
         this.sitting = false;
+        this.orientation = 'front';
         this.email = email;
         this.moving = false;
         this.soundLib = soundLib;
@@ -187,6 +217,7 @@ export class SocketPlayer {
             this.width = lerp(this.width, 56, 0.2);
             this.height = lerp(this.height, 56, 0.2);
         } else {
+            this.sitting = false;
             console.log(this.z)
             if(this.z < 0.1 && this.soundLib['socket-jump'].paused){
                 
@@ -212,24 +243,46 @@ export class SocketPlayer {
 
     //draw self onto given canvas
     draw(ctx, imageLib){
-        ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((this.jumpHeight - this.z) / this.jumpHeight))) + ")";
-        ctx.beginPath();
-        ctx.ellipse(this.x + 28, this.y + 56, 24 + 8*(1-(this.z / this.jumpHeight)), 8 + 6*(1-(this.z / this.jumpHeight)), 0, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-        
-        ctx.drawImage(imageLib.player, this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+        let spriteXOff = 0;
+        if(!this.sitting){
+            ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((this.jumpHeight - this.z) / this.jumpHeight))) + ")";
+            ctx.beginPath();
+            ctx.ellipse(this.x + 28, this.y + 56, 24 + 8*(1-(this.z / this.jumpHeight)), 8 + 6*(1-(this.z / this.jumpHeight)), 0, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+            
+            ctx.drawImage(imageLib.player, this.x + 28 - (this.width/2), this.y - this.z, this.width, this.height);
+        } else {
+            switch(this.orientation){
+                case 'front':
+                    spriteXOff = -12;
+                    ctx.drawImage(imageLib['player-sit-forward'], this.x + 20 - (this.width/2), this.y-4 - this.z, this.width, this.height);
+                    break;
+                case 'back':
+                    spriteXOff = -12;
+                    ctx.drawImage(imageLib['player-sit-backward'], this.x + 20 - (this.width/2), this.y-4 - this.z, this.width, this.height);
+                    break;
+                case 'left':
+                    spriteXOff = 0;
+                    ctx.drawImage(imageLib['player-sit-left'], this.x + 32 - (this.width/2), this.y-12 - this.z, this.width, this.height);
+                    break;
+                case 'right':
+                    spriteXOff = -20;
+                    ctx.drawImage(imageLib['player-sit-right'], this.x + 8 - (this.width/2), this.y-12 - this.z, this.width, this.height);
+                    break;
+            }
+        }
         ctx.font = "20px 'Trebuchet MS'";
         ctx.fillStyle = document.body.style.getPropertyValue('--maincolor');
 
         if(this.name.toLowerCase() === 'guest')
             ctx.fillStyle = '#CCCCCC';
-        ctx.fillText(this.name, this.x + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
+        ctx.fillText(this.name, this.x + spriteXOff + 32 - (ctx.measureText(this.name).width/2), this.y - 32 - (this.z/2));
         
         const storedUser = JSON.parse(localStorage.getItem('currentuser'));
         if(this.emoteTimer > 0 && storedUser.visibleemojis){
             ctx.globalAlpha = this.emoteTimer / this.emoteSpeed;
-            ctx.drawImage(imageLib[this.emoji + '-emote'], this.x, this.y - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
+            ctx.drawImage(imageLib[this.emoji + '-emote'], this.x + spriteXOff, this.y - this.z/2 - 128+this.emotePos*32, 64, 64 + this.emotePos * 64);
             ctx.globalAlpha = 1;
         }
 

@@ -71,12 +71,12 @@ export async function setUserVisual(){
             password: 'GUEST',
     
             //settings
-            visibleemojis: false,
+            visibleemojis: true,
             darkmode: false,
-            autosleep: 0,
+            autosleep: '100',
             mutegame: false,
-            mastervolue: 100,
-            emojivolume: 100,
+            mastervolue: '100',
+            emojivolume: '100',
             bobblehead: false,
     
             //data

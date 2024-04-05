@@ -65,7 +65,12 @@ socket.onmessage = (event) => {
         case "emote"://args: email, emote
             cur = environment.find(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
             cur.emote(data.emoji);
-            
+            break;
+        case "sit"://args: email, sitting, orientation
+            console.log(data.sitting);
+            cur = environment.find(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
+            cur.sitting = data.sitting;
+            cur.orientation = data.orientation;
             break;
         case "disconnect"://args: email
             let index = environment.findIndex(obj => {return obj instanceof SocketPlayer && obj.email === data.email;});
