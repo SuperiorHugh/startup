@@ -71,9 +71,10 @@ export class Player {
                 this.sleeping = false;
                 this.socket.send(JSON.stringify({event: 'sleep', email: this.email, sleeping: this.sleeping}));
             }
-            if(this.z < 0.1 && this.soundLib['jump'].paused){
+            
+            if(this.z <= 2 && this.soundLib['jump'].paused){
                 this.soundLib['jump'].play();
-            } else if (this.z < 0.1 && !this.soundLib['jump'].paused){
+            } else if (this.z <= 2 && !this.soundLib['jump'].paused){
                 this.soundLib['jump'].currentTime = 0;
             }
 
@@ -82,7 +83,10 @@ export class Player {
             this.z = Math.floor(Math.abs(Math.sin(this.animationTime / animSpd)) * this.jumpHeight);
             this.width = (this.setWidth * (3 / 4)) + Math.abs(Math.sin(this.animationTime / animSpd)) * (this.setWidth * (1 / 4));
             this.height = (this.setHeight * (3 / 4)) + Math.abs(Math.cos(this.animationTime / animSpd)) * (this.setHeight * (1 / 4));
-            
+            if(this.animationTime == 66){
+                this.animationTime = 0;
+            }
+            console.log(this.z)
         }
 
         let hc = horizontalCollision(this, environment, (this.moveRight - this.moveLeft) * this.speed);

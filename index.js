@@ -52,7 +52,6 @@ wss.on('connection', (ws, req) => {
                 if(testIndex !== -1)
                     sendToConnections('', {event: "disconnect", email: data.email});
                 sendToConnections(data.email, {event: "connect", email: data.email, name: data.name, x: data.x, y: data.y, bobblehead: data.bobblehead});
-                
                 const noncircularConnections = connections.map((val, i) => {
                     return {
                         email: val.email,
@@ -63,7 +62,7 @@ wss.on('connection', (ws, req) => {
                         sitting: val.sitting,
                         orientation: val.orientation,
                         sleeping: val.sleeping,
-                        bobblehead: val.bobblhead,
+                        bobblehead: val.bobblehead,
                     };
                 });
                 ws.send(JSON.stringify({event: "init-connect", connections: noncircularConnections}));

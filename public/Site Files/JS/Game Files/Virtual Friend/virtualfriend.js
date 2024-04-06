@@ -52,6 +52,7 @@ socket.onmessage = (event) => {
                 if(obj.email === player.email)
                     return;
                 let cur = new SocketPlayer(obj.x, obj.y, obj.name, obj.email, soundLib, obj.bobblehead);
+                console.log('socket player craeted with bobble head of : ' + obj.bobblehead)
                 cur.sleeping = obj.sleeping;
                 cur.sitting = obj.sitting;
                 cur.orientation = obj.orientation;
