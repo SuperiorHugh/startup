@@ -2,7 +2,7 @@ const { WebSocketServer } = require('ws');
 const express = require('express');
 const app = express();
 
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 app.use(express.json());
 
@@ -24,7 +24,7 @@ let server = app.listen(port, () => {
 
 
 /*-- websocket setup --*/
-/*
+
 const connections = [];
 let guestCount = 0;
 
@@ -117,4 +117,3 @@ function sendToConnections(email, data) {
 function isGuest(data){
     return data.name.toLowerCase().includes('guest');
 }
-*/

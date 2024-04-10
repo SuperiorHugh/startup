@@ -69,6 +69,8 @@ body {
     border-radius: 8px;
     font-weight: bold;
     font-size: 20px;
+    user-select: none;
+    -webkit-user-drag: none;
     transition: transform 0.3s ease;
 }
 

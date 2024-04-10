@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { setUserVisual, updateBackground } from './user_handler';
 
 export default function Header() {
+    useEffect(() => {
+        setUserVisual();
+        updateBackground();
+    }, []);
+
     return (
         <>
             <header>

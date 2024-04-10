@@ -1,11 +1,11 @@
-const nonloggedin = document.getElementById('non-logged-in');
-const loggedin = document.getElementById('logged-in');
-const usernameVisual = document.getElementById('username-visual');
 
-nonloggedin.style.setProperty('display', 'block');
-loggedin.style.setProperty('display', 'none');
+
 
 export async function setUserVisual(){
+    const nonloggedin = document.getElementById('non-logged-in');
+    const loggedin = document.getElementById('logged-in');
+    const usernameVisual = document.getElementById('username-visual');
+    
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
     let userRequest;
     let userData;
@@ -135,7 +135,3 @@ export function updateBackground(){
         document.body.style.setProperty('--buttonhovercolor', (storedUser.darkmode ? darkmodecolors['buttonhovercolor'] : defaultcolors['buttonhovercolor']));
     } 
 }
-
-await setUserVisual();
-updateBackground();
-
