@@ -14,4 +14,4 @@ fetch('https://v2.jokeapi.dev/joke/Programming,Miscellaneous,Pun?type=twopart')
 .then(data => {
     jokesetup.innerText = "\"" + data.setup + "\"";
     jokedelivery.innerText = data.delivery;
-})
+});
