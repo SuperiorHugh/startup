@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { setUserVisual, updateBackground } from './user_handler';
 
+
 export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

@@ -63,6 +63,8 @@ export async function setUserVisual(){
             alert('error, please re-login! sorry about that :P');
         }
     } else {
+        nonloggedin.style.setProperty('display', 'block');
+        loggedin.style.setProperty('display', 'none');
         localStorage.setItem('currentuser', JSON.stringify({
             //credentials
             

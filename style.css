@@ -14,6 +14,7 @@ body {
     --textcolor:          #0000004d;
     --buttoncolor:        #ffe6e6ff;
     --buttonhovercolor:   #fffafaff;
+    --volumeslidercolor:  #ffb3b3ff;
 
     background: var(--backgroundcolor);
 }
@@ -308,7 +309,6 @@ div.setting-page h2, div.setting-page label {
 }
 
 input.range-input, input.volume-range-input {
-    --sliderColor: var(--maincolor);
     -webkit-appearance: none;
     appearance: none;
     width: 90%;
@@ -332,17 +332,7 @@ input.volume-range-input::-webkit-slider-thumb {
     appearance: none;
     width: 20px;
     height: 20px;
-    background-color: var(--sliderColor);
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-input.range-input::-moz-range-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    background: var(--maincolor);
+    background-color: var(--volumeslidercolor);
     border-radius: 50%;
     cursor: pointer;
 }

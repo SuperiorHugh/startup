@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
 import { setUserVisual, updateBackground } from './user_handler';
+
 
 export default function Login() {
     const [email, setEmail] = useState('');

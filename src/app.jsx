@@ -1,12 +1,15 @@
 import React from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
-import Footer from './footer';
-import Header from './header';
+import Footer from './footer.jsx';
+import Header from './header.jsx';
 
 
 //body components
-import Login from './login';
-import SignUp from './signup';
+import Login from './login.jsx';
+import SignUp from './signup.jsx';
+
+import Settings from './settings.jsx';
+import LeaderBoard from './leaderboard';
 
 
 export default function App () {
@@ -26,8 +29,8 @@ export default function App () {
                 <Route path='login' element={<Login />} />
                 <Route path='sign-up' element={<SignUp />} />
                 <Route path='play' element={<>play page</>} />
-                <Route path='settings' element={<>settings page</>} />
-                <Route path='leaderboard' element={<>leaderobad page</>} />
+                <Route path='settings' element={<Settings />} />
+                <Route path='leaderboard' element={<LeaderBoard />} />
 
                 <Route path='*' element={<h1>will be play page</h1>} />
             </Routes>
