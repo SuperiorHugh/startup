@@ -6,20 +6,31 @@ export default function LeaderBoard() {
     useEffect(() => {
         fetch('https://dog.ceo/api/breeds/image/random')
         .then(response => response.json())
-        .then(data => randomdog.src = data.message);
+        .then(data => {
+            const randomdog = document.getElementById('randomdog');
+            if(randomdog)
+                randomdog.src = data.message;
+        });
 
         fetch('https://random-word-api.herokuapp.com/word')
         .then(response => response.json())
         .then(data => {
             let stringified = String(data);
-            randomword.innerText = stringified.replace(stringified[0], stringified[0].toUpperCase());
+            const randomword = document.getElementById('randomword');
+            if(randomword)
+                randomword.innerText = stringified.replace(stringified[0], stringified[0].toUpperCase());
         });
 
         fetch('https://v2.jokeapi.dev/joke/Programming,Miscellaneous,Pun?type=twopart')
         .then(response => response.json())
         .then(data => {
-            jokesetup.innerText = "\"" + data.setup + "\"";
-            jokedelivery.innerText = data.delivery;
+            const jokesetup = document.getElementById('jokesetup');
+            const jokedelivery = document.getElementById('jokedelivery');
+            
+            if(jokesetup)
+                jokesetup.innerText = "\"" + data.setup + "\"";
+            if(jokedelivery)
+                jokedelivery.innerText = data.delivery;
         });
 
         loadLeaderboard();
@@ -27,14 +38,16 @@ export default function LeaderBoard() {
 
     return (
         <main>
-            <div class="scroll-menu-wrapper">
-                <div class="scroll-menu">
+            <div className="scroll-menu-wrapper">
+                <div className="scroll-menu">
                     <table id="leaderboard">
-                        <tr id="leaderboard-header">
-                            <th>Rank</th>
-                            <th>Player</th>
-                            <th>Emotes Used</th>
-                        </tr>
+                        <thead>
+                            <tr id="leaderboard-header">
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>Emotes Used</th>
+                            </tr>
+                        </thead>
                     </table>
                 </div>
             </div>

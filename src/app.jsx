@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import Footer from './footer.jsx';
 import Header from './header.jsx';
@@ -13,6 +13,11 @@ import LeaderBoard from './leaderboard';
 
 
 export default function App () {
+    const clicked = () => {
+        window.location.reload();
+        window.location = '/play';
+    }
+
     return (
         <BrowserRouter>
             
@@ -20,7 +25,7 @@ export default function App () {
             <nav className="horizontal-list">
                 <NavLink className="nav-link" to="/login">Login</NavLink>
                 <NavLink className="nav-link" to="/sign-up">Sign Up</NavLink>
-                <NavLink className="nav-link" to="/play">Play</NavLink>
+                <NavLink className="nav-link" to="/play" onClick={clicked}>Play</NavLink>
                 <NavLink className="nav-link" to="/settings">Settings</NavLink>
                 <NavLink className="nav-link" to="/leaderboard">Leaderboard</NavLink>
             </nav>
