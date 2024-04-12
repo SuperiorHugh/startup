@@ -1,7 +1,7 @@
 # **Virtual Friend**
 
 > [!NOTE]
-> Make sure to check out the [notes](/For%20Class/notes.md)!
+> Make sure to check out the [notes](/for-class/notes.md)!
 
 ## Elevator Pitch
 
@@ -11,19 +11,19 @@ Have you ever wanted to make a new friend without having to go outside? Or maybe
 
 Login Page
 
-![Login Page](/Pictures/Planning/VFLoginPage.jpeg)
+![Login Page](/img/planning/vf-login-page.jpeg)
 
 Register Page
 
-![Register Page](/Pictures/Planning/VFRegisterPage.jpeg)
+![Register Page](/img/planning/vf-register-page.jpeg)
 
 Gameplay Page
 
-![Gameplay Page](/Pictures/Planning/VFGameplayPage.jpeg)
+![Gameplay Page](/img/planning/vf-gameplay-page.jpeg)
 
 Settings Page
 
-![Settings Page](/Pictures/Planning/VFSettingsPage.jpeg)
+![Settings Page](/img/planning/vf-settings-page.jpeg)
 
 ## Key Features
 ### Base Features

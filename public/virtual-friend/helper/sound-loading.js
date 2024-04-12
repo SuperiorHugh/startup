@@ -1,14 +1,14 @@
 const soundPaths = [
-    '../../Sounds/jump.wav',//current player jump
-    '../../Sounds/angry.wav',
-    '../../Sounds/bruh.wav',
-    '../../Sounds/happy.wav',
-    '../../Sounds/laugh.wav',
-    '../../Sounds/sad.wav',
-    '../../Sounds/surprised.wav',
-    '../../Sounds/joyful.wav',
-    '../../Sounds/ching-chong.wav',
-    '../../Sounds/jump.wav',//socketplayer jump
+    '../../snd/jump.wav',//current player jump
+    '../../snd/angry.wav',
+    '../../snd/bruh.wav',
+    '../../snd/happy.wav',
+    '../../snd/laugh.wav',
+    '../../snd/sad.wav',
+    '../../snd/surprised.wav',
+    '../../snd/joyful.wav',
+    '../../snd/ching-chong.wav',
+    '../../snd/jump.wav',//socketplayer jump
 ];
 const soundMapping = {
     0: 'jump',
