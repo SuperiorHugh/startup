@@ -48,7 +48,7 @@ export async function setUserVisual(){
                 },
                 body: JSON.stringify({email: storedUser.email, password: storedUser.password}),
             })
-            const userData = await userRequest.json();//TODO
+            const userData = await userRequest.json();
             localStorage.setItem('currentuser', JSON.stringify(userData.player));
             location.reload();
         } else {
@@ -129,5 +129,12 @@ export function updateBackground(){
         document.body.style.setProperty('--textcolor', (storedUser.darkmode ? darkmodecolors['textcolor'] : defaultcolors['textcolor']));
         document.body.style.setProperty('--buttoncolor', (storedUser.darkmode ? darkmodecolors['buttoncolor'] : defaultcolors['buttoncolor']));
         document.body.style.setProperty('--buttonhovercolor', (storedUser.darkmode ? darkmodecolors['buttonhovercolor'] : defaultcolors['buttonhovercolor']));
+
+        const favicon = document.getElementById('favicon');
+        const githubImg = document.getElementById('github-img');
+        const youtubeImg = document.getElementById('youtube-img');
+        favicon.setAttribute('href', '/img/icon/favicon' + (storedUser.darkmode ? '-dark' : '') + '.ico');
+        githubImg.setAttribute('src', '/img/icon/github' + (storedUser.darkmode ? '-dark' : '') + '-icon.png');
+        youtubeImg.setAttribute('src', '/img/icon/youtube' + (storedUser.darkmode ? '-dark' : '') + '-icon.png');
     } 
 }

@@ -153,12 +153,14 @@ export class Bartender {
             this.emojishopElement.style.top = `${this.interactPos}px`;
             this.emojishopElement.style.height = `${this.interactHeight}px`;
             this.buttons.forEach((val, i) => {
+                val.style.visibility = 'visible';
                 val.style.color = document.body.style.getPropertyValue('--maincolor');;
             });
         } else {
             this.emojishopElement.style.top = `${this.restPos}px`;
             this.emojishopElement.style.height = `${this.restHeight}px`;
             this.buttons.forEach((val, i) => {
+                val.style.visibility = 'hidden';
                 val.style.color = document.body.style.getPropertyValue('--transparentcolor');;
             });
         }
