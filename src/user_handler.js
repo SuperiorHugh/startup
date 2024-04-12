@@ -1,6 +1,4 @@
-
-
-
+//updates website header and updates player account if neccessary
 export async function setUserVisual(){
     const nonloggedin = document.getElementById('non-logged-in');
     const loggedin = document.getElementById('logged-in');
@@ -21,19 +19,13 @@ export async function setUserVisual(){
         })
         userData = await userRequest.json();
     }
-    
-    
 
-    
-    if(userData && userData.exists && storedUser && storedUser.accountver === 2){
+    if(userData && userData.exists && storedUser && storedUser.accountver === 2) {
         nonloggedin.style.setProperty('display', 'none');
         loggedin.style.setProperty('display', 'block');
 
         usernameVisual.innerText = storedUser.username;
-    } else if (userData && userData.exists && storedUser && storedUser.accountver != 2){
-        // nonloggedin.style.setProperty('display', 'block');
-        // loggedin.style.setProperty('display', 'none');
-        //TODO update account\
+    } else if (userData && userData.exists && storedUser && storedUser.accountver != 2) {//change when updating (1/2)
         alert('Detected game update. Account update commencing.')
         let res = await fetch('/api/users/update-account', {
             method: 'POST',
@@ -86,12 +78,13 @@ export async function setUserVisual(){
             purchased: [],
     
             //updating
-            accountver: 2,
+            accountver: 2,//change when updating (2/2)
         }));
     }
     
 }
 
+//default(lightmode) colors of site
 const defaultcolors = {
     'maincolor':          '#ffb3b3ff',
     'altcolor':           '#ffd2b8ff',
@@ -106,6 +99,7 @@ const defaultcolors = {
     'buttonhovercolor':   '#fffafaff',
 }
 
+//darkmode colors of site
 const darkmodecolors = {
     'maincolor':          '#90aaffff',
     'altcolor':           '#918fd7ff',
@@ -120,10 +114,10 @@ const darkmodecolors = {
     'buttonhovercolor':   '#7590ffff',
 }
 
-
+//updates colors to users preference (in settings)
 export function updateBackground(){
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
-    if(storedUser){
+    if(storedUser) {
         document.body.style.setProperty('--maincolor', (storedUser.darkmode ? darkmodecolors['maincolor'] : defaultcolors['maincolor']));
         document.body.style.setProperty('--altcolor', (storedUser.darkmode ? darkmodecolors['altcolor'] : defaultcolors['altcolor']));
         document.body.style.setProperty('--backgroundcolor', (storedUser.darkmode ? darkmodecolors['backgroundcolor'] : defaultcolors['backgroundcolor']));

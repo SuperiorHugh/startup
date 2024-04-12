@@ -10,10 +10,11 @@ app.use(express.static('../'));
 
 app.set('trust proxy', true);
 
+//players-api router import
 const usersRoute = require('./players-api');
 app.use('/api/users', usersRoute);
 
-// serve static
+//serve public directory as static
 app.use(express.static('public'));
 
 //if visited unknown, goto homepage
@@ -29,7 +30,7 @@ let server = app.listen(port, () => {
 /*-- websocket setup --*/
 
 const connections = [];
-let guestCount = 0;
+let guestCount = 0; //iterates every time a new guest joins
 
 const wss = new WebSocketServer({noServer: true});
 server.on('upgrade', (req, socket, head) => {
@@ -38,6 +39,7 @@ server.on('upgrade', (req, socket, head) => {
     });
 });
 
+//on client to server connection...
 wss.on('connection', (ws, req) => {
     let email;
 
@@ -115,8 +117,4 @@ function sendToConnections(email, data) {
         
         player.ws.send(JSON.stringify(data));
     });
-}
-
-function isGuest(data){
-    return data.name.toLowerCase().includes('guest');
 }

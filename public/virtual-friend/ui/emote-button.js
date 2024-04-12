@@ -1,11 +1,9 @@
 /*-- imports --*/
 
-import {lerp} from "../helper/helper-functions.js";
-import {EmoteSlotButton} from "./emote-slot-button.js";
+import { lerp } from "../helper/helper-functions.js";
+import { EmoteSlotButton } from "./emote-slot-button.js";
 
-
-/*-- emote ui button --*/
-
+//emote button: pressing will pop open emote menu
 export class EmoteButton {
     constructor(canvas){
         this.canvas = canvas;

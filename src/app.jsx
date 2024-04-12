@@ -1,8 +1,9 @@
+/*-- imports --*/
+
 import React, { useEffect } from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import Footer from './footer.jsx';
 import Header from './header.jsx';
-
 
 //body components
 import Login from './login.jsx';
@@ -11,7 +12,7 @@ import Gameplay from './gameplay.jsx';
 import Settings from './settings.jsx';
 import LeaderBoard from './leaderboard';
 
-
+//app: the whole of the website
 export default function App () {
     const clicked = () => {
         window.location.reload();

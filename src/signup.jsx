@@ -1,8 +1,10 @@
+/*-- imports --*/
+
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { setUserVisual, updateBackground } from './user_handler';
 
-
+//signup: body component of signup page
 export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -30,7 +32,7 @@ export default function SignUp() {
         });
         const userData = await userRequest.json();
         console.log(userData.allowed)
-        if(userData.allowed){
+        if(userData.allowed) {
             alert("welcome to the Virtual Friend Network, " + username + "!");
             localStorage.setItem('currentuser', JSON.stringify(userData.player));
             setUserVisual();
@@ -48,13 +50,40 @@ export default function SignUp() {
                 <ul id="credentials">
                     <div>
                         <li>
-                            <input id="email" type="text" className="text-input" name="emailText" placeholder="Email" value={email} onChange={changeEmail} required />
+                            <input
+                                id="email"
+                                type="text"
+                                className="text-input"
+                                name="emailText"
+                                placeholder="Email"
+                                value={email}
+                                onChange={changeEmail}
+                                required
+                            />
                         </li>
                         <li>
-                            <input id="username" type="text" className="text-input" name="usernameText" placeholder="Username" value={username} onChange={changeUsername} required />
+                            <input
+                                id="username"
+                                type="text"
+                                className="text-input"
+                                name="usernameText"
+                                placeholder="Username"
+                                value={username}
+                                onChange={changeUsername}
+                                required 
+                            />
                         </li>
                         <li>
-                            <input id="password" type="password" className="text-input" name="passwordText" placeholder="Password" value={password} onChange={changePassword} required />
+                            <input
+                                id="password"
+                                type="password"
+                                className="text-input"
+                                name="passwordText"
+                                placeholder="Password"
+                                value={password}
+                                onChange={changePassword}
+                                required
+                        />
                         </li>
                     </div>
                 </ul>

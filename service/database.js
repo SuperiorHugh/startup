@@ -16,34 +16,34 @@ const playerCollection = db.collection('player');
     process.exit(1);
 });
 
-function getPlayer(email){
+function getPlayer(email) {
     return playerCollection.findOne({email: email});
 }
 
-function getPlayerFromToken(token){
+function getPlayerFromToken(token) {
     return playerCollection.findOne({token: token});
 }
 
 const playerVals = [
     //settings
-    ["visibleemojis", true],
-    ["darkmode", false],
-    ["autosleep", '100'],
-    ["mutegame", false],
-    ["mastervolume", '100'],
-    ["emojivolume", '100'],
-    ["bobblehead", false],
+    ["visibleemojis",   true],
+    ["darkmode",        false],
+    ["autosleep",       '100'],
+    ["mutegame",        false],
+    ["mastervolume",    '100'],
+    ["emojivolume",     '100'],
+    ["bobblehead",      false],
 
     //data
-    ["emotesused", 0],
-    ["purchased", []],
-    ["testing", 0],
+    ["emotesused",      0],
+    ["purchased",       []],
+    ["testing",         0],
 
     //updating
-    ["accountver", 2], //change val in user_handler.js if updating accountver
+    ["accountver",      2], //change val in user_handler.js if updating accountver
 ];
 
-async function createPlayer(email, username, password){
+async function createPlayer(email, username, password) {
     const passwordHash = await bcrypt.hash(password, 10);
 
     const player = {
@@ -61,7 +61,7 @@ async function createPlayer(email, username, password){
     return player;
 }
 
-function getTopPlayers(amt){
+function getTopPlayers(amt) {
     const query = {};
     const options = {
         sort: {emotesused: -1},
@@ -78,21 +78,21 @@ function editSetting(email, setting, newval) {
     );
 }
 
-function addEmote(email, amt){
+function addEmote(email, amt) {
     playerCollection.updateOne(
         {email: email},
         {$inc: {emotesused: amt}},
     );
 }
 
-function purchasedEmote(email, emote){
+function purchasedEmote(email, emote) {
     playerCollection.updateOne(
         {email: email},
         {$push: {purchased: emote}},
     );
 }
 
-async function updatePlayer(user){
+async function updatePlayer(user) {
     for (const val of playerVals) {
         if(user[val[0]] === undefined || val[0] === 'accountver'){
             await playerCollection.updateOne(

@@ -1,11 +1,9 @@
 /*-- imports --*/
 
-import {lerp} from "../helper/helper-functions.js";
-import {EmoteButton} from "./emote-button.js";
+import { lerp } from "../helper/helper-functions.js";
+import { EmoteButton } from "./emote-button.js";
 
-
-/*-- emote slot ui button --*/
-
+//emote slot button: pressing will activate an emote from the player
 export class EmoteSlotButton {
     constructor(canvas, gotoX, gotoY, emoji){
         this.canvas = canvas;

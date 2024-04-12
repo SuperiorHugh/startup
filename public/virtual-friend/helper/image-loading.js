@@ -1,3 +1,6 @@
+/*-- image loading function --*/
+
+//paths of all images
 const imagePaths = [
     '../../img/game/entity/player.webp',
 
@@ -35,6 +38,8 @@ const imagePaths = [
     '../../img/game/environment/rings-front.webp',
     '../../img/game/environment/trampoline.webp',
 ];
+
+//used for mapping images to custom name
 const imageMapping = {
     0: 'player',
 

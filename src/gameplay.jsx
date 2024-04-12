@@ -1,6 +1,9 @@
+/*-- imports --*/
+
 import React, { useEffect } from 'react';
 import EmojiShop from './emojishop';
 
+//gameplay: body component of gameplay page
 export default function Gameplay() {
 
     useEffect(() => {
@@ -11,13 +14,11 @@ export default function Gameplay() {
             script.type = 'module';
             document.body.appendChild(script);
         }
-
-        loadScript();// create new game obj
+        loadScript();
         return () => {
             const script = document.querySelector('script[src="virtual-friend/virtualfriend.js"]');
             if (script) {
-                document.body.removeChild(script);// end game obj and delete
-                
+                document.body.removeChild(script);
             }
         }
     }, []);

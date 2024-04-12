@@ -1,6 +1,8 @@
-import {tpLerp} from "../helper/helper-functions.js";
+/*-- imports --*/
 
+import { tpLerp } from "../helper/helper-functions.js";
 
+//interact orb: will float near interactable objects within the players radius. clicking will activate the interactable
 export class InteractOrb {
     constructor(x, y){
         this.x = x;

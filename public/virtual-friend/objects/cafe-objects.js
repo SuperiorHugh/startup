@@ -1,6 +1,4 @@
-import {lerp, getRandomElementFromArray} from "../helper/helper-functions.js";
-
-
+//chair: can sit on, changes player orientation
 export class Chair {
     constructor(x, y, orientation){
         this.x = x;
@@ -54,6 +52,7 @@ export class Chair {
     }
 }
 
+//table: decoration
 export class Table {
     constructor(x, y){
         this.x = x;
@@ -84,6 +83,7 @@ export class Table {
     }
 }
 
+//bar table: decoration
 export class BarTable {
     constructor(x, y){
         this.x = x;
@@ -108,6 +108,7 @@ export class BarTable {
     }
 }
 
+//tile ground: flooring decoration
 export class TileGround {
     constructor(x, y){
         this.x = x;
@@ -124,6 +125,7 @@ export class TileGround {
     }
 }
 
+//bartender: can interact and purchase new emojis from them
 export class Bartender {
     constructor(x, y){
         this.x = x;

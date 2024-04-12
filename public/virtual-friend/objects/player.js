@@ -1,9 +1,9 @@
 /*-- imports --*/
 
-import {lerp, getRandomElementFromArray} from "../helper/helper-functions.js";
-import {horizontalCollision, verticalCollision} from "../helper/movement-handler.js";
+import { lerp } from "../helper/helper-functions.js";
+import { horizontalCollision, verticalCollision } from "../helper/movement-handler.js";
 
-//player class
+//player: acts as the players body
 export class Player {
     constructor (x, y, name, ui, gui, socket, email, soundLib, bobblehead){
         this.x = x;
@@ -53,8 +53,7 @@ export class Player {
         this.bobblehead = bobblehead;
     }
 
-    //tick player (runs per frame)
-    tick(environment){//TODO
+    tick(environment){
         this.lb = this.x;
         this.rb = this.x + 56;
         this.tb = this.y + (56 / 2) - 1;
@@ -127,10 +126,9 @@ export class Player {
         }
     }
 
-    //draw self onto given canvas
     draw(ctx, imageLib){
         let spriteXOff = 0;
-        let spriteYOff = (this.bobblehead ? -20 : 0);//TODO
+        let spriteYOff = (this.bobblehead ? -20 : 0);
         if(!this.sitting){
             ctx.fillStyle = "rgba(0, 0, 0, " + (0.2 + (0.1 * ((this.jumpHeight - this.z) / this.jumpHeight))) + ")";
             ctx.beginPath();
@@ -190,7 +188,6 @@ export class Player {
 
     }
 
-    //emote event
     emote(emoji){
         if(this.sleeping){
             this.sleepTimer = 0;
@@ -217,13 +214,7 @@ export class Player {
     }
 }
 
-
-
-
-
-
-
-
+//socket player: acts as the body of others
 export class SocketPlayer {
     constructor (x, y, name, email, soundLib, bobblehead){
         this.x = x;

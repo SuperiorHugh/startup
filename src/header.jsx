@@ -1,7 +1,9 @@
+/*-- imports --*/
+
 import React, { useEffect } from 'react';
 import { setUserVisual, updateBackground } from './user_handler';
 
-
+//header: the header of the website, consists of the site name, and the current user
 export default function Header() {
     useEffect(() => {
         setUserVisual();

@@ -1,8 +1,10 @@
+/*-- imports --*/
+
 import React, { useState, useEffect } from 'react';
 import { updateBackground } from './user_handler.js';
 import { updateSetting, updateColors } from './settings.js';
 
-
+//settings: body component of settings page
 export default function Settings() {
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));
     const defaultVisibleEmojis =    (storedUser ? storedUser.visibleemojis : true);
@@ -13,13 +15,13 @@ export default function Settings() {
     const defaultEmojiVolume =      (storedUser ? storedUser.emojivolume : '100');
     const defaultBobbleHead =       (storedUser ? storedUser.bobblehead : false);
 
-    const [visibleEmojis, setVisibleEmojis] = useState(defaultVisibleEmojis);
-    const [darkMode, setDarkMode] = useState(defaultDarkMode);
+    const [visibleEmojis, setVisibleEmojis] =   useState(defaultVisibleEmojis);
+    const [darkMode, setDarkMode] =             useState(defaultDarkMode);
     const [autoSleepTimer, setAutoSleepTimer] = useState(defaultAutoSleepTimer);
-    const [muteGame, setMuteGame] = useState(defaultMuteGame);
-    const [masterVolume, setMasterVolume] = useState(defaultMasterVolume);
-    const [emojiVolume, setEmojiVolume] = useState(defaultEmojiVolume);
-    const [bobbleHead, setBobbleHead] = useState(defaultBobbleHead);
+    const [muteGame, setMuteGame] =             useState(defaultMuteGame);
+    const [masterVolume, setMasterVolume] =     useState(defaultMasterVolume);
+    const [emojiVolume, setEmojiVolume] =       useState(defaultEmojiVolume);
+    const [bobbleHead, setBobbleHead] =         useState(defaultBobbleHead);
 
     const changeVisibleEmojis = () => {
         const storedUser = JSON.parse(localStorage.getItem('currentuser'));

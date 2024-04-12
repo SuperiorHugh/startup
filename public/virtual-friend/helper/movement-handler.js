@@ -29,7 +29,7 @@ export function verticalCollision(player, environment, yVel) {
     return closestDist !== undefined ? closestDist + player.y : undefined;
 }
 
-//horizontal collision //TODO
+//horizontal collision
 export function horizontalCollision(player, environment, xVel) {
     const collidables = [];
     for (let i = 0; i < environment.length; i++) {

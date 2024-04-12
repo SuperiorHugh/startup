@@ -1,3 +1,6 @@
+/*-- sound loading function --*/
+
+//paths of all sounds
 const soundPaths = [
     '../../snd/jump.wav',//current player jump
     '../../snd/angry.wav',
@@ -10,6 +13,8 @@ const soundPaths = [
     '../../snd/ching-chong.wav',
     '../../snd/jump.wav',//socketplayer jump
 ];
+
+//used for mapping sounds to custom name
 const soundMapping = {
     0: 'jump',
     1: 'angry-emote',
@@ -24,7 +29,7 @@ const soundMapping = {
 };
 
 
-//load images asynchronously
+//load sounds asynchronously
 export function loadSounds(){
     const loadedSounds = {};
     const storedUser = JSON.parse(localStorage.getItem('currentuser'));

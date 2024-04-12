@@ -1,6 +1,9 @@
+/*-- imports --*/
+
 import React, { useEffect } from 'react';
 import { loadLeaderboard } from './leaderboard-manager';
 
+//leaderboard: body component of leaderboard page
 export default function LeaderBoard() {
 
     useEffect(() => {

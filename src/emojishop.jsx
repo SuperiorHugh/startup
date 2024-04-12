@@ -1,5 +1,8 @@
+/*-- imports --*/
+
 import React from 'react';
 
+//emoji shop: the place to purchase new emojis. Pops up when interacting with bartender
 export default function EmojiShop() {
     return (
         <div id="emojishop">

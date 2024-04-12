@@ -1,6 +1,8 @@
+/*-- imports --*/
+
 import React from 'react';
 
-
+//footer: the footer of the website, consisting of github link and youtube link
 export default function Footer() {
     return (
         <footer>

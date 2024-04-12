@@ -1,3 +1,4 @@
+//loads leaderboard stats
 export async function loadLeaderboard(){
     const response = await fetch('/api/users/players', {
         method: "GET"
@@ -9,6 +10,7 @@ export async function loadLeaderboard(){
     });
 }
 
+//creates new stat for the leaderboard, and posts onto the site
 function createStat(userData, userRank){
     let leaderboard = document.getElementById("leaderboard");
     const leaderboardStat = document.createElement("tr");
@@ -33,9 +35,3 @@ function createStat(userData, userRank){
 
     leaderboard.appendChild(leaderboardStat);
 }
-/*
-<td class="rank-td" id="top3">3</td>
-<td>eggnoglord</td>
-<td>1</td>
-<td>3</td>
-*/

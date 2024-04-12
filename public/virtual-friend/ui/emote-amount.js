@@ -1,8 +1,9 @@
+/*-- imports --*/
 
-import {lerp, tpLerp} from "../helper/helper-functions.js";
+import { tpLerp } from "../helper/helper-functions.js";
 
+//emote amount: counts the amount of emojis the player has on a display
 export class EmoteAmount {
-
     constructor(x, y, player){
         this.x = x;
         this.y = y;

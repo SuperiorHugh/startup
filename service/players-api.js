@@ -1,11 +1,8 @@
-
-
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const db = require('./database.js');
 const express = require('express');
 let router = express.Router();
-
 
 //args: email password
 router.post('/login', async (req, res) => {
@@ -79,17 +76,4 @@ router.post('/update-account', async (req, res) => {
     }
 });
 
-function setAuthCookie(res, authToken) {
-    res.cookie('token', authToken, {
-      secure: true,
-      httpOnly: true,
-      sameSite: 'strict',
-    });
-}
-
-function deleteAuthCookie(res){
-    res.clearCookie('token');
-}
-
 module.exports = router;
-
