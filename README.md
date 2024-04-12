@@ -11,19 +11,19 @@ Have you ever wanted to make a new friend without having to go outside? Or maybe
 
 Login Page
 
-![Login Page](/img/planning/vf-login-page.jpeg)
+![Login Page](/public/img/planning/vf-login-page.jpeg)
 
 Register Page
 
-![Register Page](/img/planning/vf-register-page.jpeg)
+![Register Page](/public/img/planning/vf-register-page.jpeg)
 
 Gameplay Page
 
-![Gameplay Page](/img/planning/vf-gameplay-page.jpeg)
+![Gameplay Page](/public/img/planning/vf-gameplay-page.jpeg)
 
 Settings Page
 
-![Settings Page](/img/planning/vf-settings-page.jpeg)
+![Settings Page](/public/img/planning/vf-settings-page.jpeg)
 
 ## Key Features
 ### Base Features
