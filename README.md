@@ -203,4 +203,5 @@ Settings Page
 > - [x] Leaderboard component
 > - [x] Settings component
 > - [x] Emote shop component
+
 > NOTE play page requires page reload, as it does not shut down otherwise. Other pages do not reload as they are typical react.
