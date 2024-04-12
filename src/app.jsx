@@ -37,7 +37,7 @@ export default function App () {
                 <Route path='settings' element={<Settings />} />
                 <Route path='leaderboard' element={<LeaderBoard />} />
 
-                <Route path='*' element={<h1>will be play page</h1>} />
+                <Route path='*' element={<Login />} />
             </Routes>
 
             <Footer />

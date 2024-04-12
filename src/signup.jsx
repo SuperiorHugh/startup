@@ -35,6 +35,7 @@ export default function SignUp() {
             localStorage.setItem('currentuser', JSON.stringify(userData.player));
             setUserVisual();
             updateBackground();
+            window.location = '/play';
         } else {
             alert("there is already an account with that email!");
         }

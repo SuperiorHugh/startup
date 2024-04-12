@@ -190,4 +190,17 @@ Settings Page
 
 ## React Deliverable
 
-> - [ ] TODO
+> - [x] TODO
+> - [x] Bundled using Vite
+> - [x] Multiple functional React components
+> - [x] React router
+> - [x] React hooks
+> - [x] Header component
+> - [x] Footer component
+> - [x] Gameplay component
+> - [x] Login component
+> - [x] Sign up component
+> - [x] Leaderboard component
+> - [x] Settings component
+> - [x] Emote shop component
+> NOTE play page requires page reload, as it does not shut down otherwise. Other pages do not reload as they are typical react.

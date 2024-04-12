@@ -31,6 +31,7 @@ export default function Login() {
             localStorage.setItem('currentuser', JSON.stringify(userData.player));
             setUserVisual();
             updateBackground();
+            window.location = '/play';
         } else {
             alert('unknown user or incorrect password, please try again!');
         }
