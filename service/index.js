@@ -13,9 +13,12 @@ app.set('trust proxy', true);
 const usersRoute = require('./players-api');
 app.use('/api/users', usersRoute);
 
+// serve static
+app.use(express.static('public'));
+
 //if visited unknown, goto homepage
 app.use((req, res) => {
-    res.sendFile('index.html', { root: '../' });
+    res.sendFile('index.html', { root: 'public' });
 });
 
 let server = app.listen(port, () => {

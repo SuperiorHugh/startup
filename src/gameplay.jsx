@@ -7,7 +7,7 @@ export default function Gameplay() {
         console.log('load gameplay')
         const loadScript = async () => {
             const script = document.createElement('script');
-            script.src = `virtual-friend/virtualfriend.js`;
+            script.src = `src/virtual-friend/virtualfriend.js`;
             script.type = 'module';
             document.body.appendChild(script);
         }
@@ -16,7 +16,7 @@ export default function Gameplay() {
         console.log('connected scr')// create new game obj
         return () => {
             console.log('disconnected scr')
-            const script = document.querySelector('script[src="virtual-friend/virtualfriend.js"]');
+            const script = document.querySelector('script[src="src/virtual-friend/virtualfriend.js"]');
             if (script) {
                 document.body.removeChild(script);// end game obj and delete
                 
