@@ -396,9 +396,9 @@ input.checkbox-input:checked {
 
 @keyframes slideInFromLeft {
     0% {
-      transform: translateY(-100%);
-      color: transparent;
-      height: 0px;
+      transform: translateY(5%);
+      color: var(--unselectedcolor);
+      height: 30px;
     }
     100% {
       transform: translateY(0);
