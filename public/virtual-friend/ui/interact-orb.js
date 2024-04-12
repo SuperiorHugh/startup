@@ -55,5 +55,5 @@ export class InteractOrb {
         this.subject.interact(x, y, ui, player, imageLib);
     }
 
-    clickUp(x, y, ui, player, imageLib){}//TODO copy
+    clickUp(x, y, ui, player, imageLib){}
 }
