@@ -1,5 +1,3 @@
-console.log('loadded game')
-
 import {Player, SocketPlayer} from "./objects/player.js";
 import {loadImages} from "./helper/image-loading.js";
 import {loadSounds} from "./helper/sound-loading.js";
@@ -51,12 +49,12 @@ socket.onmessage = (event) => {
                 if(obj.email === player.email)
                     return;
                 let cur = new SocketPlayer(obj.x, obj.y, obj.name, obj.email, soundLib, obj.bobblehead);
-                console.log('socket player craeted with bobble head of : ' + obj.bobblehead)
                 cur.sleeping = obj.sleeping;
                 cur.sitting = obj.sitting;
                 cur.orientation = obj.orientation;
                 environment.push(cur);
             });
+            startGame();
             break;
         case "connect"://args: email, name, x, y, bobblehead
             environment.push(new SocketPlayer(data.x, data.y, data.name, data.email, soundLib, data.bobblehead));
@@ -138,7 +136,6 @@ function updatePurchased(){
                 buy3.children[0].innerHTML = 'SOLD OUT';
                 break;
         }
-        console.log('added ' + val + '!')
     });
 }
 updatePurchased();
@@ -154,44 +151,11 @@ buy3.addEventListener('click', function(event){
 });
 
 
-
-
 const inputStart = (event) => executePlayerKeyCode(player, event.code);
 const inputEnd = (event) => endPlayerKeyCode(player, event.code);
 const mouseMove = (event) => mouseMoevementEvent(canvas, mousePos, event);
 const mouseDown = (event) => mouseDownEvent(canvas, mousePos, ui, player, imageLib, event);
 const mouseUp = (event) => mouseUpEvent(canvas, mousePos, ui, player, imageLib, event);
-
-window.onload = async function(){
-    ctx = canvas.getContext("2d");
-    ctx.imageSmoothingEnabled = false;
-    
-    eb = new EmoteButton(canvas); ui.push(eb);
-    esb1 = new EmoteSlotButton(canvas, canvas.width*(1/10), canvas.height*(7/8), 'laugh'); ui.push(esb1);
-    esb2 = new EmoteSlotButton(canvas, canvas.width*(3/10), canvas.height*(6/8), 'happy'); ui.push(esb2);
-    esb3 = new EmoteSlotButton(canvas, canvas.width*(5/10), canvas.height*(5/8), 'bruh'); ui.push(esb3);
-    esb4 = new EmoteSlotButton(canvas, canvas.width*(7/10), canvas.height*(6/8), 'sad'); ui.push(esb4);
-    esb5 = new EmoteSlotButton(canvas, canvas.width*(9/10), canvas.height*(7/8), 'angry'); ui.push(esb5);
-    addEventListener("beforeunload", (event) => {
-        esb1.postEmotes();
-        esb2.postEmotes();
-        esb3.postEmotes();
-        esb4.postEmotes();
-        esb5.postEmotes();
-    });
-    iorb = new InteractOrb(128, 128); ui.push(iorb);
-    ui.sort((a, b) => a.z - b.z);
-
-    ea = new EmoteAmount(32, 32); gui.push(ea);
-
-
-    document.addEventListener('keydown', inputStart);
-    document.addEventListener('keyup', inputEnd);
-    canvas.addEventListener('mousemove', mouseMove);
-    canvas.addEventListener('mousedown', mouseDown);
-    canvas.addEventListener('mouseup', mouseUp);
-    gameLoop();
-}
 
 
 /*-- create environment --*/
@@ -226,7 +190,6 @@ environment = [
 ];
 
 /*-- game loop --*/
-
 function gameLoop() {
     ctx.clearRect(0, 0, displayWidth, displayHeight);
     ctx.globalAlpha = 1;
@@ -294,4 +257,36 @@ function e(environment){
     } else {
         iorb.subject = null;
     }
+}
+
+
+function startGame(){
+    ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = false;
+    
+    eb = new EmoteButton(canvas); ui.push(eb);
+    esb1 = new EmoteSlotButton(canvas, canvas.width*(1/10), canvas.height*(7/8), 'laugh'); ui.push(esb1);
+    esb2 = new EmoteSlotButton(canvas, canvas.width*(3/10), canvas.height*(6/8), 'happy'); ui.push(esb2);
+    esb3 = new EmoteSlotButton(canvas, canvas.width*(5/10), canvas.height*(5/8), 'bruh'); ui.push(esb3);
+    esb4 = new EmoteSlotButton(canvas, canvas.width*(7/10), canvas.height*(6/8), 'sad'); ui.push(esb4);
+    esb5 = new EmoteSlotButton(canvas, canvas.width*(9/10), canvas.height*(7/8), 'angry'); ui.push(esb5);
+    addEventListener("beforeunload", (event) => {
+        esb1.postEmotes();
+        esb2.postEmotes();
+        esb3.postEmotes();
+        esb4.postEmotes();
+        esb5.postEmotes();
+    });
+    iorb = new InteractOrb(128, 128); ui.push(iorb);
+    ui.sort((a, b) => a.z - b.z);
+
+    ea = new EmoteAmount(32, 32); gui.push(ea);
+
+
+    document.addEventListener('keydown', inputStart);
+    document.addEventListener('keyup', inputEnd);
+    canvas.addEventListener('mousemove', mouseMove);
+    canvas.addEventListener('mousedown', mouseDown);
+    canvas.addEventListener('mouseup', mouseUp);
+    gameLoop();
 }
